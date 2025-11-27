@@ -1,5 +1,7 @@
 // Menu principal qui se charge au lancement du jeu
 
+import { playMusic } from "./audio";
+
 const container = document.getElementById("main-menu");
 const style = document.getElementById("style");
 
@@ -40,4 +42,6 @@ export function loadMainMenu() {
   settingsIcon.title = "Paramètres";
   settingsIcon.addEventListener("click", () => console.log("Paramètres"));
   container.appendChild(settingsIcon);
+
+  playMusic("main-menu");
 }
