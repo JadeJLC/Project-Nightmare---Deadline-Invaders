@@ -1,9 +1,8 @@
-let audioElement = new Audio();
-audioElement.loop = true;
+import { audioElement } from "./variables.js";
 
 // Sélectionne la musique à lancer
 function selectMusic(event) {
-  return `./musiques/${event}.mp3`;
+  return `../musiques/${event}.mp3`;
 }
 
 function playMusic(event) {

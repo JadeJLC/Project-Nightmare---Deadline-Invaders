@@ -4,9 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projet Nightmare : Deadline Invaders</title>
+    <link rel="stylesheet" href="main.css" />
   </head>
   <body>
+    <!-- Menu principal -->
     <div id="main-menu"></div>
+
+    <!-- Menu pause / paramètres -->
+    <div id="pause-menu" class="is-hidden">
+      <h2></h2>
+      <button type="button" id="toggleMusic" class="music-on">
+        🎵 / Couper la musique
+      </button>
+      <div class="is-hidden">
+        <button type="button" onclick="init()">Retour au menu principal</button>
+        <button type="button">Recommencer le niveau</button>
+      </div>
+    </div>
+
+    <audio id="audio" src="../musiques/main-menu.mp3" loop></audio>
     <link id="style" rel="stylesheet" href="main-menu.css" />
   </body>
 </html>

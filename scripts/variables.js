@@ -1,7 +1,20 @@
 import { createRelou } from "./collegues.js";
 
-const playerName = prompt("Entrez votre nom");
-const relouName = prompt("Entrez le nom de votre collègue relou");
-let relouImage = createRelou(relouName);
+let gameData = {
+  playerName: "Player",
+  relouName: "0",
+  lives: 3,
+  currentLevel: 0,
+  score: 0,
+  job: "Dev",
+};
 
-export { playerName, relouName, relouImage, currentEvent };
+// gameData.relouName = prompt("Entrez le nom de votre collègue relou");
+let relouImage = createRelou(gameData.relouName);
+
+console.log(gameData);
+
+const audioElement = document.getElementById("audio");
+const musicBtn = document.getElementById("toggleMusic");
+
+export { musicBtn, audioElement, gameData };
