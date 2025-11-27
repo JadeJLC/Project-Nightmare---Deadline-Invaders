@@ -1,0 +1,51 @@
+/* Conteneur principal du menu */
+#main-menu {
+  background-image: url(../images/main-menu-placeholder.svg);
+  display: grid;
+  grid-template-columns: 250px 1fr; /* colonne gauche fixe + colonne centrale flexible */
+  grid-template-rows: auto 1fr auto; /* ligne du haut (titre), contenu, ligne du bas */
+  height: 100vh;
+  width: 100%;
+}
+
+/* Colonne gauche avec les boutons */
+.button-stack {
+  grid-column: 1; /* colonne gauche */
+  grid-row: 2; /* ligne centrale */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centrer verticalement */
+  align-items: stretch; /* boutons prennent toute la largeur */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Boutons du menu */
+.menu-button {
+  padding: 15px;
+  font-size: 1rem;
+}
+
+/* Zone du titre en haut au centre */
+.menu-title {
+  grid-column: 1 / span 2; /* occupe toute la largeur */
+  grid-row: 1; /* première ligne */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+/* Icône paramètres en bas à droite */
+.settings-icon {
+  grid-column: 2; /* colonne centrale */
+  grid-row: 1; /* ligne du bas */
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.settings-icon:hover {
+  cursor: pointer;
+}
