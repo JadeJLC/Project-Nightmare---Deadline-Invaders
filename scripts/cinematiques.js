@@ -1,3 +1,3 @@
-import { relouName, playerName } from "./collegues.js";
+import { relouName, playerName } from "./variables.js";
 
 // Gestion des cinématiques
