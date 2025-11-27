@@ -5,7 +5,9 @@ let relouImage;
 // Fonction pour récupérer l'image du collègue relou
 function createRelou() {
   const initial = relouName[0].toUpperCase();
-  relouImage = `./images/initials/${initial}.png`;
+  relouImage = /[A-Z]/.test(initial)
+    ? `../images/initials/${initial}.png`
+    : `../images/initials/0.png`;
 }
 
 export { playerName, relouName, relouImage };

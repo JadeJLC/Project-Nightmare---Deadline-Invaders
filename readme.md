@@ -38,8 +38,15 @@ https://img.freepik.com/premium-vector/chibi-cute-human-figure-pixel-art-adorabl
 https://i.pinimg.com/736x/a3/e6/49/a3e64979cc76ec65a4893b5228d94d93.jpg
 ```
 
-- Niveaux : personnage du joueur représenté par un personnage de dos à son bureau ? Autres collègues normaux dans le décor, collègue relolu portant une casquette avec l'initiale de son prénom.
-- Cinématiques : entre les niveaux, le collègue relou s'attribue le mérite de la réussite du projet et obtient une promotion. En cas de défaite à un niveau, le projet n'est pas fonctionnel et le patron s'énerve. En cas de game over, le collègue relou devient directeur (et renvoie le personnage joueur ?). En cas de victoire à tous les niveaux, le collègue relou se fait renvoyer (pot de départ, fête). En cas de parfait (100% sur tous les niveaux), le joueur devient directeur de la boîte.
+- Niveaux : personnage du joueur représenté par un personnage de dos à son bureau ? Autres collègues normaux dans le décor, collègue relou portant une casquette avec l'initiale de son prénom.
+
+## Cinématiques
+
+- Entre les niveaux, le collègue relou s'attribue le mérite de la réussite du projet et obtient une promotion.
+- En cas de défaite à un niveau, le projet n'est pas fonctionnel et le patron s'énerve.
+- En cas de game over, le collègue relou devient directeur (et renvoie le personnage joueur ?).
+- En cas de victoire à tous les niveaux, le collègue relou se fait renvoyer (pot de départ, fête).
+- En cas de parfait (100% sur tous les niveaux), le joueur devient directeur de la boîte.
 
 ## Niveaux
 
@@ -85,6 +92,7 @@ https://i.pinimg.com/736x/a3/e6/49/a3e64979cc76ec65a4893b5228d94d93.jpg
 - **Base de données "high score"** : pour comparer à ses scores précédents (multiplié par le nombre de vies restantes pour la rejouabilité ?)
 - **Options** : couper/activer la musique et les effets sonores (via le menu pause)
 - **Difficulté** : niveau de difficulté ajustable (plus de vies, plus de pourcentage gagné par tir, etc)
+- **Mode sans fin** : possibilité de jouer non-stop en dehors de l'histoire, le score augmente mais le niveau ne s'arrête qu'une fois toutes les vies épuisées
 
 ## Debug
 
