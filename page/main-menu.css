@@ -1,6 +1,6 @@
 /* Conteneur principal du menu */
 #main-menu {
-  background-image: url(../images/main-menu-placeholder.svg);
+  /*background-image: url(../images/main-menu-placeholder.svg);*/
   display: grid;
   grid-template-columns: 250px 1fr; /* colonne gauche fixe + colonne centrale flexible */
   grid-template-rows: auto 1fr auto; /* ligne du haut (titre), contenu, ligne du bas */
@@ -38,7 +38,7 @@
 
 /* Icône paramètres en bas à droite */
 .settings-icon {
-  grid-column: 2; /* colonne centrale */
+  grid-column: 3; /* colonne centrale */
   grid-row: 1; /* ligne du bas */
   display: flex;
   justify-content: flex-end;
