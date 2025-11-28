@@ -1,5 +1,5 @@
 import { stopMusic, playMusic } from "./audio.js";
-import { musicBtn, gameData } from "./variables.js";
+import { musicBtn } from "./variables.js";
 
 let currentEvent = "main-menu";
 
@@ -26,11 +26,6 @@ function pauseMenu(type) {
 function resumeGame() {
   menu.classList.add("is-hidden");
   // ---- Ferme le menu et relance le jeu
-}
-
-function restartLevel() {
-  // ---- Fonction pour recommencer le niveau actuel
-  // ---- Il ne faut pas perdre la progession sur les niveaux précédents !
 }
 
 musicBtn.addEventListener("click", toggleMusic);
