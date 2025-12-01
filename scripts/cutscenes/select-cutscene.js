@@ -1,4 +1,5 @@
-import { relouName, playerName, gameData, lastLevel } from "./variables.js";
+import { gameData, lastLevel } from "../variables.js";
+import { cutsceneIntro } from "./play-cutscenes.js";
 
 // Gestion des cinématiques
 function startCutscenes() {
@@ -35,14 +36,14 @@ function startCutscenes() {
 function starterScene() {
   // ---- Lancer la cinématique de départ
 
+  cutsceneIntro();
+
   gameData.currentLevel = 1;
 
-  lastLevel = {
-    nb: 1,
-    powerups: gameData.powerups,
-    score: gameData.score,
-    lives: gameData.lives,
-  };
+  lastLevel.nb = 1;
+  lastLevel.powerups = gameData.powerups;
+  lastLevel.score = gameData.score;
+  lastLevel.lives = gameData.lives;
 }
 
 function firstLevelEnd() {
@@ -86,3 +87,5 @@ function goodEnding() {
 function perfectEnding() {
   // ---- Cinématique de fin après un score de 100% sur chaque niveau
 }
+
+export { starterScene };

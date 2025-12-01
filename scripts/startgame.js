@@ -1,4 +1,11 @@
-import { gameData } from "./variables.js";
+import { gameData, style } from "./variables.js";
+import { openPauseMenu, openSettingsMenu } from "./pause.js";
+// import { playMusic } from "./audio.js";
+import { movePlayer } from "./game-animations.js";
+import { starterScene } from "./cutscenes/select-cutscene.js";
+
+const gameScreenContainer = document.getElementById("game-screen");
+const settingsIcon = document.getElementById("pause-btn");
 
 function startGame(mode) {
   gameData.playerName = prompt("Entrez votre nom");
@@ -15,12 +22,26 @@ function startGame(mode) {
 
 function storyMode() {
   console.log("Mode Histoire");
-  // ---- Lance le mode histoire
+  document.getElementById("pause-menu").classList.add("is-hidden");
+  document.getElementById("main-menu").classList.add("is-hidden");
+  style.setAttribute("href", "");
+  gameScreenContainer.classList.remove("is-hidden");
+  updatePauseButton();
+  movePlayer();
+  starterScene();
+  style.setAttribute("href", "game.css");
 }
 
 function endlessMode() {
   console.log("Mode Sans-Fin");
   // ---- Lance le mode sans fin
+}
+
+function updatePauseButton() {
+  settingsIcon.removeEventListener("click", openSettingsMenu);
+  settingsIcon.textContent = "||"; // Ou une vraie icône SVG
+  settingsIcon.title = settingsIcon.alt = "Pause";
+  settingsIcon.addEventListener("click", openPauseMenu);
 }
 
 export { startGame };

@@ -37,7 +37,7 @@
 }
 
 /* Icône paramètres en bas à droite */
-.settings-icon {
+.pause-btn {
   grid-column: 3; /* colonne centrale */
   grid-row: 1; /* ligne du bas */
   display: flex;
@@ -46,6 +46,6 @@
   padding: 20px;
 }
 
-.settings-icon:hover {
+.pause-btn:hover {
   cursor: pointer;
 }

@@ -1,0 +1,14 @@
+#player-icon {
+  width: 50px;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+}
+
+#game-screen {
+  width: 80%;
+  margin: auto;
+  position: relative;
+  height: 80vh;
+  background: red;
+}

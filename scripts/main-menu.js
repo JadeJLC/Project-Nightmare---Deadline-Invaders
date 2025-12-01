@@ -1,21 +1,21 @@
 // Menu principal qui se charge au lancement du jeu
 
 import { playMusic } from "./audio.js";
-import { pauseMenu } from "./pause.js";
-import { musicBtn } from "./variables.js";
+import { openSettingsMenu, openPauseMenu } from "./pause.js";
+import { musicBtn, style } from "./variables.js";
 import { startGame } from "./startgame.js";
 
-const container = document.getElementById("main-menu");
-const style = document.getElementById("style");
+const mainMenuContainer = document.getElementById("main-menu");
+const settingsIcon = document.getElementById("pause-btn");
 
 export function loadMainMenu() {
   style.setAttribute("href", "main-menu.css");
-  container.innerHTML = "";
+  mainMenuContainer.innerHTML = "";
 
   // Création des éléments HTML
   mainMenuTitle();
   mainMenuButtons();
-  settingsButton();
+  updateSettingsButton();
 
   // Lancement de la musique
   if (musicBtn.classList.contains("music-on")) {
@@ -29,7 +29,7 @@ function mainMenuTitle() {
   const title = document.createElement("h1");
   title.textContent = "Project Nightmare : Deadline Invaders";
   title.className = "menu-title";
-  container.appendChild(title);
+  mainMenuContainer.appendChild(title);
 }
 
 function mainMenuButtons() {
@@ -39,27 +39,25 @@ function mainMenuButtons() {
     { label: "Tableau des scores", onClick: () => console.log("Scores") },
   ];
 
-  const buttonContainer = document.createElement("div");
-  buttonContainer.className = "button-stack";
+  const buttonmainMenu = document.createElement("div");
+  buttonmainMenu.className = "button-stack";
 
   buttons.forEach(({ label, onClick }) => {
     const btn = document.createElement("button");
     btn.textContent = label;
     btn.className = "menu-button";
     btn.addEventListener("click", onClick);
-    buttonContainer.appendChild(btn);
+    buttonmainMenu.appendChild(btn);
   });
 
-  container.appendChild(buttonContainer);
+  mainMenuContainer.appendChild(buttonmainMenu);
 }
 
-function settingsButton() {
-  const settingsIcon = document.createElement("div");
-  settingsIcon.className = "settings-icon";
+function updateSettingsButton() {
+  settingsIcon.removeEventListener("click", openPauseMenu);
   settingsIcon.textContent = "⚙️"; // Ou une vraie icône SVG
   settingsIcon.title = settingsIcon.alt = "Paramètres";
-  settingsIcon.addEventListener("click", () => pauseMenu("settings"));
-  container.appendChild(settingsIcon);
+  settingsIcon.addEventListener("click", openSettingsMenu);
 
   playMusic("main-menu");
 }

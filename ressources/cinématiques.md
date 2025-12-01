@@ -9,8 +9,8 @@
 - (Patron) Oh, ${gameData.player} ! Tu tombes bien. Laisse-moi te présenter le nouveau membre de votre équipe !
 - [Choisissez le nom du collègue relou]
 - (Patron) ${gameData.relouName} va travailler avec vous dès aujourd'hui. Je suis sûr que tout se passera très bien.
-- (Collègue relou) Si tout le monde travaille correctement, il ne devrait pas y avoir de problème, hahaha.
-- (Joueur) ...
+- (${gameData.relouName}) Si tout le monde travaille correctement, il ne devrait pas y avoir de problème, hahaha.
+- (${gameData.player}) ...
 
 ## Cinématique de fin du premier niveau
 
@@ -20,14 +20,14 @@
 - Impressionné, le patron lui donne une promotion en tant que chef de projet
 - **Texte**
 - (Patron) Bravo à tous. Le client est (très) satisfait de nos résultats.
-- (Joueur) Mer...
-- (Collègue) Merci. Ce n'était pas toujours facile de coordonner l'équipe mais j'ai bien réussi.
-- (Joueur) ...
+- (${gameData.player}) Mer...
+- (${gameData.relouName}) Merci. Ce n'était pas toujours facile de coordonner l'équipe mais j'ai bien réussi.
+- (${gameData.player}) ...
 - (Autres collègues) ...
-- (Collègue) _chuchote_ Honnêtement, j'ai fait le plus gros du boulot. Sans moi, on n'aurait pas pu rentrer dans les deadlines.
+- (${gameData.relouName}) _chuchote_ Honnêtement, j'ai fait le plus gros du boulot. Sans moi, on n'aurait pas pu rentrer dans les deadlines.
 - _changement de scène, le patron et le collègue discutent dans son bureau_
 - _changement de scène_ (Patron) Nous avons reçu une nouvelle commande. ${gameData.relouName} sera votre chef de projet.
-- (Joueur) !!!
+- (${gameData.player}) !!!
 
 ## Cinématique de fin du deuxième niveau
 
@@ -36,8 +36,8 @@
 - Il profite d'une réunion pour s'en vanter devant tout le comité de direction
 - **Texte**
 - (Patron) Je suis très fier de toi, ${gameData.relouName}. Tu as fait un travail fantastique comme chef de projet.
-- (Joueur) En fait...
-- (Collègue) Oh, vous savez, ce n'était pas grand-chose. Je n'ai fait que donner toutes les directives et abattre la moitié du travail.
+- (${gameData.player}) En fait...
+- (${gameData.relouName}) Oh, vous savez, ce n'était pas grand-chose. Je n'ai fait que donner toutes les directives et abattre la moitié du travail.
 - (Autres collègues) ...
 - (Patron) Ne soyez pas si modeste.
 - _changement de scène, réunion des hauts placés de la boîte_ (Patron) Je pense que ${gameData.relouName} fait vraiment un travail fantastique. Il l'a démontré chaque jour depuis son arrivée.
@@ -51,7 +51,7 @@
 - Le collègue reporte toute la faute sur les autres
 - **Texte**
 - (Patron) Je ne comprends pas. Vous êtes supposés être compétents !
-- (Collègue) J'ai essayé de leur expliquer comment faire, mais ils n'ont pas voulu m'écouter.
+- (${gameData.relouName}) J'ai essayé de leur expliquer comment faire, mais ils n'ont pas voulu m'écouter.
 - (Autres collègues) Tu n'as pas...
 - (Patron) Je me fiche de vos justifications. Le client nous a donné une seconde chance. Ne la gâchez pas.
 

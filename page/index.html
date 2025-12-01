@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projet Nightmare : Deadline Invaders</title>
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
     <!-- Menu principal -->
     <div id="main-menu"></div>
-
+    <button type="button" id="pause-btn">Paramètres</button>
     <!-- Menu pause / paramètres -->
     <div id="pause-menu" class="is-hidden">
       <h2></h2>
-      <button type="button" id="toggleMusic" class="music-on">
+      <button type="button" id="toggle-music" class="music-on">
         🎵 / Couper la musique
       </button>
       <div class="is-hidden">
@@ -22,8 +22,15 @@
       </div>
     </div>
 
+    <div id="game-screen" class="is-hidden">
+      Test
+
+      <img src="../images/player.svg" alt="Joueur" id="player-icon" />
+      <div id="cutscene-text"></div>
+    </div>
+
     <audio id="audio" src="../musiques/main-menu.mp3" loop></audio>
-    <link id="style" rel="stylesheet" href="main-menu.css" />
+    <link id="style" rel="stylesheet" href="" />
   </body>
 </html>
 <script type="module" src="../scripts/app.js">

@@ -1,23 +1,21 @@
-import { gameData, lastLevel } from "./variables.js";
+import { gameData, lastLevel, menu } from "./variables.js";
 import { loadMainMenu } from "./main-menu.js";
 
 function resetGame() {
-  gameData = {
-    playerName: "Player",
-    relouName: "0",
-    lives: 3,
-    currentLevel: 0,
-    score: 0,
-    powerups: [],
-    job: "Dev",
-  };
+  gameData.lives = 3;
+  gameData.currentLevel = 0;
+  gameData.score = 0;
+  gameData.powerups = [];
+  gameData.job = "Dev";
+  gameData.speed = 5;
 
-  let lastLevel = {
-    nb: 0,
-    powerups: [],
-    score: 0,
-    lives: 3,
-  };
+  lastLevel.nb = 0;
+  lastLevel.powerups = [];
+  lastLevel.score = 0;
+  lastLevel.lives = 3;
+
+  document.getElementById("game-screen").classList.add("is-hidden");
+  menu.classList.add("is-hidden");
 
   loadMainMenu();
 }
@@ -28,6 +26,10 @@ function restartLevel() {
   gameData.powerups = lastLevel.powerups;
 
   loadLevel(gameData.currentLevel);
+}
+
+function loadLevel(level) {
+  console.log(`Chargement du niveau ${level}`);
 }
 
 export { resetGame, restartLevel };

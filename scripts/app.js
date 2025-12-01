@@ -10,3 +10,5 @@ function init() {
   resetBtn.addEventListener("click", () => resetGame());
   loadMainMenu();
 }
+
+init();

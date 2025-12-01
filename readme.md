@@ -69,7 +69,7 @@ https://i.pinimg.com/736x/a3/e6/49/a3e64979cc76ec65a4893b5228d94d93.jpg
 - **Créer les visuels** : collègues en pixel art, collègue relou, personnage principal, décors simples pour les cinématiques
 - **Créer les cinématiques** : animations des personnages, ajout de la musique, écriture de petites lignes de dialogue
 - **Musiques** : intégrer les musiques et les effets sonores
-- **Interface** : affichage du pourcentage, du score total et du nombre de vie + menu pause (recommencer le niveau, recommencer le jeu, continuer, options si possible)
+- **Interface** : affichage du pourcentage, du score total et du nombre de vies + menu pause (recommencer le niveau, recommencer le jeu, continuer, options si possible)
 - **Structure HTML et CSS** : placer tous les éléments dans une structure HTML/CSS responsive et fonctionnelle
 
 ## Fonctionnel
@@ -84,13 +84,13 @@ https://i.pinimg.com/736x/a3/e6/49/a3e64979cc76ec65a4893b5228d94d93.jpg
 
 - **Performance** : vérifier que le jeu reste à 60fps, assurer la performance
 - **Difficulté** : optimisation de l'équilibre collègues normaux/collègue relou selon les niveaux
-- **Vies** : nombre de vies raisonnable pour réussir le jeu sans qu'il soit trop facile
+- **Vies** : nombre de vies raisonnable pour réussir le jeu sans qu'il soit trop facile (3)
 
 ## Bonus
 
 - **Nom du joueur** : pour les cinématiques
 - **Base de données "high score"** : pour comparer à ses scores précédents (multiplié par le nombre de vies restantes pour la rejouabilité ?)
-- **Options** : couper/activer la musique et les effets sonores (via le menu pause)
+- **Options** : couper/activer la musique (via le menu pause)
 - **Difficulté** : niveau de difficulté ajustable (plus de vies, plus de pourcentage gagné par tir, etc)
 - **Mode sans fin** : possibilité de jouer non-stop en dehors de l'histoire, le score augmente mais le niveau ne s'arrête qu'une fois toutes les vies épuisées
 
