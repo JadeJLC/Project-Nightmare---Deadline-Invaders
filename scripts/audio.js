@@ -15,6 +15,17 @@ function playMusic(event) {
   });
 }
 
+function soundEffect(event) {
+  const effectPath = selectMusic(event);
+  const audioBox = document.getElementById("game-screen");
+  const audio = document.createElement("audio");
+  audio.src = effectPath;
+  audio.loop = false;
+
+  audioBox.append(audio);
+  audio.play();
+}
+
 function stopMusic() {
   audioElement.pause();
   audioElement.currentTime = 0;
@@ -25,4 +36,4 @@ function changeMusic(newEvent) {
   playMusic(newEvent);
 }
 
-export { changeMusic, playMusic, stopMusic };
+export { changeMusic, playMusic, stopMusic, soundEffect };

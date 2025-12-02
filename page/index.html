@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+    </style>
     <title>Projet Nightmare : Deadline Invaders</title>
     <link rel="stylesheet" href="./main.css" />
   </head>
@@ -23,11 +26,15 @@
     </div>
 
     <div id="game-screen" class="is-hidden">
-      Test
-        <div id="projectiles"></div>
+      <div id="cutscene" class="is-hidden">
+        <div id="cutscene-action"></div>
+
+        <div id="cutscene-text"></div>
+      </div>
+
+      <div id="projectiles"></div>
 
       <img src="../images/player.svg" alt="Joueur" id="player-icon" />
-      <div id="cutscene-text"></div>
     </div>
 
     <audio id="audio" src="../musiques/main-menu.mp3" loop></audio>

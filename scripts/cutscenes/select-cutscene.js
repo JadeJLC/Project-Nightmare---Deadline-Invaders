@@ -1,4 +1,5 @@
-import { gameData, lastLevel } from "../variables.js";
+import { changeMusic } from "../audio.js";
+import { gameData, lastLevel, sceneZone } from "../variables.js";
 import { cutsceneIntro } from "./play-cutscenes.js";
 
 // Gestion des cinématiques
@@ -35,6 +36,8 @@ function startCutscenes() {
 
 function starterScene() {
   // ---- Lancer la cinématique de départ
+  sceneZone.classList.remove("is-hidden");
+  changeMusic("intro");
 
   cutsceneIntro();
 

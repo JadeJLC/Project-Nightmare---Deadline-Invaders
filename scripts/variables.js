@@ -35,6 +35,7 @@ const playerIcon = document.getElementById("player-icon");
 const style = document.getElementById("style");
 const menu = document.getElementById("pause-menu");
 const typeZone = document.getElementById("cutscene-text");
+const sceneZone = document.getElementById("cutscene");
 
 export {
   audioElement,
@@ -45,4 +46,5 @@ export {
   style,
   menu,
   typeZone,
+  sceneZone,
 };
