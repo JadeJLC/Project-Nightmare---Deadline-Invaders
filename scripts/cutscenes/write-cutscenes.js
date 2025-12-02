@@ -11,6 +11,14 @@ function advanceCutScene(textList) {
 
   if (textList[currentLine] === `__PROMPT__`) {
     gameData.relouName = prompt("Entrez le nom de votre collègue relou");
+    while (
+      gameData.relouName === "" ||
+      gameData.relouName === gameData.playerName
+    ) {
+      gameData.relouName = prompt(
+        "Nom invalide : déjà utilisé par le joueur ou vide. Entrez le nom de votre collègue relou"
+      );
+    }
     textList = completeIntroText(textList);
     currentLine++;
   }
