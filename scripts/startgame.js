@@ -3,6 +3,10 @@ import { openPauseMenu, openSettingsMenu } from "./pause.js";
 // import { playMusic } from "./audio.js";
 import { movePlayer } from "./game-animations.js";
 import { starterScene } from "./cutscenes/select-cutscene.js";
+import { enableShooting } from "./shooting.js";
+
+
+
 
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
@@ -30,6 +34,7 @@ function storyMode() {
   movePlayer();
   starterScene();
   style.setAttribute("href", "game.css");
+  enableShooting();
 }
 
 function endlessMode() {
