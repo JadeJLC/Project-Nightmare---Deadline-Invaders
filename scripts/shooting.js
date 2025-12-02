@@ -9,16 +9,38 @@ let projectiles = [];
 /**
  * Active le tir avec la touche ESPACE
  */
+let isShooting = false;
+let lastShotTime = 0;
+const shotCooldown = 200;
+
 function enableShooting() {
-  // Écoute l'événement "keydown" pour détecter l'appui sur la barre espace
   document.addEventListener("keydown", (event) => {
+    // Écoute l'événement "keydown" pour détecter l'appui sur la barre espace
     if (event.code === "Space") {
-      event.preventDefault(); // Empêche la page de scroller
-      shoot(); // Lance un projectile
+      event.preventDefault();
+      isShooting = true;
     }
   });
 
-  // Lance l'animation continue des projectiles
+  document.addEventListener("keyup", (event) => {
+    // Écoute l'événement "keydown" pour détecter lorsque l'on lâche la barre espace
+    if (event.code === "Space") {
+      isShooting = false;
+    }
+  });
+
+  // Boucle continue qui vérifie si on doit tirer
+  function shootingLoop() {
+    const now = Date.now();
+    if (isShooting && now - lastShotTime >= shotCooldown) {
+      // Lance le tir si le délai entre deux tirs est respecté
+      shoot();
+      lastShotTime = now;
+    }
+    requestAnimationFrame(shootingLoop);
+  }
+
+  shootingLoop();
   animateProjectiles();
 }
 
@@ -37,7 +59,9 @@ function shoot() {
   const containerRect = container.parentElement.getBoundingClientRect();
 
   // Place le projectile au centre horizontal du joueur et juste au-dessus
-  projectile.style.left = `${playerRect.left - containerRect.left + playerRect.width / 2 - 3}px`;
+  projectile.style.left = `${
+    playerRect.left - containerRect.left + playerRect.width / 2 - 3
+  }px`;
   projectile.style.top = `${playerRect.top - containerRect.top - 10}px`;
 
   // Ajoute le projectile dans le DOM
@@ -46,7 +70,7 @@ function shoot() {
   // Ajoute le projectile dans le tableau avec sa position Y
   projectiles.push({
     element: projectile,
-    y: parseFloat(projectile.style.top)
+    y: parseFloat(projectile.style.top),
   });
 }
 

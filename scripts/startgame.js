@@ -10,6 +10,9 @@ const settingsIcon = document.getElementById("pause-btn");
 
 function startGame(mode) {
   gameData.playerName = prompt("Entrez votre nom");
+  while (gameData.playerName === "") {
+    gameData.playerName = prompt("Nom invalide : nom vide. Entrez votre nom");
+  }
 
   switch (mode) {
     case "Story":
