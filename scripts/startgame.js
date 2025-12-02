@@ -5,9 +5,6 @@ import { movePlayer } from "./game-animations.js";
 import { starterScene } from "./cutscenes/select-cutscene.js";
 import { enableShooting } from "./shooting.js";
 
-
-
-
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
 
