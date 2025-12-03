@@ -48,20 +48,20 @@ let movingRight = false;
 let movingLeft = false;
 
 function movePlayer() {
+  playerIcon.style.transform = "rotateZ(0deg)";
   const iconWidth = parseInt(
     window.getComputedStyle(playerIcon).getPropertyValue("width")
   );
   const borders = getPlayArea();
   let currentPosition = playerIcon.offsetLeft;
-
   if (movingRight && currentPosition <= borders.width - iconWidth) {
     playerIcon.style.left = `${currentPosition + gameData.speed}px`;
+    playerIcon.style.transform = "rotateZ(10deg)";
   }
-
   if (movingLeft && currentPosition >= 0) {
     playerIcon.style.left = `${currentPosition - gameData.speed}px`;
+    playerIcon.style.transform = "rotateZ(-10deg)";
   }
-
   requestAnimationFrame(movePlayer);
 }
 
