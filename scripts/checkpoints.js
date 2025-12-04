@@ -20,6 +20,7 @@ function resetGame() {
   gameData.powerups = [];
   gameData.job = "Dev";
   gameData.speed = 5;
+  gameData.loadedCutscene = false;
 
   playerIcon.style.left = "50%";
 

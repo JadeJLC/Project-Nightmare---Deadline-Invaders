@@ -11,11 +11,11 @@ function movePlayer() {
   const borders = getPlayArea();
   let currentPosition = playerIcon.offsetLeft;
 
-  if (movingRight && currentPosition <= borders.width - iconWidth) {
+  if (movingRight && currentPosition <= borders.width - iconWidth - 10) {
     playerIcon.style.left = `${currentPosition + gameData.speed}px`;
     playerIcon.style.transform = "rotateZ(10deg)";
   }
-  if (movingLeft && currentPosition >= 0) {
+  if (movingLeft && currentPosition >= 10) {
     playerIcon.style.left = `${currentPosition - gameData.speed}px`;
     playerIcon.style.transform = "rotateZ(-10deg)";
   }

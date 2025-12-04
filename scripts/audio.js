@@ -25,6 +25,10 @@ function soundEffect(event) {
 
   audioBox.append(audio);
   audio.play();
+
+  setTimeout(() => {
+    audio.remove();
+  }, 1000);
 }
 
 function stopMusic() {

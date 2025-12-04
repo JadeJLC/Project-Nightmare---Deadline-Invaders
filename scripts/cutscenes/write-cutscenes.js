@@ -25,8 +25,21 @@ function skipCutscene() {
   nextLine();
 }
 
+function fastSkip(e) {
+  console.log("Touche pressée:", e.key, e.code);
+  if (e.key === "Shift") {
+    console.log("Fast skip cutscene");
+    e.preventDefault();
+    if (confirm("Passer la cinématique ?")) {
+      skipCutscene();
+    }
+  }
+}
+
 function advanceCutScene(initialTextList) {
   skipBtn.addEventListener("click", skipCutscene);
+  document.addEventListener("keydown", fastSkip);
+
   textList = initialTextList;
   currentLine = 0;
 
@@ -51,9 +64,11 @@ function advanceCutScene(initialTextList) {
 function nextLine() {
   if (currentLine >= textList.length) {
     console.log("Cutscene finished.");
+    gameData.loadedCutscene = true;
     document.removeEventListener("keydown", pressEnter);
     sceneZone.classList.add("is-hidden");
     let newMusic = `level${gameData.currentLevel}`;
+    document.removeEventListener("keydown", fastSkip);
     changeMusic(newMusic);
     return;
   }

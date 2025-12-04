@@ -6,11 +6,13 @@ import {
   confirmBtn,
   confirmZone,
   closeConfirm,
+  gameData,
+  closeBtn,
 } from "./variables.js";
 
 let currentEvent = "main-menu";
-
-// Gestion du menu pause
+if (gameData.currentLevel !== 0)
+  currentEvent = `level${gameData.currentLevel}.mp3`;
 
 function openSettingsMenu() {
   pauseMenu("settings");
@@ -24,16 +26,19 @@ function pauseMenu(type) {
   console.log("Ouverture du menu");
   menu.classList.toggle("is-hidden");
   console.log(menu.classList);
+  closeBtn.addEventListener("click", resumeGame);
 
   switch (type) {
     case "settings":
       menu.querySelector("h2").textContent = "Paramètres";
       menu.querySelector("div").classList.add("is-hidden");
+      closeBtn.textContent = "Fermer le menu";
       console.log("Ouverture du menu paramètres");
       break;
     case "pause":
       menu.querySelector("h2").textContent = "Pause";
       menu.querySelector("div").classList.remove("is-hidden");
+      closeBtn.textContent = "Reprendre";
       console.log("Ouverture du menu pause");
       break;
   }
@@ -44,6 +49,7 @@ function pauseMenu(type) {
 
 function resumeGame() {
   menu.classList.add("is-hidden");
+  console.log("Reprise du jeu");
   // ---- Ferme le menu et relance le jeu
 }
 
@@ -94,4 +100,5 @@ export {
   openSettingsMenu,
   confirmReset,
   confirmRestart,
+  resumeGame,
 };

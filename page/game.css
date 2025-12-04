@@ -145,3 +145,27 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
+
+#enemy-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.enemy {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+}
+
+@media (orientation: portrait) {
+  .enemy {
+    width: 24px;
+    height: 24px;
+  }
+
+  #player-icon {
+    width: 42px;
+  }
+}

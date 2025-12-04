@@ -1,4 +1,3 @@
-// Fonction pour récupérer l'image du collègue relou
 function createRelou(relouName) {
   const initial = relouName[0].toUpperCase();
   return /[A-Z]/.test(initial)
@@ -15,4 +14,4 @@ function createCoworkers() {
   return `../images/coworker${i}.png`;
 }
 
-export { createRelou };
+export { createRelou, createCoworkers };

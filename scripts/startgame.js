@@ -2,6 +2,7 @@ import { gameData, style } from "./variables.js";
 import { openPauseMenu, openSettingsMenu } from "./pause.js";
 // import { playMusic } from "./audio.js";
 import { movePlayer } from "./game-animations.js";
+import { enemyLoop, newCarousel } from "./enemies.js";
 import { starterScene } from "./cutscenes/select-cutscene.js";
 import { enableShooting } from "./shooting.js";
 
@@ -31,6 +32,14 @@ function storyMode() {
   gameScreenContainer.classList.remove("is-hidden");
   updatePauseButton();
   starterScene();
+  const checkCutscene = setInterval(() => {
+    if (gameData.loadedCutscene) {
+      clearInterval(checkCutscene);
+      const carousel = newCarousel();
+      enemyLoop(carousel);
+      enableShooting();
+    }
+  }, 200);
   enableShooting();
 }
 
