@@ -1,6 +1,12 @@
 import { stopMusic, playMusic } from "./audio.js";
 import { resetGame, restartLevel } from "./checkpoints.js";
-import { musicBtn, menu, confirmBtn, confirmZone } from "./variables.js";
+import {
+  musicBtn,
+  menu,
+  confirmBtn,
+  confirmZone,
+  closeConfirm,
+} from "./variables.js";
 
 let currentEvent = "main-menu";
 
@@ -31,6 +37,8 @@ function pauseMenu(type) {
       console.log("Ouverture du menu pause");
       break;
   }
+
+  closeConfirm.addEventListener("click", cancelConfirm);
   // ---- Ouvre le menu et met le jeu en pause
 }
 
@@ -71,6 +79,13 @@ function confirmReset() {
 
   confirmZone.classList.remove("is-hidden");
   confirmBtn.addEventListener("click", resetGame);
+}
+
+function cancelConfirm() {
+  menu.querySelector("div").classList.remove("is-hidden");
+  confirmZone.classList.add("is-hidden");
+  confirmBtn.removeEventListener("click", resetGame);
+  confirmBtn.removeEventListener("click", restartLevel);
 }
 
 export {

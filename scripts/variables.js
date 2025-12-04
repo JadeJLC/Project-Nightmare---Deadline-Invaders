@@ -38,6 +38,7 @@ const typeZone = document.getElementById("cutscene-text");
 const sceneZone = document.getElementById("cutscene");
 
 const confirmBtn = document.getElementById("confirm-button");
+const closeConfirm = document.getElementById("close-confirm");
 const confirmZone = document.getElementById("confirm-menu");
 const skipBtn = document.getElementById("skip-cutscene");
 
@@ -52,6 +53,7 @@ export {
   typeZone,
   sceneZone,
   confirmBtn,
+  closeConfirm,
   confirmZone,
   skipBtn,
 };
