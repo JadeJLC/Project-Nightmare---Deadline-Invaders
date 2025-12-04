@@ -12,6 +12,8 @@ function resetGame() {
   confirmBtn.removeEventListener("click", resetGame);
   confirmZone.classList.add("is-hidden");
 
+  gameData.playerName = "Player";
+  gameData.relouName = "0";
   gameData.lives = 3;
   gameData.currentLevel = 0;
   gameData.score = 0;
@@ -28,7 +30,6 @@ function resetGame() {
 
   document.getElementById("game-screen").classList.add("is-hidden");
   menu.classList.add("is-hidden");
-
   loadMainMenu();
 }
 

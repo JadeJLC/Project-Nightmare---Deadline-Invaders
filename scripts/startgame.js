@@ -30,7 +30,6 @@ function storyMode() {
   document.getElementById("pause-menu").classList.add("is-hidden");
   gameScreenContainer.classList.remove("is-hidden");
   updatePauseButton();
-  movePlayer();
   starterScene();
   enableShooting();
 }

@@ -8,7 +8,7 @@ let textList = [];
 let pressEnter = null;
 
 function skipCutscene() {
-  if (textList[1] === `__PROMPT__`) {
+  if (textList[1] === `__PROMPT__` && gameData.relouName == "0") {
     gameData.relouName = prompt("Entrez le nom de votre collègue relou");
     while (
       gameData.relouName === "" ||
