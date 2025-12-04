@@ -1,10 +1,4 @@
-/* -----------------------------
-   Projet Nightmare: Deadline Invaders
-   Thème néon rétro / esthétique pixel
-   Fichier : main.css
------------------------------- */
-
-/* ===== Variables de thème ===== */
+/* #region **** Variables de thème  */
 :root {
   --bg: #0a0f1f;
   --bg-dim: #050914;
@@ -16,12 +10,23 @@
   --text: #cfe8ff;
   --shadow: rgba(72, 199, 255, 0.3);
 }
+/* #endregion **** Variables de thème  */
 
-/* ===== Réinitialisation ===== */
+/* #region **** generalités de page  */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+/* Cadre lumineux autour de l’écran */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 20px; /* marge intérieure du cadre */
+  border: 3px solid var(--neon);
+  border-radius: 12px;
+  box-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon-soft);
+  pointer-events: none;
 }
 
 html, body {
@@ -49,8 +54,9 @@ body::before {
 .is-hidden {
   display: none !important;
 }
+/* #endregion **** generalités de page ===== */
 
-/* ===== Menu principal ===== */
+/* #region **** Menu principal */
 #main-menu {
   position: absolute;
   top: 50%;
@@ -75,14 +81,31 @@ body::before {
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   width: min(320px, 80vw);
+  margin-bottom: 16px;
+}
+#main-menu button:last-child {
+  margin-bottom: 0;
 }
 
 #main-menu button:hover {
   border-color: var(--neon-soft);
   box-shadow: 0 0 12px var(--neon-soft);
 }
+/* Titre du menu principal placé en haut du cadre */
+#main-menu h1 {
+  position: absolute;
+  top: 40px; /* distance par rapport au haut du cadre */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon-soft);
+  margin: 0;
+}
 
-/* ===== Bouton pause (en haut à droite) ===== */
+/* #endregion **** Menu principal  */
+
+/* #region **** bouton parametre  */
 #pause-btn {
   position: absolute;
   top: 16px;
@@ -140,24 +163,10 @@ body::before {
   box-shadow: 0 0 12px var(--neon-soft);
 }
 
-/* ===== Écran de jeu ===== */
-#game-screen {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  align-items: end;
-  justify-items: center;
-  padding: 32px;
-}
+/* #endregion **** bouton parametre  */
 
-#player-icon {
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
-  width: 60px;
-  filter: drop-shadow(0 0 8px var(--neon));
-}
+/* #region **** Écran de jeu  */
+
 
 #cutscene-text {
   width: min(900px, 92vw);
@@ -169,3 +178,5 @@ body::before {
   border-radius: 10px;
   text-align: center;
 }
+
+/* #endregion **** Écran de jeu  */
