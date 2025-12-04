@@ -9,6 +9,7 @@ const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
 
 function startGame(mode) {
+  style.setAttribute("href", "game.css");
   gameData.playerName = prompt("Entrez votre nom");
   while (gameData.playerName === "") {
     gameData.playerName = prompt("Nom invalide : nom vide. Entrez votre nom");
@@ -27,13 +28,10 @@ function startGame(mode) {
 function storyMode() {
   console.log("Mode Histoire");
   document.getElementById("pause-menu").classList.add("is-hidden");
-  document.getElementById("main-menu").classList.add("is-hidden");
-  style.setAttribute("href", "");
   gameScreenContainer.classList.remove("is-hidden");
   updatePauseButton();
   movePlayer();
   starterScene();
-  style.setAttribute("href", "game.css");
   enableShooting();
 }
 

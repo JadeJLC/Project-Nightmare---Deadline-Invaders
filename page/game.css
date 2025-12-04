@@ -2,20 +2,18 @@
   --bg: #0a0f1f;
   --bg-dim: #050914;
   --panel: rgba(10, 20, 40, 0.85);
-  --neon: #48c7ff;          /* bleu néon principal */
-  --neon-soft: #8ee7ff;     /* bleu néon plus doux */
-  --accent: #9d7cff;        /* violet accent */
-  --danger: #ff5e7a;        /* rouge/rose accent */
+  --neon: #48c7ff; /* bleu néon principal */
+  --neon-soft: #8ee7ff; /* bleu néon plus doux */
+  --accent: #9d7cff; /* violet accent */
+  --danger: #ff5e7a; /* rouge/rose accent */
   --text: #cfe8ff;
   --shadow: rgba(72, 199, 255, 0.3);
 }
 
-
 /* #region **** Écran de jeu  */
 #player-icon {
-  width: 50px;
   position: absolute;
-  bottom: 50px;
+  bottom: 20px;
   left: 50%;
 }
 
@@ -30,19 +28,17 @@
 /* Style des projectiles façon laser */
 .projectile {
   position: absolute;
-  width: 3px;              
-  height: 20px;           
-  background: var(--neon); 
+  width: 3px;
+  height: 20px;
+  background: var(--neon);
   border-radius: 1px;
-  box-shadow: 0 0 6px var(--neon), 0 0 12px var(--neon-soft); 
+  box-shadow: 0 0 6px var(--neon), 0 0 12px var(--neon-soft);
 }
-
-
 
 #cutscene-text {
   color: white;
   position: absolute;
-  bottom: 15px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -51,7 +47,16 @@
   text-align: justify;
 }
 
-
+#cutscene button {
+  padding-bottom: 5px;
+  background: rgba(10, 20, 40, 0.85);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 8px var(--shadow);
+  cursor: pointer;
+  filter: hue-rotate(170deg);
+}
 
 #game-screen {
   margin: auto;
@@ -65,8 +70,8 @@
   padding: 32px;
   background-color: var(--bg);
   border: 3px solid var(--neon);
-  padding : 50px;
-  top: 30px;
+  padding: 50px;
+  top: 10vh;
 }
 
 #cutscene {
@@ -77,6 +82,13 @@
   top: 0;
   left: 0;
   z-index: 6;
+}
+
+#skip-cutscene {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /*#player-icon {

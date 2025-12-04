@@ -49,3 +49,7 @@
 .pause-btn:hover {
   cursor: pointer;
 }
+
+#game-screen {
+  display: none;
+}

@@ -1,5 +1,6 @@
 import { stopMusic, playMusic } from "./audio.js";
-import { musicBtn, menu } from "./variables.js";
+import { resetGame, restartLevel } from "./checkpoints.js";
+import { musicBtn, menu, confirmBtn, confirmZone } from "./variables.js";
 
 let currentEvent = "main-menu";
 
@@ -54,4 +55,28 @@ function toggleMusic() {
   }
 }
 
-export { pauseMenu, openPauseMenu, openSettingsMenu };
+function confirmRestart() {
+  menu.querySelector("div").classList.add("is-hidden");
+  document.getElementById("alert").textContent =
+    "Recommencer le niveau ? Toute votre progression sur ce niveau sera perdue.";
+
+  confirmZone.classList.remove("is-hidden");
+  confirmBtn.addEventListener("click", restartLevel);
+}
+
+function confirmReset() {
+  menu.querySelector("div").classList.add("is-hidden");
+  document.getElementById("alert").textContent =
+    "Attention ! Toute progression sera perdue si vous revenez au menu principal.";
+
+  confirmZone.classList.remove("is-hidden");
+  confirmBtn.addEventListener("click", resetGame);
+}
+
+export {
+  pauseMenu,
+  openPauseMenu,
+  openSettingsMenu,
+  confirmReset,
+  confirmRestart,
+};
