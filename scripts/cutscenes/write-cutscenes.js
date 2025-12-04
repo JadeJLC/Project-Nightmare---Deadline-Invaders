@@ -1,4 +1,4 @@
-import { typeZone, gameData, sceneZone } from "../variables.js";
+import { typeZone, gameData, sceneZone, skipBtn } from "../variables.js";
 import { changeMusic, soundEffect } from "../audio.js";
 
 let currentLetter = 0;
@@ -7,7 +7,13 @@ let isTyping = false;
 let textList = [];
 let pressEnter = null;
 
+function skipCutscene() {
+  currentLine = textList.length;
+  nextLine();
+}
+
 function advanceCutScene(initialTextList) {
+  skipBtn.addEventListener("click", skipCutscene);
   textList = initialTextList;
   currentLine = 0;
 
@@ -18,9 +24,9 @@ function advanceCutScene(initialTextList) {
 
   // Créer le nouvel écouteur
   pressEnter = (e) => {
+    e.preventDefault();
     if (e.code === "Enter" && !isTyping) {
       soundEffect("sound-effects/beep");
-      e.preventDefault();
       nextLine();
     }
   };

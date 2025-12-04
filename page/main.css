@@ -1,3 +1,196 @@
-.is-hidden {
-  display: none;
+/* #region **** Variables de thème  */
+:root {
+  --bg: #0a0f1f;
+  --bg-dim: #050914;
+  --panel: rgba(10, 20, 40, 0.85);
+  --neon: #48c7ff; /* bleu néon principal */
+  --neon-soft: #8ee7ff; /* bleu néon plus doux */
+  --accent: #9d7cff; /* violet accent */
+  --danger: #ff5e7a; /* rouge/rose accent */
+  --text: #cfe8ff;
+  --shadow: rgba(72, 199, 255, 0.3);
 }
+/* #endregion **** Variables de thème  */
+
+/* #region **** generalités de page  */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* Cadre lumineux autour de l’écran */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 20px; /* marge intérieure du cadre */
+  border: 3px solid var(--neon);
+  border-radius: 12px;
+  box-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon-soft);
+  pointer-events: none;
+}
+
+html,
+body {
+  height: 100%;
+  background: radial-gradient(
+    1200px 600px at 50% 20%,
+    var(--bg) 0%,
+    var(--bg-dim) 60%,
+    #000 100%
+  );
+  color: var(--text);
+  font-family: "Press Start 2P", monospace;
+  overflow: hidden;
+}
+
+/* Effet scanline rétro */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(72, 199, 255, 0.06),
+      transparent 50%
+    );
+  background-size: 100% 2px, 600px 600px;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* ===== Utilitaires ===== */
+.is-hidden {
+  display: none !important;
+}
+/* #endregion **** generalités de page ===== */
+
+/* #region **** Menu principal */
+#main-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+/* Boutons du menu principal */
+#main-menu button {
+  font-size: 16px;
+  padding: 14px 24px;
+  background: rgba(10, 20, 40, 0.85);
+  border: 2px solid var(--neon);
+  color: var(--text);
+  border-radius: 8px;
+  box-shadow: 0 0 8px var(--shadow);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: min(320px, 80vw);
+  margin-bottom: 16px;
+}
+#main-menu button:last-child {
+  margin-bottom: 0;
+}
+
+#main-menu button:hover {
+  border-color: var(--neon-soft);
+  box-shadow: 0 0 12px var(--neon-soft);
+}
+/* Titre du menu principal placé en haut du cadre */
+#main-menu h1 {
+  position: absolute;
+  top: 40px; /* distance par rapport au haut du cadre */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon-soft);
+  margin: 0;
+}
+
+/* #endregion **** Menu principal  */
+
+/* #region **** bouton parametre  */
+#pause-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--text);
+  background: rgba(10, 20, 40, 0.8);
+  border: 2px solid var(--neon);
+  border-radius: 20px;
+  box-shadow: 0 0 8px var(--shadow);
+  cursor: pointer;
+}
+
+#pause-btn:hover {
+  border-color: var(--neon-soft);
+  box-shadow: 0 0 12px var(--neon-soft);
+}
+
+/* ===== Menu pause ===== */
+#pause-menu {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: min(540px, 92vw);
+  height: fit-content;
+  padding: 18px;
+  background: var(--panel);
+  border: 2px solid var(--neon);
+  border-radius: 10px;
+  box-shadow: 0 0 12px var(--shadow);
+  text-align: center;
+  z-index: 8;
+}
+
+#pause-menu h2 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: var(--accent);
+}
+
+#pause-menu button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  color: var(--text);
+  background: rgba(10, 20, 40, 0.85);
+  border: 2px solid var(--neon);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#pause-menu button:hover {
+  border-color: var(--neon-soft);
+  box-shadow: 0 0 12px var(--neon-soft);
+}
+
+/* #endregion **** bouton parametre  */
+
+/* #region **** Écran de jeu  */
+
+#cutscene-text {
+  width: min(900px, 92vw);
+  padding: 16px;
+  margin-bottom: 12px;
+  color: var(--text);
+  background: rgba(5, 10, 20, 0.75);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* #endregion **** Écran de jeu  */

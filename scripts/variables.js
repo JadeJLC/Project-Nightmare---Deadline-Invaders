@@ -37,6 +37,10 @@ const menu = document.getElementById("pause-menu");
 const typeZone = document.getElementById("cutscene-text");
 const sceneZone = document.getElementById("cutscene");
 
+const confirmBtn = document.getElementById("confirm-button");
+const confirmZone = document.getElementById("confirm-menu");
+const skipBtn = document.getElementById("skip-cutscene");
+
 export {
   audioElement,
   musicBtn,
@@ -47,4 +51,7 @@ export {
   menu,
   typeZone,
   sceneZone,
+  confirmBtn,
+  confirmZone,
+  skipBtn,
 };
