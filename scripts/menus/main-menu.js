@@ -1,17 +1,22 @@
-// Menu principal qui se charge au lancement du jeu
+import { playMusic } from "../audio/music.js";
+import { openSettingsMenu, openPauseMenu, resumeGame } from "./pause.js";
+import {
+  musicBtn,
+  style,
+  closeBtn,
+  mainMenuContainer,
+  menu,
+} from "../variables.js";
+import { startGame } from "../engine/startgame.js";
 
-import { playMusic } from "./audio.js";
-import { openSettingsMenu, openPauseMenu } from "./pause.js";
-import { musicBtn, style, closeBtn } from "./variables.js";
-import { startGame } from "./startgame.js";
-import { resumeGame } from "./pause.js";
-
-const mainMenuContainer = document.getElementById("main-menu");
 const settingsIcon = document.getElementById("pause-btn");
 
+// Création du menu principal
+// ---- Pour alléger les performances et la page HTML, le menu principal est créé dynamiquement uniquement lorsqu'il est appelé, et supprimé au lancement du jeu
 export function loadMainMenu() {
-  style.setAttribute("href", "main-menu.css");
+  style.setAttribute("href", "stylesheets/main-menu.css");
   mainMenuContainer.innerHTML = "";
+  menu.classList.add("is-hidden");
 
   // Création des éléments HTML
   mainMenuTitle();
@@ -20,12 +25,11 @@ export function loadMainMenu() {
 
   // Lancement de la musique
   if (musicBtn.classList.contains("music-on")) {
-    console.log("Lecture de la musique.");
     playMusic("main-menu");
   }
 }
 
-// #region **** HTML creation functions
+// #region **** Fonctions pour la création du HTML
 function mainMenuTitle() {
   const title = document.createElement("h1");
   title.textContent = "Project Nightmare : Deadline Invaders";
@@ -45,7 +49,7 @@ function mainMenuButtons() {
 
   buttons.forEach(({ label, onClick }) => {
     const btn = document.createElement("button");
-    btn.textContent = label;
+    btn.textContent = btn.alt = btn.title = label;
     btn.className = "menu-button";
     btn.addEventListener("click", onClick);
     buttonmainMenu.appendChild(btn);
@@ -59,7 +63,7 @@ function updateSettingsButton() {
   closeBtn.removeEventListener("click", resumeGame);
 
   settingsIcon.removeEventListener("click", openPauseMenu);
-  settingsIcon.textContent = "⚙️"; // Ou une vraie icône SVG
+  settingsIcon.textContent = "⚙️";
   settingsIcon.title = settingsIcon.alt = "Paramètres";
   settingsIcon.addEventListener("click", openSettingsMenu);
 

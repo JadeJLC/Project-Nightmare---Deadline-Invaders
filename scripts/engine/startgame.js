@@ -1,19 +1,20 @@
-import { gameData, style } from "./variables.js";
-import { openPauseMenu, openSettingsMenu } from "./pause.js";
-// import { playMusic } from "./audio.js";
-import { movePlayer } from "./game-animations.js";
-import { enemyLoop, newCarousel } from "./enemies.js";
-import { starterScene } from "./cutscenes/select-cutscene.js";
-import { enableShooting } from "./shooting.js";
+import { gameData, style, mainMenuContainer } from "../variables.js";
+import { openPauseMenu, openSettingsMenu } from "../menus/pause.js";
+import { enemyLoop, newCarousel } from "../enemies/enemies.js";
+import { starterScene } from "../cutscenes/select-cutscene.js";
+import { enableShooting } from "../mechanics/shooting.js";
 
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
 
 function startGame(mode) {
-  style.setAttribute("href", "game.css");
-  gameData.playerName = prompt("Entrez votre nom");
+  style.setAttribute("href", "stylesheets/game.css");
+  mainMenuContainer.innerHTML = "";
+  gameData.playerName = prompt("Entrez votre nom :");
   while (gameData.playerName === "") {
-    gameData.playerName = prompt("Nom invalide : nom vide. Entrez votre nom");
+    gameData.playerName = prompt(
+      "Votre nom ne peut être vide. Entrez votre nom :"
+    );
   }
 
   switch (mode) {
@@ -27,7 +28,7 @@ function startGame(mode) {
 }
 
 function storyMode() {
-  console.log("Mode Histoire");
+  console.log(`Lancement du jeu en mode Histoire par ${gameData.playerName}`);
   document.getElementById("pause-menu").classList.add("is-hidden");
   gameScreenContainer.classList.remove("is-hidden");
   updatePauseButton();
@@ -50,7 +51,7 @@ function endlessMode() {
 
 function updatePauseButton() {
   settingsIcon.removeEventListener("click", openSettingsMenu);
-  settingsIcon.textContent = "||"; // Ou une vraie icône SVG
+  settingsIcon.textContent = "| |";
   settingsIcon.title = settingsIcon.alt = "Pause";
   settingsIcon.addEventListener("click", openPauseMenu);
 }

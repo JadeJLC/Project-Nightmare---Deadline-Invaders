@@ -1,20 +1,23 @@
-import { createRelou } from "./collegues.js";
+import { createRelou } from "./enemies/coworker-images.js";
 
 // #region ---- Données de jeu
+
+// Variables stockant les données actuelles du joueur
 let gameData = {
   playerName: "Player",
   relouName: "0",
-  loadedCutscene: false,
   lives: 3,
   currentLevel: 0,
   levelscores: [0, 0, 0],
   score: 0,
   powerups: [],
-  job: "Dev",
+  job: "dev",
   speed: 5,
+  loadedCutscene: false,
+  shotCooldown: 200,
 };
 
-// Variable qui stocke le dernier niveau terminé pour permettre de recommencer le niveau
+// Variable pour enregistrer la progression du joueur lorsqu'il termine un niveau
 let lastLevel = {
   nb: 0,
   powerups: [],
@@ -22,17 +25,22 @@ let lastLevel = {
   lives: 3,
 };
 
+// Variables par défaut pour la réinitialisation du jeu
+const defaultData = JSON.parse(JSON.stringify(gameData));
+const defaultLevel = JSON.parse(JSON.stringify(lastLevel));
+
 let relouImage = createRelou(gameData.relouName);
 
-export { gameData, lastLevel };
+export { gameData, defaultData, lastLevel, defaultLevel };
 // #endregion
 
 // #region ---- Elements HTML
 
 // Bases de la page
-const audioElement = document.getElementById("audio");
+const musicBox = document.getElementById("audio");
 const musicBtn = document.getElementById("toggle-music");
 const style = document.getElementById("style");
+const mainMenuContainer = document.getElementById("main-menu");
 
 // Menu pause
 const menu = document.getElementById("pause-menu");
@@ -46,6 +54,7 @@ const closeBtn = document.getElementById("close-menu");
 // Ecran de jeu
 const playerIcon = document.getElementById("player-icon");
 const gameScreen = document.getElementById("game-screen");
+const enemyLines = document.getElementById("enemy-carousel");
 
 // Cinématiques
 const typeZone = document.getElementById("cutscene-text");
@@ -53,7 +62,8 @@ const sceneZone = document.getElementById("cutscene");
 const skipBtn = document.getElementById("skip-cutscene");
 
 export {
-  audioElement,
+  mainMenuContainer,
+  musicBox,
   musicBtn,
   restartBtn,
   resetBtn,
@@ -68,6 +78,7 @@ export {
   skipBtn,
   gameScreen,
   closeBtn,
+  enemyLines,
 };
 
 // Définition des niveaux :
