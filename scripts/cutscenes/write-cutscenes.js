@@ -1,5 +1,7 @@
 import { typeZone, gameData, sceneZone, skipBtn } from "../variables.js";
-import { changeMusic, soundEffect } from "../audio.js";
+import { changeMusic } from "../audio/music.js";
+import { soundEffect } from "../audio/sound-effects.js";
+import { skipCutscene, fastSkip } from "./skip-cutscene.js";
 
 let currentLetter = 0;
 let currentLine = 0;
@@ -7,48 +9,17 @@ let isTyping = false;
 let textList = [];
 let pressEnter = null;
 
-function skipCutscene() {
-  if (textList[1] === `__PROMPT__` && gameData.relouName == "0") {
-    gameData.relouName = prompt("Entrez le nom de votre collègue relou");
-    while (
-      gameData.relouName === "" ||
-      gameData.relouName === gameData.playerName
-    ) {
-      gameData.relouName = prompt(
-        "Nom invalide : déjà utilisé par le joueur ou vide. Entrez le nom de votre collègue relou"
-      );
-    }
-  }
-
-  currentLine = textList.length;
-
-  nextLine();
-}
-
-function fastSkip(e) {
-  console.log("Touche pressée:", e.key, e.code);
-  if (e.key === "Shift") {
-    console.log("Fast skip cutscene");
-    e.preventDefault();
-    if (confirm("Passer la cinématique ?")) {
-      skipCutscene();
-    }
-  }
-}
-
-function advanceCutScene(initialTextList) {
+function advanceCutScene(cutsceneTextList) {
   skipBtn.addEventListener("click", skipCutscene);
   document.addEventListener("keydown", fastSkip);
 
-  textList = initialTextList;
+  textList = cutsceneTextList;
   currentLine = 0;
 
-  // Supprimer l'ancien écouteur s'il existe
   if (pressEnter) {
     document.removeEventListener("keydown", pressEnter);
   }
 
-  // Créer le nouvel écouteur
   pressEnter = (e) => {
     e.preventDefault();
     if (e.code === "Enter" && !isTyping) {
@@ -61,32 +32,24 @@ function advanceCutScene(initialTextList) {
   nextLine();
 }
 
-function nextLine() {
-  if (currentLine >= textList.length) {
+function nextLine(skip) {
+  if (currentLine >= textList.length || skip) {
     console.log("Cutscene finished.");
     gameData.loadedCutscene = true;
-    document.removeEventListener("keydown", pressEnter);
     sceneZone.classList.add("is-hidden");
-    let newMusic = `level${gameData.currentLevel}`;
+
     document.removeEventListener("keydown", fastSkip);
+    document.removeEventListener("keydown", pressEnter);
+
+    let newMusic = `level${gameData.currentLevel}`;
     changeMusic(newMusic);
     return;
   }
 
   if (textList[currentLine] === `__PROMPT__`) {
-    gameData.relouName = prompt("Entrez le nom de votre collègue relou");
-    while (
-      gameData.relouName === "" ||
-      gameData.relouName === gameData.playerName
-    ) {
-      gameData.relouName = prompt(
-        "Nom invalide : déjà utilisé par le joueur ou vide. Entrez le nom de votre collègue relou"
-      );
-    }
-    textList = completeIntroText(textList);
+    textList = completeIntroText();
     currentLine++;
     nextLine();
-    return;
   }
 
   isTyping = true;
@@ -96,6 +59,7 @@ function nextLine() {
   });
 }
 
+// Gestion de l'affichage lettre par lettre
 function typeWriter(txt, onComplete) {
   if (currentLetter === 0) {
     typeZone.textContent = "";
@@ -119,7 +83,17 @@ function typeWriter(txt, onComplete) {
   }
 }
 
-function completeIntroText(textList) {
+// Gestion du cas spécial de la cinématique d'introduction : entrer le nom du collègue puis l'intégrer aux dialogues
+function completeIntroText() {
+  gameData.relouName = prompt("Entrez le nom de votre collègue relou :");
+  while (
+    gameData.relouName === "" ||
+    gameData.relouName === gameData.playerName
+  ) {
+    gameData.relouName = prompt(
+      "Votre collègue ne peut avoir un nom vide ou identique au vôtre. Entrez le nom de votre collègue relou :"
+    );
+  }
   textList.push(
     `(Patron) : ${gameData.relouName} va travailler avec vous dès aujourd'hui. Je suis sûr que tout se passera très bien.`
   );
@@ -131,4 +105,4 @@ function completeIntroText(textList) {
   return textList;
 }
 
-export { advanceCutScene };
+export { advanceCutScene, textList, nextLine };

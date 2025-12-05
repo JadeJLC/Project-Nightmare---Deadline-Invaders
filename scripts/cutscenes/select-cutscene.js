@@ -1,4 +1,4 @@
-import { changeMusic } from "../audio.js";
+import { changeMusic } from "../audio/music.js";
 import { gameData, lastLevel, sceneZone } from "../variables.js";
 import { cutsceneIntro } from "./play-cutscenes.js";
 
@@ -42,11 +42,6 @@ function starterScene() {
   cutsceneIntro();
 
   gameData.currentLevel = 1;
-
-  lastLevel.nb = 1;
-  lastLevel.powerups = gameData.powerups;
-  lastLevel.score = gameData.score;
-  lastLevel.lives = gameData.lives;
 }
 
 function firstLevelEnd() {
@@ -54,12 +49,10 @@ function firstLevelEnd() {
 
   gameData.currentLevel = 2;
 
-  lastLevel = {
-    nb: 2,
-    powerups: gameData.powerups,
-    score: gameData.score,
-    lives: gameData.lives,
-  };
+  lastLevel.nb = 1;
+  lastLevel.powerups = gameData.powerups;
+  lastLevel.score = gameData.score;
+  lastLevel.lives = gameData.lives;
 }
 
 function secondLevelEnd() {
@@ -67,12 +60,10 @@ function secondLevelEnd() {
 
   gameData.currentLevel = 3;
 
-  lastLevel = {
-    nb: 3,
-    powerups: gameData.powerups,
-    score: gameData.score,
-    lives: gameData.lives,
-  };
+  lastLevel.nb = 2;
+  lastLevel.powerups = gameData.powerups;
+  lastLevel.score = gameData.score;
+  lastLevel.lives = gameData.lives;
 }
 
 function failedLevel() {
