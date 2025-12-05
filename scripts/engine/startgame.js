@@ -3,6 +3,7 @@ import { openPauseMenu, openSettingsMenu } from "../menus/pause.js";
 import { enemyLoop, newCarousel } from "../enemies/enemies.js";
 import { starterScene } from "../cutscenes/select-cutscene.js";
 import { enableShooting } from "../mechanics/shooting.js";
+import { initLives } from "../mechanics/life.js";
 
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
@@ -33,6 +34,7 @@ function storyMode() {
   gameScreenContainer.classList.remove("is-hidden");
   updatePauseButton();
   starterScene();
+  initLives();
   const checkCutscene = setInterval(() => {
     if (gameData.loadedCutscene) {
       clearInterval(checkCutscene);

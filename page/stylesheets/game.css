@@ -146,6 +146,7 @@
   animation-iteration-count: infinite;
 }
 
+
 #enemy-carousel {
   position: relative;
   width: 100%;
@@ -168,4 +169,20 @@
   #player-icon {
     width: 42px;
   }
+}
+
+/* Zone des vies */
+#lives {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 50;
+}
+
+#lives img {
+   width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0 4px rgba(255,0,0,0.6));
 }
