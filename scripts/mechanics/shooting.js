@@ -69,7 +69,7 @@ function animateProjectiles() {
     projectile.y -= projectileSpeed;
     projectile.element.style.top = projectile.y + "px";
 
-    if (projectile.y < -20) {
+    if (projectile.y < -10) {
       projectile.element.remove();
       projectiles.splice(index, 1);
     }
