@@ -1,13 +1,28 @@
-import { gameData, lastLevel, menu } from "./variables.js";
+import {
+  gameData,
+  lastLevel,
+  menu,
+  confirmBtn,
+  confirmZone,
+  playerIcon,
+} from "./variables.js";
 import { loadMainMenu } from "./main-menu.js";
 
 function resetGame() {
+  confirmBtn.removeEventListener("click", resetGame);
+  confirmZone.classList.add("is-hidden");
+
+  gameData.playerName = "Player";
+  gameData.relouName = "0";
   gameData.lives = 3;
   gameData.currentLevel = 0;
   gameData.score = 0;
   gameData.powerups = [];
   gameData.job = "Dev";
   gameData.speed = 5;
+  gameData.loadedCutscene = false;
+
+  playerIcon.style.left = "50%";
 
   lastLevel.nb = 0;
   lastLevel.powerups = [];
@@ -16,11 +31,13 @@ function resetGame() {
 
   document.getElementById("game-screen").classList.add("is-hidden");
   menu.classList.add("is-hidden");
-
   loadMainMenu();
 }
 
 function restartLevel() {
+  confirmBtn.removeEventListener("click", restartLevel);
+  confirmZone.classList.add("is-hidden");
+
   gameData.score = lastLevel.score;
   gameData.lives = lastLevel.lives;
   gameData.powerups = lastLevel.powerups;

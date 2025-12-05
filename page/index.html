@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
     </style>
@@ -13,9 +14,10 @@
     <!-- Menu principal -->
     <div id="main-menu"></div>
     <button type="button" id="pause-btn">Paramètres</button>
-    <!-- Menu pause / paramètres -->
+    <!-- #region Menu pause / paramètres -->
     <div id="pause-menu" class="is-hidden">
       <h2></h2>
+      <button type="button" id="close-menu">Fermer le menu</button>
       <button type="button" id="toggle-music" class="music-on">
         🎵 / Couper la musique
       </button>
@@ -23,7 +25,13 @@
         <button type="button" id="reset-game">Retour au menu principal</button>
         <button type="button" id="restart-level">Recommencer le niveau</button>
       </div>
+      <div class="is-hidden" id="confirm-menu">
+        <span id="alert"></span>
+        <button id="confirm-button">Confirmer</button>
+        <button id="close-confirm">Annuler</button>
+      </div>
     </div>
+    <!-- #endregion -->
 
     <div id="game-screen" class="is-hidden">
       <div id="cutscene" class="is-hidden">
@@ -31,17 +39,18 @@
 
         <div id="cutscene-text"></div>
         
+        <button type="button" id="skip-cutscene" class="menu-button">
+          ⏩ Passer
+        </button>
       </div>
-
+      <div id="enemy-carousel"></div>
       <div id="projectiles"></div>
 
-      <img src="../images/player.svg" alt="Joueur" id="player-icon" />
+      <img src="../images/player.png" alt="Joueur" id="player-icon" />
     </div>
 
     <audio id="audio" src="../musiques/main-menu.mp3" loop></audio>
     <link id="style" rel="stylesheet" href="" />
   </body>
 </html>
-<script type="module" src="../scripts/app.js">
-  init();
-</script>
+<script type="module" src="../scripts/app.js"></script>

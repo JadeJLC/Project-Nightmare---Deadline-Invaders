@@ -2,8 +2,9 @@
 
 import { playMusic } from "./audio.js";
 import { openSettingsMenu, openPauseMenu } from "./pause.js";
-import { musicBtn, style } from "./variables.js";
+import { musicBtn, style, closeBtn } from "./variables.js";
 import { startGame } from "./startgame.js";
+import { resumeGame } from "./pause.js";
 
 const mainMenuContainer = document.getElementById("main-menu");
 const settingsIcon = document.getElementById("pause-btn");
@@ -54,6 +55,9 @@ function mainMenuButtons() {
 }
 
 function updateSettingsButton() {
+  closeBtn.addEventListener("click", openSettingsMenu);
+  closeBtn.removeEventListener("click", resumeGame);
+
   settingsIcon.removeEventListener("click", openPauseMenu);
   settingsIcon.textContent = "⚙️"; // Ou une vraie icône SVG
   settingsIcon.title = settingsIcon.alt = "Paramètres";

@@ -8,10 +8,11 @@ function selectMusic(event) {
 function playMusic(event) {
   const musicPath = selectMusic(event);
 
-  // Charge et joue la musique
   audioElement.src = musicPath;
   audioElement.play().catch((err) => {
-    console.error("Erreur à la lecture de la musique :", err);
+    if (err.name !== "AbortError") {
+      console.error("Erreur à la lecture de la musique :", err);
+    }
   });
 }
 
@@ -24,6 +25,10 @@ function soundEffect(event) {
 
   audioBox.append(audio);
   audio.play();
+
+  setTimeout(() => {
+    audio.remove();
+  }, 1000);
 }
 
 function stopMusic() {

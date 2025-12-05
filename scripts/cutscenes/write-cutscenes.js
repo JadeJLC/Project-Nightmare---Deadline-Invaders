@@ -1,4 +1,4 @@
-import { typeZone, gameData, sceneZone } from "../variables.js";
+import { typeZone, gameData, sceneZone, skipBtn } from "../variables.js";
 import { changeMusic, soundEffect } from "../audio.js";
 
 let currentLetter = 0;
@@ -7,7 +7,39 @@ let isTyping = false;
 let textList = [];
 let pressEnter = null;
 
+function skipCutscene() {
+  if (textList[1] === `__PROMPT__` && gameData.relouName == "0") {
+    gameData.relouName = prompt("Entrez le nom de votre collègue relou");
+    while (
+      gameData.relouName === "" ||
+      gameData.relouName === gameData.playerName
+    ) {
+      gameData.relouName = prompt(
+        "Nom invalide : déjà utilisé par le joueur ou vide. Entrez le nom de votre collègue relou"
+      );
+    }
+  }
+
+  currentLine = textList.length;
+
+  nextLine();
+}
+
+function fastSkip(e) {
+  console.log("Touche pressée:", e.key, e.code);
+  if (e.key === "Shift") {
+    console.log("Fast skip cutscene");
+    e.preventDefault();
+    if (confirm("Passer la cinématique ?")) {
+      skipCutscene();
+    }
+  }
+}
+
 function advanceCutScene(initialTextList) {
+  skipBtn.addEventListener("click", skipCutscene);
+  document.addEventListener("keydown", fastSkip);
+
   textList = initialTextList;
   currentLine = 0;
 
@@ -18,9 +50,9 @@ function advanceCutScene(initialTextList) {
 
   // Créer le nouvel écouteur
   pressEnter = (e) => {
+    e.preventDefault();
     if (e.code === "Enter" && !isTyping) {
       soundEffect("sound-effects/beep");
-      e.preventDefault();
       nextLine();
     }
   };
@@ -32,9 +64,11 @@ function advanceCutScene(initialTextList) {
 function nextLine() {
   if (currentLine >= textList.length) {
     console.log("Cutscene finished.");
+    gameData.loadedCutscene = true;
     document.removeEventListener("keydown", pressEnter);
     sceneZone.classList.add("is-hidden");
     let newMusic = `level${gameData.currentLevel}`;
+    document.removeEventListener("keydown", fastSkip);
     changeMusic(newMusic);
     return;
   }

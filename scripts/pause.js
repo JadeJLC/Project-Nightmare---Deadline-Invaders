@@ -1,9 +1,18 @@
 import { stopMusic, playMusic } from "./audio.js";
-import { musicBtn, menu } from "./variables.js";
+import { resetGame, restartLevel } from "./checkpoints.js";
+import {
+  musicBtn,
+  menu,
+  confirmBtn,
+  confirmZone,
+  closeConfirm,
+  gameData,
+  closeBtn,
+} from "./variables.js";
 
 let currentEvent = "main-menu";
-
-// Gestion du menu pause
+if (gameData.currentLevel !== 0)
+  currentEvent = `level${gameData.currentLevel}.mp3`;
 
 function openSettingsMenu() {
   pauseMenu("settings");
@@ -17,24 +26,30 @@ function pauseMenu(type) {
   console.log("Ouverture du menu");
   menu.classList.toggle("is-hidden");
   console.log(menu.classList);
+  closeBtn.addEventListener("click", resumeGame);
 
   switch (type) {
     case "settings":
       menu.querySelector("h2").textContent = "Paramètres";
       menu.querySelector("div").classList.add("is-hidden");
+      closeBtn.textContent = "Fermer le menu";
       console.log("Ouverture du menu paramètres");
       break;
     case "pause":
       menu.querySelector("h2").textContent = "Pause";
       menu.querySelector("div").classList.remove("is-hidden");
+      closeBtn.textContent = "Reprendre";
       console.log("Ouverture du menu pause");
       break;
   }
+
+  closeConfirm.addEventListener("click", cancelConfirm);
   // ---- Ouvre le menu et met le jeu en pause
 }
 
 function resumeGame() {
   menu.classList.add("is-hidden");
+  console.log("Reprise du jeu");
   // ---- Ferme le menu et relance le jeu
 }
 
@@ -54,4 +69,36 @@ function toggleMusic() {
   }
 }
 
-export { pauseMenu, openPauseMenu, openSettingsMenu };
+function confirmRestart() {
+  menu.querySelector("div").classList.add("is-hidden");
+  document.getElementById("alert").textContent =
+    "Recommencer le niveau ? Toute votre progression sur ce niveau sera perdue.";
+
+  confirmZone.classList.remove("is-hidden");
+  confirmBtn.addEventListener("click", restartLevel);
+}
+
+function confirmReset() {
+  menu.querySelector("div").classList.add("is-hidden");
+  document.getElementById("alert").textContent =
+    "Attention ! Toute progression sera perdue si vous revenez au menu principal.";
+
+  confirmZone.classList.remove("is-hidden");
+  confirmBtn.addEventListener("click", resetGame);
+}
+
+function cancelConfirm() {
+  menu.querySelector("div").classList.remove("is-hidden");
+  confirmZone.classList.add("is-hidden");
+  confirmBtn.removeEventListener("click", resetGame);
+  confirmBtn.removeEventListener("click", restartLevel);
+}
+
+export {
+  pauseMenu,
+  openPauseMenu,
+  openSettingsMenu,
+  confirmReset,
+  confirmRestart,
+  resumeGame,
+};

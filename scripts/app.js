@@ -1,14 +1,18 @@
 import { loadMainMenu } from "./main-menu.js";
 import { restartBtn, resetBtn } from "./variables.js";
-import { restartLevel, resetGame } from "./checkpoints.js";
+import { confirmReset, confirmRestart } from "./pause.js";
+import { playMusic } from "./audio.js";
+import { movePlayer } from "./game-animations.js";
 
 // Gestion du jeu (déplacement des collègues et du joueur)
 
 // Initialisation du jeu
 function init() {
-  restartBtn.addEventListener("click", () => restartLevel());
-  resetBtn.addEventListener("click", () => resetGame());
+  restartBtn.addEventListener("click", () => confirmRestart());
+  resetBtn.addEventListener("click", () => confirmReset());
   loadMainMenu();
+  movePlayer();
+  playMusic("main-menu");
 }
 
 init();
