@@ -1,4 +1,5 @@
 import { createRelou, createCoworkers } from "./coworker-images.js";
+import { coworkerID } from "./lines-builder.js";
 
 class Coworker {
   constructor(x, y) {
@@ -8,6 +9,7 @@ class Coworker {
     this.el = document.createElement("img");
     this.el.src = this.sprite;
     this.el.className = "enemy";
+    this.el.id = `cw${coworkerID}`;
     this.isAlive = true;
     document.getElementById("enemy-carousel").appendChild(this.el);
     this.updatePosition();

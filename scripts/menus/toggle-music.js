@@ -1,4 +1,4 @@
-import { gameData } from "../variables.js";
+import { gameData, musicBtn } from "../variables.js";
 import { stopMusic, playMusic } from "../audio/music.js";
 
 let currentMusic = "main-menu";

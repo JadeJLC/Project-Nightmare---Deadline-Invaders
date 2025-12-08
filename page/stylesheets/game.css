@@ -2,8 +2,11 @@
   --bg: #0a0f1f;
   --bg-dim: #050914;
   --panel: rgba(10, 20, 40, 0.85);
+
   --neon: #48c7ff; /* bleu néon principal */
   --neon-soft: #8ee7ff; /* bleu néon plus doux */
+  --attack: #ff4848; /* rouge néon */
+  --attack-soft: #ff8e8e; /*rouge néon doux */
   --accent: #9d7cff; /* violet accent */
   --danger: #ff5e7a; /* rouge/rose accent */
   --text: #cfe8ff;
@@ -26,13 +29,23 @@
 }
 
 /* Style des projectiles façon laser */
-.projectile {
+.player-projectile {
+  background: var(--neon);
+  box-shadow: 0 0 6px var(--neon), 0 0 12px var(--neon-soft);
+  height: 20px;
+}
+
+.enemy-projectile {
+  background: var(--attack);
+  box-shadow: 0 0 6px var(--attack), 0 0 12px var(--attack-soft);
+  height: 30px;
+}
+
+.player-projectile,
+.enemy-projectile {
   position: absolute;
   width: 3px;
-  height: 20px;
-  background: var(--neon);
   border-radius: 1px;
-  box-shadow: 0 0 6px var(--neon), 0 0 12px var(--neon-soft);
 }
 
 #cutscene-text {
@@ -146,7 +159,6 @@
   animation-iteration-count: infinite;
 }
 
-
 #enemy-carousel {
   position: relative;
   width: 100%;
@@ -182,7 +194,7 @@
 }
 
 #lives img {
-   width: 24px;
+  width: 24px;
   height: 24px;
-  filter: drop-shadow(0 0 4px rgba(255,0,0,0.6));
+  filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.6));
 }
