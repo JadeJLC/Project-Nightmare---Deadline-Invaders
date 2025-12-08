@@ -82,13 +82,16 @@ function shoot() {
 // ----- Anime tous les projectiles créés en les déplaçant vers le cadre supérieur de l'écran
 // ----- Supprimer les projectiles lorsqu'ils atteignent le haut de l'écran
 function animateProjectiles() {
-  projectiles.forEach((projectile, index) => {
+  for (let index = projectiles.length - 1; index >= 0; index--) {
+    const projectile = projectiles[index];
     projectile.y -= projectileSpeed;
     projectile.element.style.top = projectile.y + "px";
 
+    // Supprimer si hors écran
     if (projectile.y < -10) {
       projectile.element.remove();
       projectiles.splice(index, 1);
+      continue; // passer au projectile suivant
     }
 
     // Test de collisions
@@ -106,19 +109,20 @@ function animateProjectiles() {
         projectiles.splice(index, 1);
 
         if (enemy instanceof Coworker) {
-          enemy.hit(); // met isAlive = false + cache l'élément
-          gameData.goodScore = gameData.goodScore + levelData.coworkerBonus;
+          enemy.hit();
+          gameData.goodScore += levelData.coworkerBonus;
           console.log("Collègue éliminé, score:", gameData.goodScore);
         } else if (enemy instanceof Relou) {
-          enemy.hit(); // affiche juste le message
-          gameData.badScore = gameData.badScore + levelData.relouMalus;
+          enemy.hit();
+          gameData.badScore += levelData.relouMalus;
           console.log("Relou touché, compteur:", gameData.badScore);
         }
+
         updateProgressBar();
-        break; // projectile détruit, on sort
+        break; // projectile détruit, on sort de la boucle ennemis
       }
     }
-  });
+  }
 
   requestAnimationFrame(animateProjectiles);
 }
