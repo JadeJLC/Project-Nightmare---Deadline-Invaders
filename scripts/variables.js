@@ -13,8 +13,9 @@ let gameData = {
   job: "dev",
   speed: 5,
   loadedCutscene: false,
+  countPoint: false,
   currentMusic: "main-menu",
-  shotCooldown: 200,
+  shotCooldown: 300,
 };
 
 let gameOptions = {
@@ -89,33 +90,38 @@ export { playerIcon, gameScreen, enemyLines, HUD };
 const sceneZone = document.getElementById("cutscene");
 const typeZone = document.getElementById("cutscene-text");
 const skipBtn = document.getElementById("skip-cutscene");
+const endLvl = document.getElementById("end-level");
+const toCutscene = document.getElementById("launch-cutscene");
 
-export { typeZone, sceneZone, skipBtn };
+export { typeZone, sceneZone, skipBtn, endLvl, toCutscene };
 
 // #endregion
 
 // Définition des niveaux :
-const level1Data = {
-  lineCount: 5,
-  relouPerLine: 1,
-  enemiesPerLine: 12,
-  pointsPerEnemy: 5,
+const allLevelData = {
+  1: {
+    lineCount: 5,
+    relouPerLine: 2,
+    enemiesPerLine: 12,
+    coworkerBonus: 5,
+    relouMalus: 5,
+  },
+  2: {
+    lineCount: 5,
+    relouPerLine: 3,
+    enemiesPerLine: 14,
+    coworkerBonus: 5,
+    relouMalus: 7,
+  },
+  3: {
+    lineCount: 4,
+    relouPerLine: 4,
+    enemiesPerLine: 16,
+    coworkerBonus: 4,
+    relouMalus: 8,
+  },
 };
 
-const level2Data = {
-  lineCount: 4,
-  relouPerLine: 3,
-  enemiesPerLine: 14,
-  pointsPerEnemy: 3,
-};
+let levelData = { ...allLevelData[1] };
 
-const level3Data = {
-  lineCount: 4,
-  relouPerLine: 5,
-  enemiesPerLine: 16,
-  pointsPerEnemy: 2,
-};
-
-let levelData = { ...level1Data };
-
-export { levelData };
+export { levelData, allLevelData };

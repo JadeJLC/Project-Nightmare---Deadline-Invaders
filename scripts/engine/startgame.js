@@ -1,10 +1,7 @@
 import { gameData, style, mainMenuContainer } from "../variables.js";
 import { openPauseMenu, openSettingsMenu } from "../menus/pause.js";
-import { enemyLoop, newCarousel } from "../enemies/enemies.js";
-import { starterScene } from "../cutscenes/select-cutscene.js";
-import { enableShooting } from "../mechanics/shooting.js";
+import { startCutscenes } from "../cutscenes/select-cutscene.js";
 import { initLives } from "../mechanics/life.js";
-import { updateProgressBar } from "../mechanics/progress-bar.js";
 
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
@@ -34,18 +31,8 @@ function storyMode() {
   document.getElementById("pause-menu").classList.add("is-hidden");
   gameScreenContainer.classList.remove("is-hidden");
   updatePauseButton();
-  starterScene();
+  startCutscenes();
   initLives();
-  updateProgressBar();
-  const checkCutscene = setInterval(() => {
-    if (gameData.loadedCutscene) {
-      clearInterval(checkCutscene);
-      const carousel = newCarousel();
-      enemyLoop(carousel);
-      enableShooting();
-    }
-  }, 200);
-  enableShooting();
 }
 
 function endlessMode() {

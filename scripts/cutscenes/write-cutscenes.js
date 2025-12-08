@@ -1,9 +1,7 @@
 import { typeZone, gameData, sceneZone, skipBtn, HUD } from "../variables.js";
-import { changeMusic } from "../audio/music.js";
 import { soundEffect } from "../audio/sound-effects.js";
 import { skipCutscene, fastSkip } from "./skip-cutscene.js";
-import { enableShooting } from "../mechanics/shooting.js";
-import { enableEnemyShooting } from "../mechanics/enemy-shooting.js";
+import { loadLevel } from "../engine/levels.js";
 
 let currentLetter = 0;
 let currentLine = 0;
@@ -47,11 +45,7 @@ function nextLine(skip) {
     clearTimeout(typewriterTimeout);
     typewriterTimeout = null;
 
-    gameData.currentMusic = `level${gameData.currentLevel}`;
-    HUD.classList.remove("is-hidden");
-    changeMusic();
-    enableShooting();
-    enableEnemyShooting();
+    loadLevel();
     return;
   }
 

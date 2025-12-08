@@ -17,24 +17,26 @@ function cutsceneFailedLevel() {
     `(Autres collègues) Tu n'as pas...`,
     `(Patron) Je me fiche de vos justifications. Le client nous a donné une seconde chance. Ne la gâchez pas.`,
   ];
+
   advanceCutScene(failedTxt);
 }
 
 function cutsceneEndFirstLevel() {
   const firstLvlTxt = [
+    ``,
     `(Patron) Bravo à tous. Le client est satisfait de nos résultats.`,
-    `(${gameData.player}) Mer...`,
+    `(${gameData.playerName}) Mer...`,
     `(${gameData.relouName}) Merci. Ce n'était pas toujours facile de coordonner l'équipe mais j'ai bien réussi.`,
-    `(${gameData.player}) ...`,
+    `(${gameData.playerName}) ...`,
     `(Autres collègues) ...`,
-    `(${gameData.relouName}) _chuchote_ Honnêtement, j'ai fait le plus gros du boulot. Sans moi, on n'aurait pas pu rentrer dans les deadlines.`,
+    `(${gameData.relouName}) *chuchote* Honnêtement, j'ai fait le plus gros du boulot. Sans moi, on n'aurait pas pu rentrer dans les deadlines.`,
     `__FIRSTSCENE__`,
     `(Patron) Nous avons reçu une nouvelle commande. ${gameData.relouName} sera votre chef de projet.`,
-    `(${gameData.player}) !!!`,
+    `(${gameData.playerName}) !!!`,
   ];
 
   if (lastLevel.score === 100) {
-    firstLvlTxt[0] = `(Patron) Bravo à tous. Le client est (très) satisfait de nos résultats.`;
+    firstLvlTxt[0] = `(Patron) Bravo à tous. Le client est très satisfait de nos résultats.`;
   }
 
   advanceCutScene(firstLvlTxt);
@@ -42,14 +44,16 @@ function cutsceneEndFirstLevel() {
 
 function cutsceneEndSecondLevel() {
   const secondLvlTxt = [
+    ``,
     `(Patron) Je suis très fier de toi, ${gameData.relouName}. Tu as fait un travail fantastique comme chef de projet.`,
-    `(${gameData.player}) En fait...`,
+    `(${gameData.playerName}) En fait...`,
     `(${gameData.relouName}) Oh, vous savez, ce n'était pas grand-chose. Je n'ai fait que donner toutes les directives et abattre la moitié du travail.`,
     `(Autres collègues) ...`,
     ` (Patron) Ne soyez pas si modeste.`,
     `__SECONDSCENE__`,
     `Patron) Je pense que ${gameData.relouName} fait vraiment un travail fantastique. Il l'a démontré chaque jour depuis son arrivée.`,
-    `__WAIT__``(Patron) Je propose donc de le promouvoir au rang de manager. Il peut gérer facilement de plus grosses équipes.`,
+    `__WAIT__`,
+    `(Patron) Je propose donc de le promouvoir au rang de manager. Il peut gérer facilement de plus grosses équipes.`,
   ];
 
   advanceCutScene(secondLvlTxt);

@@ -5,11 +5,18 @@ let enemyShots = [];
 const projectileSpeed = 4;
 let animationStarted = false;
 const projectileCtn = document.getElementById("projectiles");
+let enemyShotTimeout = null;
+
+function disableEnemyShooting() {
+  clearTimeout(enemyShotTimeout);
+  enemyShotTimeout = null;
+}
 
 function enableEnemyShooting() {
+  console.log("Activation des tirs ennemis");
   const interval = Math.floor(Math.random() * 800) + 200;
 
-  setTimeout(() => {
+  enemyShotTimeout = setTimeout(() => {
     selectEnemyShooter();
     enableEnemyShooting();
   }, interval);
@@ -88,4 +95,4 @@ function animateEnemyShots() {
   requestAnimationFrame(animateEnemyShots);
 }
 
-export { enableEnemyShooting };
+export { enableEnemyShooting, disableEnemyShooting };
