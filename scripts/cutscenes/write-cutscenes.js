@@ -25,7 +25,7 @@ function advanceCutScene(cutsceneTextList) {
   pressEnter = (e) => {
     e.preventDefault();
     if (e.code === "Enter" && !isTyping) {
-      soundEffect("sound-effects/beep");
+      soundEffect("beep");
       nextLine();
     }
   };
@@ -43,8 +43,8 @@ function nextLine(skip) {
     document.removeEventListener("keydown", fastSkip);
     document.removeEventListener("keydown", pressEnter);
 
-    let newMusic = `level${gameData.currentLevel}`;
-    changeMusic(newMusic);
+    gameData.currentMusic = `level${gameData.currentLevel}`;
+    changeMusic();
     enableShooting();
     enableEnemyShooting();
     return;
@@ -71,7 +71,7 @@ function typeWriter(txt, onComplete) {
   if (currentLetter < txt.length) {
     typeZone.textContent += txt[currentLetter];
     if (currentLetter % 4 === 0) {
-      soundEffect("sound-effects/text-sound-effect");
+      soundEffect("text-sound-effect");
     }
     currentLetter++;
     setTimeout(() => {

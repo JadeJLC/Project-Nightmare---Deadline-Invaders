@@ -37,7 +37,8 @@ function startCutscenes() {
 function starterScene() {
   // ---- Lancer la cinématique de départ
   sceneZone.classList.remove("is-hidden");
-  changeMusic("intro");
+  gameData.currentMusic = "intro";
+  changeMusic();
 
   cutsceneIntro();
 

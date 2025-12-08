@@ -6,6 +6,7 @@ import {
   closeBtn,
   mainMenuContainer,
   menu,
+  gameData,
 } from "../variables.js";
 import { startGame } from "../engine/startgame.js";
 
@@ -24,8 +25,8 @@ export function loadMainMenu() {
   updateSettingsButton();
 
   // Lancement de la musique
-  if (musicBtn.classList.contains("music-on")) {
-    playMusic("main-menu");
+  if (gameData.musicOn) {
+    playMusic(gameData.currentMusic);
   }
 }
 

@@ -1,7 +1,12 @@
+import { gameOptions } from "../variables.js";
 import { selectMusic } from "./music.js";
 
 function soundEffect(soundName) {
-  const effectPath = selectMusic(soundName);
+  if (!gameOptions.soundEffects) {
+    return;
+  }
+
+  const effectPath = selectMusic(`sound-effects/${soundName}`);
   const audioBox = document.getElementById("game-screen");
   const audio = document.createElement("audio");
 
@@ -10,6 +15,12 @@ function soundEffect(soundName) {
 
   audioBox.append(audio);
   audio.play();
+
+  if (soundName == "shoot") {
+    setTimeout(() => {
+      audio.pause();
+    }, 500);
+  }
 
   setTimeout(() => {
     audio.remove();

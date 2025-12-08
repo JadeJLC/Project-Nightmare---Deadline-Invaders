@@ -1,3 +1,5 @@
+import { soundEffect } from "../audio/sound-effects.js";
+
 let shootingEnemies = 0;
 let enemyShots = [];
 const projectileSpeed = 4;
@@ -42,6 +44,7 @@ function selectEnemyShooter() {
 }
 
 function displayEnemyShot(enemy) {
+  soundEffect("shoot");
   // ---- Affiche le tir ennemi
 
   const projectile = document.createElement("div");
