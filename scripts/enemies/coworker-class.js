@@ -1,4 +1,5 @@
 import { createRelou, createCoworkers } from "./coworker-images.js";
+import { enemiesRegistry } from "../variables.js";
 
 class Coworker {
   constructor(x, y) {
@@ -10,6 +11,7 @@ class Coworker {
     this.el.className = "enemy";
     this.isAlive = true;
     document.getElementById("enemy-carousel").appendChild(this.el);
+    enemiesRegistry.push(this);
     this.updatePosition();
   }
 
@@ -33,7 +35,7 @@ class Coworker {
 
   hit() {
     this.isAlive = false;
-    this.el.style.display = "none";
+    this.el.className = "is-hidden";
   }
 }
 
@@ -47,6 +49,7 @@ class Relou {
     this.el.className = "enemy";
     this.isAlive = true;
     this.isRelou = true;
+    enemiesRegistry.push(this);
     document.getElementById("enemy-carousel").appendChild(this.el);
     this.updatePosition();
   }

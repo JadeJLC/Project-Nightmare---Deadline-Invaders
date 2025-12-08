@@ -7,7 +7,8 @@ let gameData = {
   lives: 3,
   currentLevel: 0,
   levelscores: [0, 0, 0],
-  score: 0,
+  goodScore: 0,
+  badScore: 0,
   powerups: [],
   job: "dev",
   speed: 5,
@@ -27,7 +28,10 @@ let lastLevel = {
 const defaultData = JSON.parse(JSON.stringify(gameData));
 const defaultLevel = JSON.parse(JSON.stringify(lastLevel));
 
-export { gameData, defaultData, lastLevel, defaultLevel };
+// Liste des ennemis
+const enemiesRegistry = [];
+
+export { gameData, defaultData, lastLevel, defaultLevel, enemiesRegistry };
 // #endregion
 
 // #region ---- Elements HTML
