@@ -121,7 +121,6 @@
   animation-iteration-count: infinite;
 }
 
-
 #enemy-carousel {
   position: relative;
   width: 100%;
@@ -158,7 +157,13 @@
 
 #lives img {
 <<<<<<< HEAD
+<<<<<<< HEAD
    width: 24px;
   height: 24px;
   filter: drop-shadow(0 0 4px rgba(255,0,0,0.6));
+=======
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.6));
+>>>>>>> audio
 }

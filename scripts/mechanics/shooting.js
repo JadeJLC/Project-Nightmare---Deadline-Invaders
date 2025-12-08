@@ -1,6 +1,7 @@
 import { playerIcon, gameData, enemiesRegistry } from "../variables.js";
 import { rectsIntersect } from "./collisions.js";
 import { Coworker, Relou } from "../enemies/coworker-class.js";
+import { soundEffect } from "../audio/sound-effects.js";
 
 const projectileSpeed = 5;
 let projectiles = [];
@@ -29,6 +30,7 @@ function enableShooting() {
   function shootingLoop() {
     const now = Date.now();
     if (isShooting && now - lastShotTime >= gameData.shotCooldown) {
+      soundEffect("shoot");
       shoot();
       lastShotTime = now;
     }

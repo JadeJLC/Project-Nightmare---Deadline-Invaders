@@ -13,7 +13,13 @@ let gameData = {
   job: "dev",
   speed: 5,
   loadedCutscene: false,
+  currentMusic: "main-menu",
   shotCooldown: 200,
+};
+
+let gameOptions = {
+  musicOn: true,
+  soundEffects: true,
 };
 
 // Variable pour enregistrer la progression du joueur lorsqu'il termine un niveau
@@ -31,7 +37,14 @@ const defaultLevel = JSON.parse(JSON.stringify(lastLevel));
 // Liste des ennemis
 const enemiesRegistry = [];
 
-export { gameData, defaultData, lastLevel, defaultLevel, enemiesRegistry };
+export {
+  gameData,
+  gameOptions,
+  defaultData,
+  lastLevel,
+  defaultLevel,
+  enemiesRegistry,
+};
 // #endregion
 
 // #region ---- Elements HTML
@@ -39,10 +52,11 @@ export { gameData, defaultData, lastLevel, defaultLevel, enemiesRegistry };
 // Bases de la page
 const musicBox = document.getElementById("audio");
 const musicBtn = document.getElementById("toggle-music");
+const effectBtn = document.getElementById("toggle-effects");
 const style = document.getElementById("style");
 const mainMenuContainer = document.getElementById("main-menu");
 
-export { musicBox, musicBtn, style, mainMenuContainer };
+export { musicBox, musicBtn, effectBtn, style, mainMenuContainer };
 
 // Menu pause
 const menu = document.getElementById("pause-menu");
