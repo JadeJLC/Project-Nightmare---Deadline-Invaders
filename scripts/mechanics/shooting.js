@@ -2,7 +2,7 @@ import { playerIcon, gameData, enemiesRegistry } from "../variables.js";
 import { rectsIntersect } from "./collisions.js";
 import { Coworker, Relou } from "../enemies/coworker-class.js";
 
-const projectileSpeed = 8;
+const projectileSpeed = 5;
 let projectiles = [];
 let isShooting = false;
 let lastShotTime = 0;
@@ -45,7 +45,7 @@ function shoot() {
   const container = document.getElementById("projectiles");
 
   const projectile = document.createElement("div");
-  projectile.classList.add("projectile");
+  projectile.classList.add("player-projectile");
 
   // Récupère la position du joueur et du conteneur du jeu
   const playerRect = playerIcon.getBoundingClientRect();

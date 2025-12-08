@@ -2,6 +2,8 @@ import { typeZone, gameData, sceneZone, skipBtn } from "../variables.js";
 import { changeMusic } from "../audio/music.js";
 import { soundEffect } from "../audio/sound-effects.js";
 import { skipCutscene, fastSkip } from "./skip-cutscene.js";
+import { enableShooting } from "../mechanics/shooting.js";
+import { enableEnemyShooting } from "../mechanics/enemy-shooting.js";
 
 let currentLetter = 0;
 let currentLine = 0;
@@ -43,6 +45,8 @@ function nextLine(skip) {
 
     let newMusic = `level${gameData.currentLevel}`;
     changeMusic(newMusic);
+    enableShooting();
+    enableEnemyShooting();
     return;
   }
 

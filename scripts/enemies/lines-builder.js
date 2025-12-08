@@ -1,6 +1,8 @@
 import { Coworker, Relou } from "./coworker-class.js";
 import { gameData } from "../variables.js";
 
+let coworkerID = 0;
+
 class EnemyLine {
   constructor(y, direction, cfg, relouCount, lineIndex) {
     this.direction = direction;
@@ -26,6 +28,7 @@ class EnemyLine {
 
     return Array.from({ length: enemiesPerLine }, (_, i) => {
       const x = startX + i * enemySpacingX + offset;
+      coworkerID++;
       if (relouPositions.has(i)) {
         return new Relou(x, y, gameData.relouName);
       } else {
@@ -75,4 +78,4 @@ class EnemyCarousel {
   }
 }
 
-export { EnemyLine, EnemyCarousel };
+export { EnemyLine, EnemyCarousel, coworkerID };
