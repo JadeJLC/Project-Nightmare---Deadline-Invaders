@@ -35,7 +35,7 @@ class Coworker {
 
   hit() {
     this.isAlive = false;
-    this.el.style.display = "none";
+    this.el.className = "is-hidden";
   }
 }
 
