@@ -1,7 +1,13 @@
-import { playerIcon, gameData, enemiesRegistry } from "../variables.js";
+import {
+  playerIcon,
+  gameData,
+  enemiesRegistry,
+  levelData,
+} from "../variables.js";
 import { rectsIntersect } from "./collisions.js";
 import { Coworker, Relou } from "../enemies/coworker-class.js";
 import { soundEffect } from "../audio/sound-effects.js";
+import { updateProgressBar } from "./progress-bar.js";
 
 const projectileSpeed = 5;
 let projectiles = [];
@@ -94,13 +100,14 @@ function animateProjectiles() {
 
         if (enemy instanceof Coworker) {
           enemy.hit(); // met isAlive = false + cache l'élément
-          gameData.goodScore = gameData.goodScore + 10;
+          gameData.goodScore = gameData.goodScore + levelData.pointsPerEnemy;
           console.log("Collègue éliminé, score:", gameData.goodScore);
         } else if (enemy instanceof Relou) {
           enemy.hit(); // affiche juste le message
-          gameData.badScore = gameData.badScore + 10;
+          gameData.badScore = gameData.badScore + levelData.pointsPerEnemy;
           console.log("Relou touché, compteur:", gameData.badScore);
         }
+        updateProgressBar();
         break; // projectile détruit, on sort
       }
     }

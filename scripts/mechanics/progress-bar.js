@@ -1,18 +1,23 @@
-let positiveScore = 0;
-let negativeScore = 0;
+import { gameData } from "../variables.js";
 
 export function updateProgressBar() {
-  const total = positiveScore + negativeScore;
+  const total = gameData.goodScore + gameData.badScore;
 
-  // éviter division par zéro
-  if (total === 0) {
-    document.getElementById("progress-bar").style.width = "0%";
-    return;
+  const goodBar = document.getElementById("good-progress");
+  const badBar = document.getElementById("bad-progress");
+  const goodScore = document.getElementById("good-score");
+  const badScore = document.getElementById("bad-score");
+
+  goodBar.style.height = badBar.style.bottom = gameData.goodScore + "%";
+  badBar.style.height = gameData.badScore + "%";
+  goodScore.textContent = gameData.goodScore;
+  badScore.textContent = gameData.badScore;
+
+  if (total >= 100) {
+    console.log(
+      "Fin du niveau. Pourcentage de bonne qualité : ",
+      gameData.goodScore,
+      "%"
+    );
   }
- 
-  let percent = (positiveScore / total) * 100;
-
-  percent = Math.max(0, Math.min(100, percent));
-
-  document.getElementById("progress-bar").style.width = percent + "%";
 }

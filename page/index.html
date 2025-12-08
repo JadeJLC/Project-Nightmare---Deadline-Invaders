@@ -34,10 +34,22 @@
     </div>
     <!-- #endregion -->
 
+    <div id="HUD" class="is-hidden">
+      <div id="progress-container">
+        <div id="good-progress"></div>
+        <div id="bad-progress"></div>
+      </div>
+
+      <div class="topHUD">
+        <div id="lives"></div>
+
+        <div class="level-score">
+          Score : <span id="good-score"></span>% | <span id="bad-score"></span>%
+        </div>
+      </div>
+    </div>
+
     <div id="game-screen" class="is-hidden">
-     <div id="progress-container">
-        <div id="progress-bar"></div> 
-      </div>  
       <div id="cutscene" class="is-hidden">
         <div id="cutscene-action"></div>
 
@@ -48,7 +60,7 @@
         </button>
       </div>
       <div id="enemy-carousel"></div>
-      <div id="lives"></div>
+
       <div id="projectiles"></div>
 
       <img src="../images/player.png" alt="Joueur" id="player-icon" />
