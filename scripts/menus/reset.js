@@ -10,6 +10,7 @@ import {
   enemyLines,
 } from "../variables.js";
 import { loadMainMenu } from "./main-menu.js";
+import { loadLevel } from "../engine/levels.js";
 
 // Fonction pour redémarrer le jeu depuis le menu principal
 // ---- Réinitialise gameData et defaultLevel à leur valeur de départ et replace le joueur au centre de l'écran de jeu, puis ouvre le menu principal
@@ -37,12 +38,7 @@ function restartLevel() {
   gameData.lives = lastLevel.lives;
   gameData.powerups = lastLevel.powerups;
 
-  loadLevel(gameData.currentLevel);
-}
-
-function loadLevel(level) {
-  // ---- Fonction à coder pour lancer un niveau
-  console.log(`Chargement du niveau ${level}`);
+  loadLevel();
 }
 
 export { resetGame, restartLevel };

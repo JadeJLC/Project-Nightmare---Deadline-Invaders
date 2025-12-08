@@ -27,6 +27,19 @@ function movePlayer() {
   requestAnimationFrame(movePlayer);
 }
 
+function disableMovement() {
+  document.removeEventListener("keydown", startMovement);
+  document.removeEventListener("keyup", stopMovement);
+  movingLeft = false;
+  movingRight = false;
+}
+
+function enableMovement() {
+  console.log("Activation des mouvements");
+  document.addEventListener("keydown", startMovement);
+  document.addEventListener("keyup", stopMovement);
+}
+
 // #region ---- Gestion des touches
 function startMovement(e) {
   if (e.key === "ArrowRight") movingRight = true;
@@ -37,10 +50,6 @@ function stopMovement(e) {
   if (e.key === "ArrowRight") movingRight = false;
   if (e.key === "ArrowLeft") movingLeft = false;
 }
-
-document.addEventListener("keydown", startMovement);
-document.addEventListener("keyup", stopMovement);
-
 // #endregion
 
-export { movePlayer };
+export { movePlayer, enableMovement, disableMovement };

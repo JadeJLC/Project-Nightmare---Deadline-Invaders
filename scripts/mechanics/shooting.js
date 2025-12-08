@@ -14,24 +14,31 @@ let projectiles = [];
 let isShooting = false;
 let lastShotTime = 0;
 
+function pressSpace(e) {
+  if (e.code === "Space") {
+    e.preventDefault();
+    isShooting = true;
+  }
+}
+
+function releaseSpace(e) {
+  if (e.code === "Space") {
+    isShooting = false;
+  }
+}
+
+function disableShooting() {
+  console.log("Suppression de la capacité de tir");
+  document.removeEventListener("keydown", pressSpace);
+}
+
 // Fonction pour activer les tirs en appuyant sur la touche espace
 // ---- Le tir est actif en continu tant que la touche est pressée, avec un délai entre chaque tir
 function enableShooting() {
+  gameData.countPoint = true;
+  console.log("Activation des tir du joueur");
   document.addEventListener("keydown", pressSpace);
   document.addEventListener("keyup", releaseSpace);
-
-  function pressSpace(e) {
-    if (e.code === "Space") {
-      e.preventDefault();
-      isShooting = true;
-    }
-  }
-
-  function releaseSpace(e) {
-    if (e.code === "Space") {
-      isShooting = false;
-    }
-  }
 
   function shootingLoop() {
     const now = Date.now();
@@ -100,11 +107,11 @@ function animateProjectiles() {
 
         if (enemy instanceof Coworker) {
           enemy.hit(); // met isAlive = false + cache l'élément
-          gameData.goodScore = gameData.goodScore + levelData.pointsPerEnemy;
+          gameData.goodScore = gameData.goodScore + levelData.coworkerBonus;
           console.log("Collègue éliminé, score:", gameData.goodScore);
         } else if (enemy instanceof Relou) {
           enemy.hit(); // affiche juste le message
-          gameData.badScore = gameData.badScore + levelData.pointsPerEnemy;
+          gameData.badScore = gameData.badScore + levelData.relouMalus;
           console.log("Relou touché, compteur:", gameData.badScore);
         }
         updateProgressBar();
@@ -116,4 +123,4 @@ function animateProjectiles() {
   requestAnimationFrame(animateProjectiles);
 }
 
-export { enableShooting };
+export { enableShooting, disableShooting };
