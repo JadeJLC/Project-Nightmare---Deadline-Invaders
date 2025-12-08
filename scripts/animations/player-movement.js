@@ -32,6 +32,7 @@ function disableMovement() {
   document.removeEventListener("keyup", stopMovement);
   movingLeft = false;
   movingRight = false;
+  cancelAnimationFrame(movePlayer);
 }
 
 function enableMovement() {

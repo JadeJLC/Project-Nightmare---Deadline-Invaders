@@ -10,6 +10,7 @@ let enemyShotTimeout = null;
 function disableEnemyShooting() {
   clearTimeout(enemyShotTimeout);
   enemyShotTimeout = null;
+  cancelAnimationFrame(animateEnemyShots);
 }
 
 function enableEnemyShooting() {
