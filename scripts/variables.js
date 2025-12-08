@@ -81,8 +81,9 @@ export {
 const gameScreen = document.getElementById("game-screen");
 const playerIcon = document.getElementById("player-icon");
 const enemyLines = document.getElementById("enemy-carousel");
+const HUD = document.getElementById("HUD");
 
-export { playerIcon, gameScreen, enemyLines };
+export { playerIcon, gameScreen, enemyLines, HUD };
 
 // Cinématiques
 const sceneZone = document.getElementById("cutscene");
@@ -98,18 +99,21 @@ const level1Data = {
   lineCount: 5,
   relouPerLine: 1,
   enemiesPerLine: 12,
+  pointsPerEnemy: 5,
 };
 
 const level2Data = {
   lineCount: 4,
   relouPerLine: 3,
   enemiesPerLine: 14,
+  pointsPerEnemy: 3,
 };
 
 const level3Data = {
   lineCount: 4,
   relouPerLine: 5,
   enemiesPerLine: 16,
+  pointsPerEnemy: 2,
 };
 
 let levelData = { ...level1Data };
