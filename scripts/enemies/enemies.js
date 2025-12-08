@@ -1,4 +1,4 @@
-import { gameData, level1Data, gameScreen } from "../variables.js";
+import { gameData, levelData, gameScreen } from "../variables.js";
 import { EnemyCarousel } from "./lines-builder.js";
 
 window.addEventListener("resize", createGameScreen);
@@ -9,6 +9,7 @@ function createGameScreen() {
     .getPropertyValue("width");
 
   screenConfig.screenWidth = parseInt(gameScreenWidth);
+  screenConfig.enemiesPerLine = levelData.enemiesPerLine;
   const availableWidth = screenConfig.screenWidth - 200;
   screenConfig.enemySpacingX =
     availableWidth / (screenConfig.enemiesPerLine - 1);
@@ -36,7 +37,7 @@ function newCarousel() {
   console.log(
     `Largeur écran: ${screenConfig.screenWidth}, Espacement: ${screenConfig.enemySpacingX}`
   );
-  const carousel = new EnemyCarousel(screenConfig, level1Data);
+  const carousel = new EnemyCarousel(screenConfig, levelData);
   return carousel;
 }
 

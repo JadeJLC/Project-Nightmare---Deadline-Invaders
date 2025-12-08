@@ -1,6 +1,8 @@
-import { playerIcon, gameData } from "../variables.js";
+import { playerIcon, gameData, enemiesRegistry } from "../variables.js";
+import { rectsIntersect } from "./collisions.js";
+import { Coworker, Relou } from "../enemies/coworker-class.js";
 
-const projectileSpeed = 8;
+const projectileSpeed = 5;
 let projectiles = [];
 let isShooting = false;
 let lastShotTime = 0;
@@ -43,7 +45,7 @@ function shoot() {
   const container = document.getElementById("projectiles");
 
   const projectile = document.createElement("div");
-  projectile.classList.add("projectile");
+  projectile.classList.add("player-projectile");
 
   // Récupère la position du joueur et du conteneur du jeu
   const playerRect = playerIcon.getBoundingClientRect();
@@ -69,9 +71,36 @@ function animateProjectiles() {
     projectile.y -= projectileSpeed;
     projectile.element.style.top = projectile.y + "px";
 
-    if (projectile.y < -20) {
+    if (projectile.y < -10) {
       projectile.element.remove();
       projectiles.splice(index, 1);
+    }
+
+    // Test de collisions
+    const pRect = projectile.element.getBoundingClientRect();
+
+    for (let i = 0; i < enemiesRegistry.length; i++) {
+      const enemy = enemiesRegistry[i];
+      if (!enemy.isAlive) continue; // ignorer les morts
+
+      const eRect = enemy.el.getBoundingClientRect();
+
+      if (rectsIntersect(pRect, eRect)) {
+        // Collision détectée
+        projectile.element.remove();
+        projectiles.splice(index, 1);
+
+        if (enemy instanceof Coworker) {
+          enemy.hit(); // met isAlive = false + cache l'élément
+          gameData.goodScore = gameData.goodScore + 10;
+          console.log("Collègue éliminé, score:", gameData.goodScore);
+        } else if (enemy instanceof Relou) {
+          enemy.hit(); // affiche juste le message
+          gameData.badScore = gameData.badScore + 10;
+          console.log("Relou touché, compteur:", gameData.badScore);
+        }
+        break; // projectile détruit, on sort
+      }
     }
   });
 
