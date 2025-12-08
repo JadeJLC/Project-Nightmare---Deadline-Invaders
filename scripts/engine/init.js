@@ -12,7 +12,6 @@ function init() {
   setEventListeners();
   loadMainMenu();
   movePlayer();
-  playMusic("main-menu");
 }
 
 // Création des event listeners qui seront toujours activés

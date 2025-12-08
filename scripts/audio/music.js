@@ -1,3 +1,4 @@
+import { openPauseMenu, openSettingsMenu } from "../menus/pause.js";
 import { musicBox, gameData, gameOptions } from "../variables.js";
 
 function selectMusic(musicName) {
@@ -15,6 +16,14 @@ function playMusic(musicName) {
   musicBox.play().catch((err) => {
     if (err.name !== "AbortError") {
       console.error("Erreur à la lecture de la musique :", err);
+    }
+    if (err.name === "Not Allowed") {
+      gameOptions.musicOn = false;
+      if ((gameData.currentMusic = "main-menu")) {
+        openSettingsMenu();
+      } else {
+        openPauseMenu();
+      }
     }
   });
 }
