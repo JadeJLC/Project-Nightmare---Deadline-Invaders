@@ -1,5 +1,3 @@
-import { createRelou } from "./enemies/coworker-images.js";
-
 // #region ---- Données de jeu
 
 // Variables stockant les données actuelles du joueur
@@ -9,7 +7,8 @@ let gameData = {
   lives: 3,
   currentLevel: 0,
   levelscores: [0, 0, 0],
-  score: 0,
+  goodScore: 0,
+  badScore: 0,
   powerups: [],
   job: "dev",
   speed: 5,
@@ -29,9 +28,10 @@ let lastLevel = {
 const defaultData = JSON.parse(JSON.stringify(gameData));
 const defaultLevel = JSON.parse(JSON.stringify(lastLevel));
 
-let relouImage = createRelou(gameData.relouName);
+// Liste des ennemis
+const enemiesRegistry = [];
 
-export { gameData, defaultData, lastLevel, defaultLevel };
+export { gameData, defaultData, lastLevel, defaultLevel, enemiesRegistry };
 // #endregion
 
 // #region ---- Elements HTML
@@ -42,6 +42,8 @@ const musicBtn = document.getElementById("toggle-music");
 const style = document.getElementById("style");
 const mainMenuContainer = document.getElementById("main-menu");
 
+export { musicBox, musicBtn, style, mainMenuContainer };
+
 // Menu pause
 const menu = document.getElementById("pause-menu");
 const restartBtn = document.getElementById("restart-level");
@@ -51,41 +53,51 @@ const closeConfirm = document.getElementById("close-confirm");
 const confirmZone = document.getElementById("confirm-menu");
 const closeBtn = document.getElementById("close-menu");
 
-// Ecran de jeu
-const playerIcon = document.getElementById("player-icon");
-const gameScreen = document.getElementById("game-screen");
-const enemyLines = document.getElementById("enemy-carousel");
-
-// Cinématiques
-const typeZone = document.getElementById("cutscene-text");
-const sceneZone = document.getElementById("cutscene");
-const skipBtn = document.getElementById("skip-cutscene");
-
 export {
-  mainMenuContainer,
-  musicBox,
-  musicBtn,
+  menu,
   restartBtn,
   resetBtn,
-  playerIcon,
-  style,
-  menu,
-  typeZone,
-  sceneZone,
   confirmBtn,
   closeConfirm,
   confirmZone,
-  skipBtn,
-  gameScreen,
   closeBtn,
-  enemyLines,
 };
 
-// Définition des niveaux :
+// Ecran de jeu
+const gameScreen = document.getElementById("game-screen");
+const playerIcon = document.getElementById("player-icon");
+const enemyLines = document.getElementById("enemy-carousel");
 
+export { playerIcon, gameScreen, enemyLines };
+
+// Cinématiques
+const sceneZone = document.getElementById("cutscene");
+const typeZone = document.getElementById("cutscene-text");
+const skipBtn = document.getElementById("skip-cutscene");
+
+export { typeZone, sceneZone, skipBtn };
+
+// #endregion
+
+// Définition des niveaux :
 const level1Data = {
   lineCount: 5,
   relouPerLine: 1,
+  enemiesPerLine: 12,
 };
 
-export { level1Data };
+const level2Data = {
+  lineCount: 4,
+  relouPerLine: 3,
+  enemiesPerLine: 14,
+};
+
+const level3Data = {
+  lineCount: 4,
+  relouPerLine: 5,
+  enemiesPerLine: 16,
+};
+
+let levelData = { ...level1Data };
+
+export { levelData };

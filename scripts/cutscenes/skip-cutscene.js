@@ -18,7 +18,6 @@ function skipCutscene() {
 }
 
 function fastSkip(e) {
-  console.log("Touche pressée:", e.key, e.code);
   if (e.key === "Shift") {
     e.preventDefault();
     if (confirm("Passer la cinématique ?")) {

@@ -53,7 +53,6 @@ function nextLine(skip) {
   if (textList[currentLine] === `__PROMPT__`) {
     textList = completeIntroText();
     currentLine++;
-    nextLine();
   }
 
   isTyping = true;
