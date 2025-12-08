@@ -1,4 +1,8 @@
 import { soundEffect } from "../audio/sound-effects.js";
+import { gameData, levelData } from "../variables.js";
+import { rectsIntersect } from "./collisions.js";
+import { playerIcon } from "../variables.js";
+import { updateProgressBar } from "./progress-bar.js";
 
 let shootingEnemies = 0;
 let enemyShots = [];
@@ -80,8 +84,9 @@ function displayEnemyShot(enemy) {
 function animateEnemyShots() {
   const container = document.getElementById("projectiles");
   const containerRect = container.parentElement.getBoundingClientRect();
-
+  const playerRect = playerIcon.getBoundingClientRect();
   enemyShots.forEach((projectile, index) => {
+    const pRect = projectile.element.getBoundingClientRect();
     projectile.y += projectileSpeed;
     projectile.element.style.top = projectile.y + "px";
 
@@ -89,6 +94,24 @@ function animateEnemyShots() {
       projectile.element.remove();
       enemyShots.splice(index, 1);
       shootingEnemies--;
+    }
+
+    if (rectsIntersect(playerRect, pRect)) {
+      if (gameData.goodScore >= levelData.coworkerBonus) {
+        gameData.goodScore -= levelData.coworkerBonus;
+      } else if (gameData.goodScore < levelData.coworkerBonus) {
+        gameData.goodScore -= gameData.goodScore;
+      }
+      console.log("Le joueur est touché ! Score valide :" + gameData.goodScore);
+      // Animation de dégâts
+      playerIcon.classList.add("player--hit");
+      setTimeout(() => playerIcon.classList.remove("player--hit"), 200);
+      // Supprimer le projectile
+      projectile.element.remove();
+      enemyShots.splice(index, 1);
+      shootingEnemies--;
+      updateProgressBar();
+      return;
     }
   });
 
