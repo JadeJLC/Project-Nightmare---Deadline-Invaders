@@ -1,4 +1,6 @@
-import { playerIcon, gameData } from "../variables.js";
+import { playerIcon, gameData, enemiesRegistry } from "../variables.js";
+import { rectsIntersect } from "./collisions.js";
+import { Coworker, Relou } from "../enemies/coworker-class.js";
 
 const projectileSpeed = 8;
 let projectiles = [];
@@ -72,6 +74,33 @@ function animateProjectiles() {
     if (projectile.y < -10) {
       projectile.element.remove();
       projectiles.splice(index, 1);
+    }
+
+    // Test de collisions
+    const pRect = projectile.element.getBoundingClientRect();
+
+    for (let i = 0; i < enemiesRegistry.length; i++) {
+      const enemy = enemiesRegistry[i];
+      if (!enemy.isAlive) continue; // ignorer les morts
+
+      const eRect = enemy.el.getBoundingClientRect();
+
+      if (rectsIntersect(pRect, eRect)) {
+        // Collision détectée
+        projectile.element.remove();
+        projectiles.splice(index, 1);
+
+        if (enemy instanceof Coworker) {
+          enemy.hit(); // met isAlive = false + cache l'élément
+          gameData.goodScore = gameData.goodScore + 10;
+          console.log("Collègue éliminé, score:", gameData.goodScore);
+        } else if (enemy instanceof Relou) {
+          enemy.hit(); // affiche juste le message
+          gameData.badScore = gameData.badScore + 10;
+          console.log("Relou touché, compteur:", gameData.badScore);
+        }
+        break; // projectile détruit, on sort
+      }
     }
   });
 
