@@ -10,6 +10,7 @@ let currentLine = 0;
 let isTyping = false;
 let textList = [];
 let pressEnter = null;
+let typewriterTimeout = null;
 
 function advanceCutScene(cutsceneTextList) {
   skipBtn.addEventListener("click", skipCutscene);
@@ -43,6 +44,9 @@ function nextLine(skip) {
     document.removeEventListener("keydown", fastSkip);
     document.removeEventListener("keydown", pressEnter);
 
+    clearTimeout(typewriterTimeout);
+    typewriterTimeout = null;
+
     gameData.currentMusic = `level${gameData.currentLevel}`;
     changeMusic();
     enableShooting();
@@ -74,7 +78,7 @@ function typeWriter(txt, onComplete) {
       soundEffect("text-sound-effect");
     }
     currentLetter++;
-    setTimeout(() => {
+    typewriterTimeout = setTimeout(() => {
       typeWriter(txt, onComplete);
     }, 25);
   } else {
