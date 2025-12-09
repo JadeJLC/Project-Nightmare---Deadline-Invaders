@@ -26,7 +26,7 @@ function updateLives() {
   livesContainer.innerHTML = "";
   for (let i = 0; i < gameData.lives; i++) {
     const heart = document.createElement("img");
-    heart.src = "../life.png";
+    heart.src = "/images/life.png";
     heart.alt = "Vie";
     livesContainer.appendChild(heart);
   }

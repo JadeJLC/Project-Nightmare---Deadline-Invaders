@@ -6,6 +6,7 @@ import {
   cutsceneFailedLevel,
   cutsceneIntro,
 } from "./play-cutscenes.js";
+import { loseLife } from "../mechanics/life.js";
 
 // Gestion des cinématiques
 function startCutscenes() {
@@ -27,16 +28,26 @@ function startCutscenes() {
       starterScene();
       break;
     case 1:
-      firstLevelEnd();
+      if (gameData.badScore > gameData.goodScore) {
+        loseLife();
+        failedLevel();
+      } else {
+        firstLevelEnd();
+      }
       break;
     case 2:
-      secondLevelEnd();
+      if (gameData.badScore > gameData.goodScore) {
+        loseLife();
+        failedLevel();
+      } else {
+        secondLevelEnd();
+      }
       break;
     case 3:
       if (gameData.score === 300) {
         perfectEnding();
-      } else if (gameData.levelscores[index] < 50) {
-        gameData.lives -= 1;
+      } else if (gameData.badScore > gameData.goodScore) {
+        loseLife();
         failedLevel();
       } else {
         goodEnding();

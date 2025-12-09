@@ -9,6 +9,7 @@
   --attack-soft: #ff8e8e; /*rouge néon doux */
   --accent: #9d7cff; /* violet accent */
   --danger: #ff5e7a; /* rouge/rose accent */
+  --good: rgb(116, 251, 116);
   --text: #cfe8ff;
   --shadow: rgba(72, 199, 255, 0.3);
 }
@@ -217,5 +218,5 @@
 }
 
 #good-progress {
-  background: var(--text);
+  background: var(--good);
 }
