@@ -7,6 +7,7 @@ import {
   cutsceneIntro,
 } from "./play-cutscenes.js";
 import { loseLife } from "../mechanics/life.js";
+import { addScoreToScoreboard } from "../scores/scoreboard.js";
 
 // Gestion des cinématiques
 function startCutscenes() {
@@ -16,11 +17,15 @@ function startCutscenes() {
   gameData.score =
     gameData.levelscores[0] + gameData.levelscores[1] + gameData.levelscores[2];
 
-  let index = gameData.currentLevel - 1;
-
   if (gameData.lives === 0) {
+    addScoreToScoreboard();
     badEnding();
     return;
+  }
+
+  if (gameData.badScore > gameData.goodScore) {
+    loseLife();
+    failedLevel();
   }
 
   switch (gameData.currentLevel) {
@@ -28,27 +33,15 @@ function startCutscenes() {
       starterScene();
       break;
     case 1:
-      if (gameData.badScore > gameData.goodScore) {
-        loseLife();
-        failedLevel();
-      } else {
-        firstLevelEnd();
-      }
+      firstLevelEnd();
       break;
     case 2:
-      if (gameData.badScore > gameData.goodScore) {
-        loseLife();
-        failedLevel();
-      } else {
-        secondLevelEnd();
-      }
+      secondLevelEnd();
       break;
     case 3:
+      addScoreToScoreboard();
       if (gameData.score === 300) {
         perfectEnding();
-      } else if (gameData.badScore > gameData.goodScore) {
-        loseLife();
-        failedLevel();
       } else {
         goodEnding();
       }
@@ -106,6 +99,7 @@ function badEnding() {
 }
 
 function goodEnding() {
+  console.log("Fin du jeu.");
   // ---- Cinématique de fin simple
 }
 

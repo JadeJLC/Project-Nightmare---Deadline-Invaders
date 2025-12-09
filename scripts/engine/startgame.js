@@ -2,6 +2,7 @@ import { gameData, style, mainMenuContainer } from "../variables.js";
 import { openPauseMenu, openSettingsMenu } from "../menus/pause.js";
 import { startCutscenes } from "../cutscenes/select-cutscene.js";
 import { initLives } from "../mechanics/life.js";
+import { addScoreToScoreboard } from "../scores/scoreboard.js";
 
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
@@ -28,6 +29,7 @@ function startGame(mode) {
 
 function storyMode() {
   console.log(`Lancement du jeu en mode Histoire par ${gameData.playerName}`);
+  gameData.gameMode = "Histoire";
   document.getElementById("pause-menu").classList.add("is-hidden");
   gameScreenContainer.classList.remove("is-hidden");
   updatePauseButton();
@@ -37,6 +39,7 @@ function storyMode() {
 
 function endlessMode() {
   console.log("Mode Sans-Fin");
+  gameData.gameMode = "Sans fin";
   // ---- Lance le mode sans fin
 }
 

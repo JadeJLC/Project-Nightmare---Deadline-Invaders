@@ -7,7 +7,7 @@ import {
 import { rectsIntersect } from "./collisions.js";
 import { Coworker, Relou } from "../enemies/coworker-class.js";
 import { soundEffect } from "../audio/sound-effects.js";
-import { updateProgressBar } from "./progress-bar.js";
+import { updateProgressBar } from "../scores/progress-bar.js";
 
 const projectileSpeed = 5;
 let projectiles = [];

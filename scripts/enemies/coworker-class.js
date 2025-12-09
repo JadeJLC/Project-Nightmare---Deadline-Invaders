@@ -47,7 +47,6 @@ class Coworker {
   hit() {
     this.isAlive = false;
     this.el.className = "is-hidden";
-    console.log(this.el.src);
     if (
       this.sprite == "../images/coworker1.png" ||
       this.sprite == "../images/coworker2.png"
@@ -101,9 +100,7 @@ class Relou {
     this.updatePosition();
   }
 
-  hit() {
-    console.log("Relou ne peut pas être éliminé !");
-  }
+  hit() {}
 }
 
 export { Coworker, Relou };

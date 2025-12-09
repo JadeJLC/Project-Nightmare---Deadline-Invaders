@@ -2,7 +2,7 @@ import { soundEffect } from "../audio/sound-effects.js";
 import { gameData, levelData } from "../variables.js";
 import { rectsIntersect } from "./collisions.js";
 import { playerIcon } from "../variables.js";
-import { updateProgressBar } from "./progress-bar.js";
+import { updateProgressBar } from "../scores/progress-bar.js";
 
 let shootingEnemies = 0;
 let enemyShots = [];
@@ -18,7 +18,6 @@ function disableEnemyShooting() {
 }
 
 function enableEnemyShooting() {
-  console.log("Activation des tirs ennemis");
   const interval = Math.floor(Math.random() * 800) + 200;
 
   enemyShotTimeout = setTimeout(() => {
