@@ -15,7 +15,7 @@ let gameData = {
   loadedCutscene: false,
   countPoint: false,
   currentMusic: "main-menu",
-  shotCooldown: 300,
+  shotCooldown: 600,
 };
 
 let gameOptions = {

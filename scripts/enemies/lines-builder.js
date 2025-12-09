@@ -43,9 +43,11 @@ class EnemyLine {
       moveSpeedX: this.cfg.moveSpeedX * this.speedMultiplier,
     };
 
+    const time = Date.now();
+
     this.enemies.forEach((e) => {
       if (e.isAlive) {
-        e.update(this.direction, modifiedCfg);
+        e.update(this.direction, modifiedCfg, time);
       }
     });
   }
