@@ -18,7 +18,7 @@ import {
   disableMovement,
   enableMovement,
 } from "../animations/player-movement.js";
-import { updateProgressBar } from "../mechanics/progress-bar.js";
+import { updateProgressBar } from "../scores/progress-bar.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;

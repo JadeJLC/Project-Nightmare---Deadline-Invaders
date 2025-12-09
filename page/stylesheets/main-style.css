@@ -139,7 +139,7 @@ body::before {
 
 /* ===== Menu pause ===== */
 #pause-menu,
-#end-level {
+.confirm-pannel {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -156,6 +156,39 @@ body::before {
   z-index: 8;
 }
 
+.scoreboard {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 80vw;
+  max-width: 850px;
+  height: fit-content;
+  padding: 15px;
+  padding-bottom: 10px;
+  background: var(--panel);
+  border: 2px solid var(--neon);
+  border-radius: 10px;
+  box-shadow: 0 0 12px var(--shadow);
+}
+
+.scoreboard td {
+  width: 25%;
+  text-align: center;
+  padding-top: 15px;
+  vertical-align: top;
+}
+
+.scoreboard th {
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--neon);
+}
+
+.scoreboard thead {
+  margin-bottom: 10px;
+}
+
 #pause-menu h2 {
   margin-bottom: 12px;
   font-size: 16px;
@@ -163,7 +196,8 @@ body::before {
 }
 
 #pause-menu button,
-#end-level button {
+.confirm-pannel button,
+.back-to-main {
   display: block;
   width: 100%;
   padding: 12px;
@@ -175,7 +209,14 @@ body::before {
   cursor: pointer;
 }
 
-#pause-menu button:hover {
+.back-to-main {
+  max-width: 400px;
+  margin: auto;
+}
+
+#pause-menu button:hover,
+.confirm-pannel button:hover,
+.back-to-main:hover {
   border-color: var(--neon-soft);
   box-shadow: 0 0 12px var(--neon-soft);
 }

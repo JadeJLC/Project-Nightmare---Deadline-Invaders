@@ -16,6 +16,7 @@ let gameData = {
   countPoint: false,
   currentMusic: "main-menu",
   shotCooldown: 600,
+  gameMode: "",
 };
 
 let gameOptions = {
@@ -38,6 +39,8 @@ const defaultLevel = JSON.parse(JSON.stringify(lastLevel));
 // Liste des ennemis
 const enemiesRegistry = [];
 
+const cookieName = "ScoreBoard";
+
 export {
   gameData,
   gameOptions,
@@ -45,7 +48,9 @@ export {
   lastLevel,
   defaultLevel,
   enemiesRegistry,
+  cookieName,
 };
+
 // #endregion
 
 // #region ---- Elements HTML
@@ -56,8 +61,16 @@ const musicBtn = document.getElementById("toggle-music");
 const effectBtn = document.getElementById("toggle-effects");
 const style = document.getElementById("style");
 const mainMenuContainer = document.getElementById("main-menu");
+const scoreBoardContainer = document.getElementById("score-board");
 
-export { musicBox, musicBtn, effectBtn, style, mainMenuContainer };
+export {
+  musicBox,
+  musicBtn,
+  effectBtn,
+  style,
+  mainMenuContainer,
+  scoreBoardContainer,
+};
 
 // Menu pause
 const menu = document.getElementById("pause-menu");

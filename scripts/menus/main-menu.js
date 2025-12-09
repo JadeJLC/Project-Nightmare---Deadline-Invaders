@@ -7,8 +7,10 @@ import {
   mainMenuContainer,
   menu,
   gameData,
+  scoreBoardContainer,
 } from "../variables.js";
 import { startGame } from "../engine/startgame.js";
+import { displayScores } from "../scores/scoreboard.js";
 
 const settingsIcon = document.getElementById("pause-btn");
 
@@ -16,7 +18,7 @@ const settingsIcon = document.getElementById("pause-btn");
 // ---- Pour alléger les performances et la page HTML, le menu principal est créé dynamiquement uniquement lorsqu'il est appelé, et supprimé au lancement du jeu
 export function loadMainMenu() {
   style.setAttribute("href", "stylesheets/main-menu.css");
-  mainMenuContainer.innerHTML = "";
+  mainMenuContainer.innerHTML = scoreBoardContainer.innerHTML = "";
   menu.classList.add("is-hidden");
 
   // Création des éléments HTML
@@ -42,7 +44,7 @@ function mainMenuButtons() {
   const buttons = [
     { label: "Mode Histoire", onClick: () => startGame("Story") },
     { label: "Mode Sans-Fin", onClick: () => startGame("Endless") },
-    { label: "Tableau des scores", onClick: () => console.log("Scores") },
+    { label: "Tableau des scores", onClick: () => displayScores() },
   ];
 
   const buttonmainMenu = document.createElement("div");
