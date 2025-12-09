@@ -20,6 +20,7 @@ export function loadMainMenu() {
   style.setAttribute("href", "stylesheets/main-menu.css");
   mainMenuContainer.innerHTML = scoreBoardContainer.innerHTML = "";
   menu.classList.add("is-hidden");
+  HUD.classList.add("is-hidden");
 
   // Création des éléments HTML
   mainMenuTitle();

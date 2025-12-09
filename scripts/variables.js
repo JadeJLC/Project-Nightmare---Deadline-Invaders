@@ -105,8 +105,9 @@ const typeZone = document.getElementById("cutscene-text");
 const skipBtn = document.getElementById("skip-cutscene");
 const endLvl = document.getElementById("end-level");
 const toCutscene = document.getElementById("launch-cutscene");
+const cutsceneAnimation = document.getElementById("cutscene-action");
 
-export { typeZone, sceneZone, skipBtn, endLvl, toCutscene };
+export { typeZone, sceneZone, skipBtn, endLvl, toCutscene, cutsceneAnimation };
 
 // #endregion
 

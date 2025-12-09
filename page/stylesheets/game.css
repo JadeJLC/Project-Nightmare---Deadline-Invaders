@@ -105,6 +105,51 @@
   transform: translateX(-50%);
 }
 
+#cutscene-action {
+  position: absolute;
+  bottom: 200px;
+  left: 35%;
+  width: 80%;
+}
+
+#cw4 {
+  position: absolute;
+  bottom: -15px;
+  left: -30px;
+}
+
+#cw3 {
+  position: absolute;
+  bottom: -25px;
+  left: 60px;
+  z-index: 2;
+}
+
+#cw1 {
+  position: absolute;
+  bottom: -30px;
+  left: -90px;
+}
+
+#cw5 {
+  position: absolute;
+  bottom: 40px;
+  z-index: 1;
+}
+
+#cwr {
+  position: absolute;
+  left: 355px;
+  bottom: -15px;
+  z-index: 2;
+}
+
+#boss {
+  position: absolute;
+  left: 300px;
+  bottom: -5px;
+}
+
 @keyframes arrow-blink {
   0%,
   100% {

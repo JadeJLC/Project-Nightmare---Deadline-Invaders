@@ -2,20 +2,24 @@ import { typeZone, gameData, sceneZone, skipBtn, HUD } from "../variables.js";
 import { soundEffect } from "../audio/sound-effects.js";
 import { skipCutscene, fastSkip } from "./skip-cutscene.js";
 import { loadLevel } from "../engine/levels.js";
+import { specialLines } from "./special-scenes.js";
 
 let currentLetter = 0;
-let currentLine = 0;
 let isTyping = false;
-let textList = [];
 let pressEnter = null;
 let typewriterTimeout = null;
+
+let cutsceneData = {
+  textList: [],
+  currentLine: 0,
+};
 
 function advanceCutScene(cutsceneTextList) {
   skipBtn.addEventListener("click", skipCutscene);
   document.addEventListener("keydown", fastSkip);
 
-  textList = cutsceneTextList;
-  currentLine = 0;
+  cutsceneData.textList = cutsceneTextList;
+  cutsceneData.currentLine = 0;
 
   if (pressEnter) {
     document.removeEventListener("keydown", pressEnter);
@@ -34,7 +38,7 @@ function advanceCutScene(cutsceneTextList) {
 }
 
 function nextLine(skip) {
-  if (currentLine >= textList.length || skip) {
+  if (cutsceneData.currentLine >= cutsceneData.textList.length || skip) {
     console.log("Cutscene finished.");
     gameData.loadedCutscene = true;
     sceneZone.classList.add("is-hidden");
@@ -49,15 +53,12 @@ function nextLine(skip) {
     return;
   }
 
-  if (textList[currentLine] === `__PROMPT__`) {
-    textList = completeIntroText();
-    currentLine++;
-  }
+  specialLines();
 
   isTyping = true;
-  typeWriter(textList[currentLine], () => {
+  typeWriter(cutsceneData.textList[cutsceneData.currentLine], () => {
     isTyping = false;
-    currentLine++;
+    cutsceneData.currentLine++;
   });
 }
 
@@ -85,26 +86,6 @@ function typeWriter(txt, onComplete) {
   }
 }
 
-// Gestion du cas spécial de la cinématique d'introduction : entrer le nom du collègue puis l'intégrer aux dialogues
-function completeIntroText() {
-  gameData.relouName = prompt("Entrez le nom de votre collègue relou :");
-  while (
-    gameData.relouName === "" ||
-    gameData.relouName === gameData.playerName
-  ) {
-    gameData.relouName = prompt(
-      "Votre collègue ne peut avoir un nom vide ou identique au vôtre. Entrez le nom de votre collègue relou :"
-    );
-  }
-  textList.push(
-    `(Patron) : ${gameData.relouName} va travailler avec vous dès aujourd'hui. Je suis sûr que tout se passera très bien.`
-  );
-  textList.push(
-    `(${gameData.relouName}) : Si tout le monde travaille correctement, il ne devrait pas y avoir de problème, hahaha.`
-  );
-  textList.push(`(${gameData.playerName}) : ...`);
+// Gestion des lignes spéciales entre "__" qui déclenchent des scènes particulières dans les cinématiques
 
-  return textList;
-}
-
-export { advanceCutScene, textList, nextLine };
+export { advanceCutScene, cutsceneData, nextLine };
