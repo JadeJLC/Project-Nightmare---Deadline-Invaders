@@ -30,6 +30,7 @@ function releaseSpace(e) {
 function disableShooting() {
   console.log("Suppression de la capacité de tir");
   document.removeEventListener("keydown", pressSpace);
+  isShooting = false;
 }
 
 // Fonction pour activer les tirs en appuyant sur la touche espace
