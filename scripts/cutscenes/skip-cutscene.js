@@ -1,8 +1,8 @@
 import { gameData } from "../variables.js";
-import { textList, nextLine } from "./write-cutscenes.js";
+import { cutsceneData, nextLine } from "./write-cutscenes.js";
 
 function skipCutscene() {
-  if (textList[1] === `__PROMPT__` && gameData.relouName == "0") {
+  if (cutsceneData.textList[1] === `__PROMPT__` && gameData.relouName == "0") {
     gameData.relouName = prompt("Entrez le nom de votre collègue relou :");
     while (
       gameData.relouName === "" ||

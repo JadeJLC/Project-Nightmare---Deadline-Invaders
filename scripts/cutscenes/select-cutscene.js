@@ -61,7 +61,6 @@ function starterScene() {
 function firstLevelEnd() {
   gameData.currentMusic = "intro";
   changeMusic();
-  // ---- Lancer la cinématique de fin du niveau 1
 
   gameData.currentLevel = 2;
 
@@ -76,7 +75,6 @@ function firstLevelEnd() {
 function secondLevelEnd() {
   gameData.currentMusic = "intro";
   changeMusic();
-  // ---- Lancer la cinématique de fin du niveau 2
 
   gameData.currentLevel = 3;
 
