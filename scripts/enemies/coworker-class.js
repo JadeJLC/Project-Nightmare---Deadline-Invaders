@@ -5,7 +5,8 @@ import { enemiesRegistry } from "../variables.js";
 class Coworker {
   constructor(x, y) {
     this.x = x;
-    this.y = y;
+    this.baseY = y; // position de base
+    this.wavePhase = Math.random() * Math.PI * 2; // phase aléatoire
     this.sprite = createCoworkers();
     this.el = document.createElement("img");
     this.el.src = this.sprite;
@@ -32,6 +33,13 @@ class Coworker {
       this.x = cfg.screenWidth;
     }
 
+    // Oscillation verticale
+    const amplitude = 8; // pixels
+    const frequency = 0.002; // vitesse de l’oscillation
+    const time = Date.now();
+    this.y =
+      this.baseY + amplitude * Math.sin(this.wavePhase + time * frequency);
+
     this.updatePosition();
   }
 
@@ -44,7 +52,8 @@ class Coworker {
 class Relou {
   constructor(x, y, name) {
     this.x = x;
-    this.y = y;
+    this.baseY = y; // position de base
+    this.wavePhase = Math.random() * Math.PI * 2; // phase aléatoire
     this.sprite = createRelou(name);
     this.el = document.createElement("img");
     this.el.src = this.sprite;
@@ -71,6 +80,13 @@ class Relou {
     } else if (this.x < -this.el.width) {
       this.x = cfg.screenWidth;
     }
+
+    // Oscillation verticale
+    const amplitude = 8; // pixels
+    const frequency = 0.002; // vitesse de l’oscillation
+    const time = Date.now();
+    this.y =
+      this.baseY + amplitude * Math.sin(this.wavePhase + time * frequency);
 
     this.updatePosition();
   }
