@@ -1,6 +1,7 @@
 import { createRelou, createCoworkers } from "./coworker-images.js";
 import { coworkerID } from "./lines-builder.js";
 import { enemiesRegistry } from "../variables.js";
+import { soundEffect } from "../audio/sound-effects.js";
 
 class Coworker {
   constructor(x, y) {
@@ -46,6 +47,15 @@ class Coworker {
   hit() {
     this.isAlive = false;
     this.el.className = "is-hidden";
+    console.log(this.el.src);
+    if (
+      this.sprite == "../images/coworker1.png" ||
+      this.sprite == "../images/coworker2.png"
+    ) {
+      soundEffect("tir-cwf");
+    } else {
+      soundEffect("tir-cwm");
+    }
   }
 }
 

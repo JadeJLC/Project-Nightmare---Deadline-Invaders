@@ -117,6 +117,7 @@ function animateProjectiles() {
           enemy.hit();
           gameData.badScore += levelData.relouMalus;
           console.log("Relou touché, compteur:", gameData.badScore);
+          soundEffect("tir-relou");
         }
 
         updateProgressBar();
