@@ -2,7 +2,7 @@ import { gameData, gameOptions, musicBtn, effectBtn } from "../variables.js";
 import { stopMusic, playMusic } from "../audio/music.js";
 
 function toggleMusic() {
-  if (gameOptions.musicOn) {
+  if (!gameOptions.musicOn) {
     console.log("Lecture de la musique : ", gameData.currentMusic);
     musicBtn.textContent = "🎵 / Couper la musique";
     gameOptions.musicOn = true;
@@ -16,7 +16,7 @@ function toggleMusic() {
 }
 
 function toggleEffects() {
-  if (gameOptions.soundEffects) {
+  if (!gameOptions.soundEffects) {
     effectBtn.textContent = "🔉 / Désactiver les effets sonores";
     gameOptions.soundEffects = true;
   } else {

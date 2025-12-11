@@ -96,8 +96,10 @@ function animateEnemyShots() {
       shootingEnemies--;
     }
 
-    if (rectsIntersect(playerRect, pRect)) {
-      if (gameData.goodScore >= levelData.coworkerBonus) {
+    if (rectsIntersect(playerRect, pRect) && gameData.countPoint) {
+      if (gameData.goodScore === 0) {
+        gameData.badScore += levelData.relouMalus;
+      } else if (gameData.goodScore >= levelData.coworkerBonus) {
         gameData.goodScore -= levelData.coworkerBonus;
       } else if (gameData.goodScore < levelData.coworkerBonus) {
         gameData.goodScore -= gameData.goodScore;

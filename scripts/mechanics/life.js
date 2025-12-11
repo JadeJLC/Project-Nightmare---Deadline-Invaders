@@ -1,4 +1,5 @@
 import { gameData } from "../variables.js";
+import { badEnding } from "../cutscenes/select-cutscene.js";
 
 function initLives() {
   const livesContainer = document.getElementById("lives");
@@ -17,7 +18,7 @@ function loseLife() {
     updateLives();
   }
   if (gameData.lives === 0) {
-    console.log("Game Over");
+    badEnding();
   }
 }
 

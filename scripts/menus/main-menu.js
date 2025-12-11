@@ -1,7 +1,6 @@
 import { playMusic } from "../audio/music.js";
 import { openSettingsMenu, openPauseMenu, resumeGame } from "./pause.js";
 import {
-  musicBtn,
   style,
   closeBtn,
   mainMenuContainer,
@@ -10,13 +9,14 @@ import {
   scoreBoardContainer,
 } from "../variables.js";
 import { startGame } from "../engine/startgame.js";
-import { displayScores } from "../scores/scoreboard.js";
+import { displayScores, newMenuOption } from "../scores/scoreboard.js";
 
 const settingsIcon = document.getElementById("pause-btn");
 
 // Création du menu principal
 // ---- Pour alléger les performances et la page HTML, le menu principal est créé dynamiquement uniquement lorsqu'il est appelé, et supprimé au lancement du jeu
 export function loadMainMenu() {
+  resetScoreBoard();
   style.setAttribute("href", "stylesheets/main-menu.css");
   mainMenuContainer.innerHTML = scoreBoardContainer.innerHTML = "";
   menu.classList.add("is-hidden");
@@ -31,6 +31,12 @@ export function loadMainMenu() {
   if (gameData.musicOn) {
     playMusic(gameData.currentMusic);
   }
+}
+
+function resetScoreBoard() {
+  if (newMenuOption) newMenuOption.remove();
+
+  scoreBoardContainer.classList.add("is-hidden");
 }
 
 // #region **** Fonctions pour la création du HTML

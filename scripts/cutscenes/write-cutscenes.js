@@ -1,8 +1,10 @@
-import { typeZone, gameData, sceneZone, skipBtn, HUD } from "../variables.js";
+import { typeZone, gameData, sceneZone, skipBtn } from "../variables.js";
 import { soundEffect } from "../audio/sound-effects.js";
 import { skipCutscene, fastSkip } from "./skip-cutscene.js";
 import { loadLevel } from "../engine/levels.js";
 import { specialLines } from "./special-scenes.js";
+import { cutsceneDeleteCoworkers } from "./images-cutscenes.js";
+import { endGame } from "../engine/levels.js";
 
 let currentLetter = 0;
 let isTyping = false;
@@ -37,19 +39,30 @@ function advanceCutScene(cutsceneTextList) {
   nextLine();
 }
 
+function endCutscene() {
+  console.log("Cutscene finished.");
+  gameData.loadedCutscene = true;
+  sceneZone.classList.add("is-hidden");
+  typeZone.textContent = "";
+
+  document.removeEventListener("keydown", fastSkip);
+  document.removeEventListener("keydown", pressEnter);
+
+  cutsceneDeleteCoworkers();
+
+  clearTimeout(typewriterTimeout);
+  typewriterTimeout = null;
+
+  if (gameData.currentLevel <= 3) {
+    loadLevel();
+  } else {
+    endGame();
+  }
+}
+
 function nextLine(skip) {
   if (cutsceneData.currentLine >= cutsceneData.textList.length || skip) {
-    console.log("Cutscene finished.");
-    gameData.loadedCutscene = true;
-    sceneZone.classList.add("is-hidden");
-
-    document.removeEventListener("keydown", fastSkip);
-    document.removeEventListener("keydown", pressEnter);
-
-    clearTimeout(typewriterTimeout);
-    typewriterTimeout = null;
-
-    loadLevel();
+    endCutscene();
     return;
   }
 
@@ -85,7 +98,5 @@ function typeWriter(txt, onComplete) {
     }
   }
 }
-
-// Gestion des lignes spéciales entre "__" qui déclenchent des scènes particulières dans les cinématiques
 
 export { advanceCutScene, cutsceneData, nextLine };

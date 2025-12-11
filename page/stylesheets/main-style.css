@@ -156,7 +156,9 @@ body::before {
   z-index: 8;
 }
 
-.scoreboard {
+#score-board {
+  height: 70vh;
+  overflow: auto;
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -164,13 +166,15 @@ body::before {
   transform: translateX(-50%) translateY(-50%);
   width: 80vw;
   max-width: 850px;
-  height: fit-content;
-  padding: 15px;
-  padding-bottom: 10px;
   background: var(--panel);
   border: 2px solid var(--neon);
-  border-radius: 10px;
   box-shadow: 0 0 12px var(--shadow);
+  border-radius: 10px;
+}
+
+.scoreboard {
+  width: 100%;
+  padding: 0px 15px 10px 15px;
 }
 
 .scoreboard td {
@@ -181,12 +185,16 @@ body::before {
 }
 
 .scoreboard th {
+  padding-top: 15px;
   padding-bottom: 5px;
   border-bottom: 2px solid var(--neon);
 }
 
 .scoreboard thead {
   margin-bottom: 10px;
+  position: sticky;
+  top: 0px;
+  background: var(--panel);
 }
 
 #pause-menu h2 {

@@ -5,12 +5,15 @@ import {
   cutsceneEndSecondLevel,
   cutsceneFailedLevel,
   cutsceneIntro,
-} from "./play-cutscenes.js";
+  cutsceneEndThirdLevel,
+} from "./text-cutscenes.js";
 import { loseLife } from "../mechanics/life.js";
 import { addScoreToScoreboard } from "../scores/scoreboard.js";
+import { cutsceneDisplayCoworkers } from "./images-cutscenes.js";
 
 // Gestion des cinématiques
-function startCutscenes() {
+function selectCutscene() {
+  cutsceneDisplayCoworkers();
   endLvl.classList.add("is-hidden");
   sceneZone.classList.remove("is-hidden");
 
@@ -26,6 +29,7 @@ function startCutscenes() {
   if (gameData.badScore > gameData.goodScore) {
     loseLife();
     failedLevel();
+    return;
   }
 
   switch (gameData.currentLevel) {
@@ -39,12 +43,7 @@ function startCutscenes() {
       secondLevelEnd();
       break;
     case 3:
-      addScoreToScoreboard();
-      if (gameData.score === 300) {
-        perfectEnding();
-      } else {
-        goodEnding();
-      }
+      goodEnding();
       break;
   }
 }
@@ -87,6 +86,7 @@ function secondLevelEnd() {
 }
 
 function failedLevel() {
+  gameData.score = lastLevel.score;
   // --- Cinématique quand on échoue à un niveau
 
   cutsceneFailedLevel();
@@ -97,12 +97,17 @@ function badEnding() {
 }
 
 function goodEnding() {
-  console.log("Fin du jeu.");
-  // ---- Cinématique de fin simple
+  gameData.currentLevel = 4;
+  gameData.currentMusic = "good-ending";
+  changeMusic();
+
+  lastLevel.nb = 3;
+  lastLevel.powerups = gameData.powerups;
+  lastLevel.score = gameData.score;
+  lastLevel.lives = gameData.lives;
+
+  addScoreToScoreboard();
+  cutsceneEndThirdLevel();
 }
 
-function perfectEnding() {
-  // ---- Cinématique de fin après un score de 100% sur chaque niveau
-}
-
-export { starterScene, startCutscenes };
+export { starterScene, selectCutscene, badEnding };

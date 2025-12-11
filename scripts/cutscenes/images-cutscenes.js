@@ -7,12 +7,18 @@ const lastPost = 4;
 const duration = 180;
 let lastFrameTime = 0;
 
-export function cutsceneDisplayCoworkers() {
+function cutsceneDeleteCoworkers() {
+  cutsceneAnimation.innerHTML = "";
+  stopCutsceneAnimation();
+}
+
+function cutsceneDisplayCoworkers() {
   cutsceneAnimation.innerHTML = "";
   let coworkerID = 1;
 
   while (coworkerID < 6) {
     let newCoworker = document.createElement("img");
+
     newCoworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
     newCoworker.id = `cw${coworkerID}`;
     cutsceneAnimation.appendChild(newCoworker);
@@ -29,19 +35,17 @@ export function cutsceneDisplayCoworkers() {
   boss.id = "boss";
   cutsceneAnimation.appendChild(boss);
 
-  sceneZone.appendChild(cutsceneAnimation);
-
-  animationFrameId = requestAnimationFrame(animate);
+  animationFrameId = requestAnimationFrame(animateCoworkers);
 }
 
-function animate(timestamp) {
+function animateCoworkers(timestamp) {
   if (timestamp - lastFrameTime >= duration) {
     lastFrameTime = timestamp;
 
     cutsceneMoveCoworkers();
   }
 
-  animationFrameId = requestAnimationFrame(animate);
+  animationFrameId = requestAnimationFrame(animateCoworkers);
 }
 
 function cutsceneMoveCoworkers() {
@@ -51,20 +55,35 @@ function cutsceneMoveCoworkers() {
   while (coworkerID < 6) {
     let coworker = document.getElementById(`cw${coworkerID}`);
 
-    if (coworker)
+    if (coworker) {
       coworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
+
+      // if (coworker.classList.contains("final-scene")) {
+      //   coworker.src = `/images/cutscenes/cw${coworkerID}_party_pose${currentPose}.png`;
+      // } else {
+      //   coworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
+      // }
+    }
 
     coworkerID++;
   }
 
   let relou = document.getElementById("cwr");
-  if (relou) relou.src = `/images/cutscenes/cwr_pose${currentPose}.png`;
+  if (relou) {
+    if (relou.classList.contains("final-scene")) {
+      relou.src = `/images/cutscenes/cwr_carton_pose${currentPose}.png`;
+    } else {
+      relou.src = `/images/cutscenes/cwr_pose${currentPose}.png`;
+    }
+  }
 
   let boss = document.getElementById("boss");
   if (boss) boss.src = `/images/cutscenes/boss_pose${currentPose}.png`;
 }
 
-export function stopCutsceneAnimation() {
+function stopCutsceneAnimation() {
   cancelAnimationFrame(animationFrameId);
   console.log("Animation stopped.");
 }
+
+export { cutsceneDisplayCoworkers, cutsceneDeleteCoworkers };

@@ -4,7 +4,10 @@ import {
   cookieName,
   mainMenuContainer,
   scoreBoardContainer,
+  menu,
 } from "../variables.js";
+
+let newMenuOption = null;
 
 function addScoreToScoreboard() {
   console.log("Sauvegarde du score");
@@ -53,6 +56,7 @@ function scoreBoardTitle() {
   title.innerHTML = "Tableau des scores";
   title.className = "menu-title";
   mainMenuContainer.appendChild(title);
+  scoreBoardContainer.classList.remove("is-hidden");
 }
 
 function emptyScoreBoard() {
@@ -98,6 +102,10 @@ function createScoreBoard(scores) {
 
   scoreBoard.appendChild(scoreBoardBody);
 
+  newMenuOption = document.createElement("button");
+  newMenuOption.textContent = "Retour au menu principal";
+  newMenuOption.addEventListener("click", loadMainMenu);
+  menu.appendChild(newMenuOption);
   scoreBoardContainer.append(scoreBoard);
 }
 
@@ -116,4 +124,4 @@ function formatDate(date) {
 }
 // #endregion
 
-export { addScoreToScoreboard, displayScores };
+export { addScoreToScoreboard, displayScores, newMenuOption };

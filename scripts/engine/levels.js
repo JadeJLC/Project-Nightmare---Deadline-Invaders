@@ -9,6 +9,7 @@ import {
   enemyLines,
   playerIcon,
   endLvl,
+  toCutscene,
 } from "../variables.js";
 import {
   disableEnemyShooting,
@@ -19,10 +20,16 @@ import {
   enableMovement,
 } from "../animations/player-movement.js";
 import { updateProgressBar } from "../scores/progress-bar.js";
+import { selectCutscene } from "../cutscenes/select-cutscene.js";
+import { loadMainMenu } from "../menus/main-menu.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;
   console.log("Chargement du niveau", gameData.currentLevel);
+
+  let levelNum = document.getElementById("level-num");
+
+  if (levelNum) levelNum.textContent = `Niveau ${gameData.currentLevel}`;
 
   Object.assign(levelData, allLevelData[gameData.currentLevel]);
 
@@ -43,6 +50,7 @@ function loadLevel() {
   enableMovement();
   gameData.badScore = 0;
   gameData.goodScore = 0;
+  gameData.countPoint = true;
 
   updateProgressBar();
   console.log("Niveau chargé");
@@ -70,11 +78,43 @@ function finishLevel() {
   projectiles.innerHTML = "";
 
   endLvl.classList.remove("is-hidden");
-
-  if (gameData.goodScore > 50)
-    endLvl.firstElementChild.innerHTML = "Félicitations ! ";
-
-  endLvl.firstElementChild.innerHTML += `Vous avez terminé le niveau ${gameData.currentLevel} avec un score de ${gameData.levelscores[index]} !`;
+  gameData.countPoint = false;
+  if (gameData.goodScore > 50) {
+    endLvl.firstElementChild.innerHTML = `Félicitations ! Vous avez terminé le niveau ${gameData.currentLevel} avec un score de ${gameData.levelscores[index]}% !`;
+  } else {
+    endLvl.firstElementChild.innerHTML = `Vous avez terminé le niveau ${gameData.currentLevel} avec un score de ${gameData.levelscores[index]}%.`;
+  }
 }
 
-export { loadLevel, finishLevel };
+function endGame() {
+  console.log("Fin du jeu");
+  endLvl.classList.remove("is-hidden");
+  endLvl.firstElementChild.innerHTML = `Félicitations ! Vous avez terminé Project Nightmare : Deadline Invaders ! <br/><br/>
+    Il semble que ${gameData.relouName} ne compte pas en rester là.<br/><br/>
+    Peut-être le retrouverez-vous bientôt...`;
+
+  toCutscene.removeEventListener("click", selectCutscene);
+
+  toCutscene.addEventListener("click", thanksScreen);
+
+  toCutscene.textContent = "Continuer";
+}
+
+function thanksScreen() {
+  endLvl.firstElementChild.innerHTML = `Merci d'avoir joué !`;
+  toCutscene.removeEventListener("click", thanksScreen);
+
+  toCutscene.addEventListener("click", finalScreen);
+
+  toCutscene.textContent = "Retour au menu principal";
+}
+
+function finalScreen() {
+  endLvl.classList.add("is-hidden");
+  toCutscene.textContent = "Continuer";
+  toCutscene.removeEventListener("click", finalScreen);
+  toCutscene.addEventListener("click", selectCutscene);
+  loadMainMenu();
+}
+
+export { loadLevel, finishLevel, endGame };

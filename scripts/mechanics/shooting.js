@@ -30,6 +30,7 @@ function releaseSpace(e) {
 function disableShooting() {
   console.log("Suppression de la capacité de tir");
   document.removeEventListener("keydown", pressSpace);
+  cancelAnimationFrame(animateProjectiles);
   isShooting = false;
 }
 
@@ -104,7 +105,7 @@ function animateProjectiles() {
 
       const eRect = enemy.el.getBoundingClientRect();
 
-      if (rectsIntersect(pRect, eRect)) {
+      if (rectsIntersect(pRect, eRect) && gameData.countPoint) {
         // Collision détectée
         projectile.element.remove();
         projectiles.splice(index, 1);
@@ -117,7 +118,6 @@ function animateProjectiles() {
           enemy.hit();
           gameData.badScore += levelData.relouMalus;
           console.log("Relou touché, compteur:", gameData.badScore);
-          soundEffect("tir-relou");
         }
 
         updateProgressBar();

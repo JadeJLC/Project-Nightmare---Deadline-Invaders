@@ -13,7 +13,7 @@
   <body>
     <!-- Menu principal -->
     <div id="main-menu"></div>
-    <div id="score-board"></div>
+    <div id="score-board" class="is-hidden"></div>
     <div id="end-level" class="confirm-pannel is-hidden">
       <span></span>
       <button type="button" id="launch-cutscene">Continuer</button>
@@ -50,7 +50,8 @@
         <div id="lives"></div>
 
         <div class="level-score">
-          Score : <span id="good-score"></span>% | <span id="bad-score"></span>%
+          <span id="level-num"></span> - Score : <span id="good-score"></span>%
+          | <span id="bad-score"></span>%
         </div>
       </div>
     </div>
