@@ -1,5 +1,4 @@
 import { gameData, lastLevel } from "../variables.js";
-import { cutsceneDisplayCoworkers } from "./images-cutscenes.js";
 import { advanceCutScene } from "./write-cutscenes.js";
 
 function cutsceneIntro() {

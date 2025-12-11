@@ -168,13 +168,13 @@ body::before {
   max-width: 850px;
   background: var(--panel);
   border: 2px solid var(--neon);
+  box-shadow: 0 0 12px var(--shadow);
+  border-radius: 10px;
 }
 
 .scoreboard {
   width: 100%;
   padding: 0px 15px 10px 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 12px var(--shadow);
 }
 
 .scoreboard td {

@@ -1,6 +1,6 @@
 import { gameData, style, mainMenuContainer } from "../variables.js";
 import { openPauseMenu, openSettingsMenu } from "../menus/pause.js";
-import { startCutscenes } from "../cutscenes/select-cutscene.js";
+import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { initLives } from "../mechanics/life.js";
 import { addScoreToScoreboard } from "../scores/scoreboard.js";
 
@@ -33,7 +33,7 @@ function storyMode() {
   document.getElementById("pause-menu").classList.add("is-hidden");
   gameScreenContainer.classList.remove("is-hidden");
   updatePauseButton();
-  startCutscenes();
+  selectCutscene();
   initLives();
 }
 

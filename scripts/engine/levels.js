@@ -20,12 +20,16 @@ import {
   enableMovement,
 } from "../animations/player-movement.js";
 import { updateProgressBar } from "../scores/progress-bar.js";
-import { startCutscenes } from "../cutscenes/select-cutscene.js";
+import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { loadMainMenu } from "../menus/main-menu.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;
   console.log("Chargement du niveau", gameData.currentLevel);
+
+  let levelNum = document.getElementById("level-num");
+
+  if (levelNum) levelNum.textContent = `Niveau ${gameData.currentLevel}`;
 
   Object.assign(levelData, allLevelData[gameData.currentLevel]);
 
@@ -89,7 +93,7 @@ function endGame() {
     Il semble que ${gameData.relouName} ne compte pas en rester là.<br/><br/>
     Peut-être le retrouverez-vous bientôt...`;
 
-  toCutscene.removeEventListener("click", startCutscenes);
+  toCutscene.removeEventListener("click", selectCutscene);
 
   toCutscene.addEventListener("click", thanksScreen);
 
@@ -109,7 +113,7 @@ function finalScreen() {
   endLvl.classList.add("is-hidden");
   toCutscene.textContent = "Continuer";
   toCutscene.removeEventListener("click", finalScreen);
-  toCutscene.addEventListener("click", startCutscenes);
+  toCutscene.addEventListener("click", selectCutscene);
   loadMainMenu();
 }
 

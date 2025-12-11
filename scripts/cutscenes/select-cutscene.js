@@ -6,13 +6,13 @@ import {
   cutsceneFailedLevel,
   cutsceneIntro,
   cutsceneEndThirdLevel,
-} from "./play-cutscenes.js";
+} from "./text-cutscenes.js";
 import { loseLife } from "../mechanics/life.js";
 import { addScoreToScoreboard } from "../scores/scoreboard.js";
 import { cutsceneDisplayCoworkers } from "./images-cutscenes.js";
 
 // Gestion des cinématiques
-function startCutscenes() {
+function selectCutscene() {
   cutsceneDisplayCoworkers();
   endLvl.classList.add("is-hidden");
   sceneZone.classList.remove("is-hidden");
@@ -110,4 +110,4 @@ function goodEnding() {
   cutsceneEndThirdLevel();
 }
 
-export { starterScene, startCutscenes, badEnding };
+export { starterScene, selectCutscene, badEnding };
