@@ -16,9 +16,6 @@ export function specialLines() {
   let specialLine = cutsceneData.currentLine;
   let boss = document.getElementById("boss");
   let relou = document.getElementById("cwr");
-  let managers = document.getElementById("managers");
-
-  if (managers) managers.remove();
 
   console.log(line);
 
@@ -46,11 +43,11 @@ export function specialLines() {
   }
 
   // Discussion entre le patron et le relou
-  if (line === "__FIRSTSCENE__" || line === "__ENDSCENE__") {
+  if (line === "__SECRETTALK__" || line === "__ENDSCENE__") {
     secretConversation(line);
   }
 
-  if (line === "__SECONDSCENE__") {
+  if (line === "__MANAGEMENT__") {
     managementMeeting();
   }
 
@@ -63,7 +60,7 @@ export function specialLines() {
   }
 
   // Dénonciation du collègue relou au patron
-  if (line === "__THIRDSCENE__") {
+  if (line === "__DENONCE__") {
     denonceRelou();
   }
 
@@ -102,7 +99,7 @@ function secretConversation(line) {
   relou.classList.remove("is-hidden");
 
   // Début de la scène
-  if (line === "__FIRSTSCENE__") {
+  if (line === "__SECRETTALK__") {
     hideAllCoworkers();
 
     relou.style.transform = "scaleX(-1)";
@@ -115,6 +112,9 @@ function secretConversation(line) {
 
   // Fin de la scène
   if (line === "__ENDSCENE__") {
+    let managers = document.getElementById("managers");
+    if (managers) managers.remove();
+
     boss.style = "";
     relou.style = "";
 
