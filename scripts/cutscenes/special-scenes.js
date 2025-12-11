@@ -1,12 +1,15 @@
 import { cutsceneData } from "./write-cutscenes.js";
-import { cutsceneAnimation, gameData } from "../variables.js";
+import { cutsceneAnimation, gameData, sceneZone } from "../variables.js";
 import {
   showAllCoworkers,
   hideAllCoworkers,
   moveCharacters,
   completeIntroText,
-  finalSceneRelouLeave,
+  animateRelou,
 } from "./helper-functions.js";
+import { changeMusic } from "../audio/music.js";
+
+let finalScene = false;
 
 export function specialLines() {
   let line = cutsceneData.textList[cutsceneData.currentLine];
@@ -31,9 +34,9 @@ export function specialLines() {
     moveCharacters(line);
   }
 
-  if (line.includes(`(${gameData.relouName})`)) {
+  if (line.includes(`(${gameData.relouName})`) && !finalScene) {
     relou.style.left = "335px";
-  } else if (relou) {
+  } else if (relou && !finalScene) {
     relou.style.left = "";
   }
 
@@ -79,6 +82,7 @@ export function specialLines() {
   }
 
   if (line === "__PARTY__") {
+    partyTime();
   }
 
   if (line === "__RELOULEAVE__") {
@@ -153,6 +157,10 @@ function denonceRelou() {
   let relou = document.getElementById("cwr");
   cutsceneData.textList[cutsceneData.currentLine] = " ... (en privé) ...";
 
+  let boss = document.getElementById("boss");
+  boss.style.left = "180px";
+  boss.style.bottom = "0px";
+
   relou.classList.add("is-hidden");
   hideAllCoworkers();
   let coworker = document.getElementById(`cw2`);
@@ -176,40 +184,58 @@ function relouLeave() {
   let relou = document.getElementById("cwr");
 
   if (relou) relou.style.transform = "scaleX(-1)";
-  finalSceneRelouLeave();
+  animateRelou();
+}
+
+function partyTime() {
+  while (coworkerID < 6) {
+    let coworker = document.getElementById(`cw${coworkerID}`);
+
+    if (coworker) coworker.classList.add("final-scene");
+
+    coworkerID++;
+  }
+
+  gameData.currentMusic = "party";
+  changeMusic();
+
+  let partyLights = document.createElement("img");
+  partyLights.id = "party-lights";
+  partyLights.src = "party.png";
+
+  sceneZone.appendChild(partyLights);
+
+  cutsceneData.textList[cutsceneData.currentLine] = "♫ ♪ ♬";
 }
 
 // Début de la cinématique pour le pot de départ du relou
+// ----- Place les collègues différemment, supprime le patron, change l'image du collègue relou
 function lastWorkDay() {
+  finalScene = true;
   let relou = document.getElementById("cwr");
   if (relou) relou.classList.remove("is-hidden");
   relou.classList.add("final-scene");
-  // relou.src = "cwr_carton_pose1.png";
+  relou.style.left = "455px";
 
   let coworkerID = 1;
   while (coworkerID < 6) {
     let coworker = document.getElementById(`cw${coworkerID}`);
 
     if (coworker && coworker.id == "cw1") {
-      console.log("Déplacement du collègue 1");
       coworker.style.left = "-100px";
       coworker.style.bottom = "0px";
     }
     if (coworker && coworker.id == "cw2") {
-      console.log("Déplacement du collègue 2");
       coworker.style.transform = "scaleX(-1)";
     }
     if (coworker && coworker.id == "cw3") {
-      console.log("Déplacement du collègue 3");
       coworker.style.left = "200px";
     }
     if (coworker && coworker.id == "cw4") {
-      console.log("Déplacement du collègue 4");
       coworker.style.left = "270px";
       coworker.style.transform = "scaleX(-1)";
     }
     if (coworker && coworker.id == "cw5") {
-      console.log("Déplacement du collègue 5");
       coworker.style.left = "290px";
       coworker.style.transform = "scaleX(-1)";
       coworker.style.bottom = "-50px";
@@ -220,6 +246,8 @@ function lastWorkDay() {
 
   let boss = document.getElementById("boss");
   if (boss) boss.remove();
+
+  cutsceneData.currentLine++;
 }
 // #endregion
 

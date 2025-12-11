@@ -18,6 +18,7 @@ function cutsceneDisplayCoworkers() {
 
   while (coworkerID < 6) {
     let newCoworker = document.createElement("img");
+
     newCoworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
     newCoworker.id = `cw${coworkerID}`;
     cutsceneAnimation.appendChild(newCoworker);
@@ -54,8 +55,15 @@ function cutsceneMoveCoworkers() {
   while (coworkerID < 6) {
     let coworker = document.getElementById(`cw${coworkerID}`);
 
-    if (coworker)
+    if (coworker) {
       coworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
+
+      // if (coworker.classList.contains("final-scene")) {
+      //   coworker.src = `/images/cutscenes/cw${coworkerID}_party_pose${currentPose}.png`;
+      // } else {
+      //   coworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
+      // }
+    }
 
     coworkerID++;
   }

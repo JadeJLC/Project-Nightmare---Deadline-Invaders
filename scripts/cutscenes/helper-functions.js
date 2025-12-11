@@ -1,8 +1,9 @@
-import { soundEffect } from "../audio/sound-effects.js";
 import { cutsceneAnimation, gameData } from "../variables.js";
 import { cutsceneData } from "./write-cutscenes.js";
 
+let lastFrameTime = 0;
 let relouLeaveAnimationID;
+const duration = 180;
 
 // Fonctions pour afficher ou masquer les collègues dans les cinématiques
 function hideAllCoworkers() {
@@ -73,27 +74,26 @@ function animateRelou(timestamp) {
     finalSceneRelouLeave();
   }
 
-  animationFrameId = requestAnimationFrame(animateRelou);
+  relouLeaveAnimationID = requestAnimationFrame(animateRelou);
 }
 
+let countstep = 0;
+
 function finalSceneRelouLeave() {
-  let countstep = 0;
   let relou = document.getElementById("cwr");
+
+  if (!relou) return;
 
   let relouLeftPosition = relou.getBoundingClientRect().left;
   const containerBorders = cutsceneAnimation.getBoundingClientRect();
 
-  if (
-    relou &&
-    relouLeftPosition < containerBorders.width - containerBorders.left &&
-    countstep <= 5
-  ) {
-    relouLeftPosition += 5;
-    relou.style.left = `${relouLeftPosition}px`;
+  if (relouLeftPosition < containerBorders.right && countstep <= 5) {
+    let newStep = parseFloat(relou.style.left || 0) + 5;
+    relou.style.left = `${newStep}px`;
     countstep++;
   } else {
-    cancelAnimationFrame(animateRelou);
-    relou.classList.remove();
+    cancelAnimationFrame(relouLeaveAnimationID);
+    relou.remove();
   }
 }
 
@@ -102,5 +102,5 @@ export {
   hideAllCoworkers,
   showAllCoworkers,
   completeIntroText,
-  finalSceneRelouLeave,
+  animateRelou,
 };

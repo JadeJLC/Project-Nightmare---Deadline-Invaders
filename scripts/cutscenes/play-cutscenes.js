@@ -108,7 +108,7 @@ function cutsceneEndThirdLevel() {
     `__STOP__`,
     `__BOSSBACK__`,
     `(Patron) : Je suis très content de voir que le management de ${gameData.relouName} a été très efficace.`,
-    `(${gameData.relouName}) : Je ne pouvais pas voir décevoir après cette preuve de confiance.`,
+    `(${gameData.relouName}) : Je ne pouvais pas vous décevoir après cette preuve de confiance.`,
     `(Collègue) : Chef, je peux vous parler ?`,
     `(${gameData.relouName}) : Oui ?`,
     `(Collègue) : Pas toi. S'il vous plaît.`,
