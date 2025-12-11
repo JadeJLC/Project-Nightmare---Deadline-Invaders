@@ -100,7 +100,9 @@ class Relou {
     this.updatePosition();
   }
 
-  hit() {}
+  hit() {
+    soundEffect("tir-relou");
+  }
 }
 
 export { Coworker, Relou };

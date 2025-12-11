@@ -7,8 +7,8 @@ import {
   musicBtn,
   effectBtn,
   toCutscene,
+  gameData,
 } from "../variables.js";
-import { playMusic } from "../audio/music.js";
 import { movePlayer } from "../animations/player-movement.js";
 import { startCutscenes } from "../cutscenes/select-cutscene.js";
 

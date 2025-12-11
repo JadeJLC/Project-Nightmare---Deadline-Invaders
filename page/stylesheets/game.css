@@ -112,10 +112,10 @@
   width: 80%;
 }
 
-#cw4 {
+#cw1 {
   position: absolute;
-  bottom: -15px;
-  left: -30px;
+  bottom: -30px;
+  left: -90px;
 }
 
 #cw3 {
@@ -125,10 +125,10 @@
   z-index: 2;
 }
 
-#cw1 {
+#cw4 {
   position: absolute;
-  bottom: -30px;
-  left: -90px;
+  bottom: -15px;
+  left: -30px;
 }
 
 #cw5 {
