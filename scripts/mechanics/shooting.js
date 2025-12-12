@@ -49,9 +49,11 @@ function disableShooting() {
 // Fonction pour activer les tirs en appuyant sur la touche espace
 // ---- Le tir est actif en continu tant que la touche est pressée, avec un délai entre chaque tir
 function enableShooting() {
+  // Avant de relancer, on s'assure que rien ne tourne encore
   disableShooting();
+
   gameData.countPoint = true;
-  console.log("Activation des tir du joueur");
+  console.log("Activation des tirs du joueur");
   document.addEventListener("keydown", pressSpace);
   document.addEventListener("keyup", releaseSpace);
 
@@ -65,8 +67,13 @@ function enableShooting() {
     shootingLoopId = requestAnimationFrame(shootingLoop);
   }
 
-  shootingLoop();
-  animateProjectiles();
+  function animateLoop() {
+    animateProjectiles();
+    projectileAnimId = requestAnimationFrame(animateLoop);
+  }
+
+  shootingLoopId = requestAnimationFrame(shootingLoop);
+  projectileAnimId = requestAnimationFrame(animateLoop);
 }
 
 // Fonction pour créer les projectiles
@@ -150,7 +157,7 @@ function animateProjectiles() {
     }
   }
 
-  projectileAnimId = requestAnimationFrame(animateProjectiles);
+  //requestAnimationFrame(animateProjectiles);
 }
 
 export { enableShooting, disableShooting };
