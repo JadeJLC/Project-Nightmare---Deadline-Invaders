@@ -3,7 +3,7 @@ import { sceneZone, cutsceneAnimation } from "../variables.js";
 let animationFrameId;
 
 let currentPose = 1;
-const lastPost = 4;
+const lastPose = 4;
 const duration = 180;
 let lastFrameTime = 0;
 
@@ -49,24 +49,25 @@ function animateCoworkers(timestamp) {
 }
 
 function cutsceneMoveCoworkers() {
-  currentPose = (currentPose % lastPost) + 1;
+  currentPose = (currentPose % lastPose) + 1;
 
   let coworkerID = 1;
   while (coworkerID < 6) {
     let coworker = document.getElementById(`cw${coworkerID}`);
 
     if (coworker) {
-      coworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
-
-      // if (coworker.classList.contains("final-scene")) {
-      //   coworker.src = `/images/cutscenes/cw${coworkerID}_party_pose${currentPose}.png`;
-      // } else {
-      //   coworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
-      // }
+      if (coworker.classList.contains("final-scene")) {
+        coworker.src = `/images/cutscenes/cw${coworkerID}_party_pose${currentPose}.png`;
+      } else {
+        coworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
+      }
     }
 
     coworkerID++;
   }
+
+  let party = document.getElementById("party-lights");
+  if (party) party.src = `/images/party_${currentPose}.png`;
 
   let relou = document.getElementById("cwr");
   if (relou) {

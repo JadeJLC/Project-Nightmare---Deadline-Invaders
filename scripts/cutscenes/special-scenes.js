@@ -47,8 +47,8 @@ export function specialLines() {
     secretConversation(line);
   }
 
-  if (line === "__MANAGEMENT__") {
-    managementMeeting();
+  if (line.includes("__MANAGEMENT__")) {
+    managementMeeting(line);
   }
 
   // Transition entre les scènes
@@ -127,15 +127,40 @@ function secretConversation(line) {
 
 // #region ---- Fin du deuxième niveau
 
-function managementMeeting() {
+function managementMeeting(line) {
+  let boss = document.getElementById("boss");
+  let relou = document.getElementById("cwr");
   hideAllCoworkers();
-  let managers = document.createElement("img");
-  managers.src = "managers.png";
-  managers.title = managers.alt = "Managers";
-  managers.id = "managers";
 
-  cutsceneAnimation.appendChild(managers);
-  cutsceneData.currentLine++;
+  relou.style.left = "50px";
+  relou.style.bottom = "20px";
+  boss.style.left = "180px";
+  boss.style.bottom = "20px";
+
+  if (line === "__MANAGEMENT__") {
+    let managers = document.createElement("img");
+    managers.src = "/images/managers.png";
+    managers.title = managers.alt = "Managers";
+    managers.id = "managers";
+    cutsceneData.currentLine++;
+    cutsceneAnimation.appendChild(managers);
+  } else {
+    if (
+      line ===
+      `__MANAGEMENT__ (Patron) : Je pense que ${gameData.relouName} a vraiment fait un travail fantastique, chaque jour depuis son arrivée.`
+    )
+      cutsceneData.textList[
+        cutsceneData.currentLine
+      ] = `(Patron) : Je pense que ${gameData.relouName} a vraiment fait un travail fantastique, chaque jour depuis son arrivée.`;
+
+    if (
+      line ===
+      `__MANAGEMENT__ (Patron) : Je propose donc de le promouvoir au rang de manager. Il peut gérer facilement de plus grosses équipes.`
+    )
+      cutsceneData.textList[
+        cutsceneData.currentLine
+      ] = `(Patron) : Je propose donc de le promouvoir au rang de manager. Il peut gérer facilement de plus grosses équipes.`;
+  }
 }
 
 // #endregion
@@ -185,23 +210,31 @@ function relouLeave() {
 
   if (relou) relou.style.transform = "scaleX(-1)";
   animateRelou();
+
+  cutsceneData.textList[cutsceneData.currentLine] = "...";
 }
 
 function partyTime() {
+  let coworkerID = 1;
   while (coworkerID < 6) {
     let coworker = document.getElementById(`cw${coworkerID}`);
 
     if (coworker) coworker.classList.add("final-scene");
 
+    if (coworkerID === 5) {
+      coworker.style.left = "120px";
+    }
+
     coworkerID++;
   }
 
   gameData.currentMusic = "party";
-  changeMusic();
+  changeMusic(30);
 
   let partyLights = document.createElement("img");
-  partyLights.id = "party-lights";
-  partyLights.src = "party.png";
+  partyLights.id = partyLights.alt = partyLights.title = "party-lights";
+
+  partyLights.src = `/images/party_1.png`;
 
   sceneZone.appendChild(partyLights);
 
@@ -217,6 +250,8 @@ function lastWorkDay() {
   relou.classList.add("final-scene");
   relou.style.left = "455px";
 
+  gameData.currentMusic = "party";
+  changeMusic();
   let coworkerID = 1;
   while (coworkerID < 6) {
     let coworker = document.getElementById(`cw${coworkerID}`);

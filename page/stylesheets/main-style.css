@@ -172,6 +172,12 @@ body::before {
   border-radius: 10px;
 }
 
+#party-lights {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .scoreboard {
   width: 100%;
   padding: 0px 15px 10px 15px;

@@ -150,6 +150,12 @@
   bottom: -5px;
 }
 
+#managers {
+  position: absolute;
+  bottom: -60px;
+  z-index: 3;
+}
+
 @keyframes arrow-blink {
   0%,
   100% {
