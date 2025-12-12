@@ -39,7 +39,7 @@ const defaultLevel = JSON.parse(JSON.stringify(lastLevel));
 
 // Liste des ennemis
 const enemiesRegistry = [];
-const maxTimer = 5000;
+const maxTimer = 60000;
 
 const cookieName = "ScoreBoard";
 
