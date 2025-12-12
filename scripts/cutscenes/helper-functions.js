@@ -87,7 +87,7 @@ function finalSceneRelouLeave() {
   let relouLeftPosition = relou.getBoundingClientRect().left;
   const containerBorders = cutsceneAnimation.getBoundingClientRect();
 
-  if (relouLeftPosition < containerBorders.right && countstep <= 5) {
+  if (relouLeftPosition < containerBorders.right && countstep <= 15) {
     let newStep = parseFloat(relou.style.left || 0) + 5;
     relou.style.left = `${newStep}px`;
     countstep++;

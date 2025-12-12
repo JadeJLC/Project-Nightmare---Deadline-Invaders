@@ -5,7 +5,7 @@ function selectMusic(musicName) {
   return `../musiques/${musicName}.mp3`;
 }
 
-function playMusic(musicName) {
+function playMusic(musicName, n) {
   if (!gameOptions.musicOn) {
     console.log("Musique désactivée");
     return;
@@ -26,6 +26,8 @@ function playMusic(musicName) {
       }
     }
   });
+
+  if (n && musicBox.currentTime < n) musicBox.currentTime = n;
 }
 
 function stopMusic() {
@@ -33,9 +35,10 @@ function stopMusic() {
   musicBox.currentTime = 0;
 }
 
-function changeMusic() {
+function changeMusic(n) {
   stopMusic();
-  playMusic(gameData.currentMusic);
+
+  playMusic(gameData.currentMusic, n);
 }
 
 export { selectMusic, changeMusic, playMusic, stopMusic };
