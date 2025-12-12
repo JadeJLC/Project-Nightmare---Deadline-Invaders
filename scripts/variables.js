@@ -6,6 +6,7 @@ let gameData = {
   relouName: "0",
   lives: 3,
   currentLevel: 0,
+  timer: 0,
   levelscores: [0, 0, 0],
   goodScore: 0,
   badScore: 0,
@@ -38,6 +39,7 @@ const defaultLevel = JSON.parse(JSON.stringify(lastLevel));
 
 // Liste des ennemis
 const enemiesRegistry = [];
+const maxTimer = 5000;
 
 const cookieName = "ScoreBoard";
 
@@ -49,6 +51,7 @@ export {
   defaultLevel,
   enemiesRegistry,
   cookieName,
+  maxTimer,
 };
 
 // #endregion
@@ -93,11 +96,12 @@ export {
 
 // Ecran de jeu
 const gameScreen = document.getElementById("game-screen");
+const timerZone = document.getElementById("timer");
 const playerIcon = document.getElementById("player-icon");
 const enemyLines = document.getElementById("enemy-carousel");
 const HUD = document.getElementById("HUD");
 
-export { playerIcon, gameScreen, enemyLines, HUD };
+export { playerIcon, gameScreen, timerZone, enemyLines, HUD };
 
 // Cinématiques
 const sceneZone = document.getElementById("cutscene");

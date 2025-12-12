@@ -22,6 +22,7 @@ import {
 import { updateProgressBar } from "../scores/progress-bar.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { loadMainMenu } from "../menus/main-menu.js";
+import { displayTimer, pauseTimer, removeTimer, startTimer } from "./timer.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;
@@ -53,6 +54,8 @@ function loadLevel() {
   gameData.countPoint = true;
 
   updateProgressBar();
+  setInterval(displayTimer, 10);
+  startTimer();
   console.log("Niveau chargé");
 }
 
@@ -60,6 +63,8 @@ function finishLevel() {
   disableShooting();
   disableMovement();
   disableEnemyShooting();
+  pauseTimer();
+  removeTimer();
 
   // Réinitialisation de la zone de jeu
   typeZone.textContent = "";
