@@ -26,7 +26,10 @@ function selectCutscene() {
     return;
   }
 
-  if (gameData.badScore > gameData.goodScore) {
+  if (
+    gameData.badScore > gameData.goodScore ||
+    (gameData.badScore + gameData.goodScore < 100 && gameData.currentLevel != 0)
+  ) {
     loseLife();
     failedLevel();
     return;
