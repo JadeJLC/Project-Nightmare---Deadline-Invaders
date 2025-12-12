@@ -106,16 +106,27 @@ function animateProjectiles() {
       const eRect = enemy.el.getBoundingClientRect();
 
       if (rectsIntersect(pRect, eRect) && gameData.countPoint) {
+        let difference = 100 - gameData.goodScore - gameData.badScore;
         // Collision détectée
         projectile.element.remove();
         projectiles.splice(index, 1);
 
         if (enemy instanceof Coworker) {
           enemy.hit();
-          gameData.goodScore += levelData.coworkerBonus;
+          if (difference >= levelData.coworkerBonus) {
+            gameData.goodScore += levelData.coworkerBonus;
+          } else {
+            gameData.goodScore += difference;
+          }
           console.log("Collègue éliminé, score:", gameData.goodScore);
         } else if (enemy instanceof Relou) {
           enemy.hit();
+          if (difference >= levelData.relouMalus) {
+            gameData.badScore += levelData.relouMalus;
+          } else {
+            gameData.badScore += difference;
+          }
+
           gameData.badScore += levelData.relouMalus;
           console.log("Relou touché, compteur:", gameData.badScore);
         }
