@@ -96,7 +96,7 @@ function endGame() {
   endLvl.classList.remove("is-hidden");
   endLvl.firstElementChild.innerHTML = `Félicitations ! Vous avez terminé Project Nightmare : Deadline Invaders ! <br/><br/>
     Il semble que ${gameData.relouName} ne compte pas en rester là.<br/><br/>
-    Peut-être le retrouverez-vous bientôt...`;
+    Peut-être vous retrouverez-vous bientôt...`;
 
   toCutscene.removeEventListener("click", selectCutscene);
 
