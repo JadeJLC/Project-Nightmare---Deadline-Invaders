@@ -14,9 +14,8 @@ function playMusic(musicName, n) {
 
   musicBox.src = musicPath;
   musicBox.play().catch((err) => {
-    if (err.name !== "AbortError") {
-      console.error("Erreur à la lecture de la musique :", err);
-    }
+    console.error("Erreur à la lecture de la musique :", err);
+
     if (err.name === "NotAllowedError") {
       gameOptions.musicOn = false;
       if ((gameData.currentMusic = "main-menu")) {

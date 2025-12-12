@@ -20,7 +20,7 @@ let gameData = {
 };
 
 let gameOptions = {
-  musicOn: true,
+  musicOn: false,
   soundEffects: true,
 };
 

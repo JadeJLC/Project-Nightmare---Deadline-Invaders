@@ -58,7 +58,7 @@ function starterScene() {
 }
 
 function firstLevelEnd() {
-  gameData.currentMusic = "intro";
+  gameData.currentMusic = "cutscene1";
   changeMusic();
 
   gameData.currentLevel = 2;
@@ -72,7 +72,7 @@ function firstLevelEnd() {
 }
 
 function secondLevelEnd() {
-  gameData.currentMusic = "intro";
+  gameData.currentMusic = "cutscene2";
   changeMusic();
 
   gameData.currentLevel = 3;
