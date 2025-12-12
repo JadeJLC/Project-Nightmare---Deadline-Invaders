@@ -82,7 +82,7 @@ function cutsceneEndSecondLevel() {
     `__WAIT__`,
     `__MANAGEMENT__`,
     `__MANAGEMENT__ (Patron) : Je pense que ${gameData.relouName} a vraiment fait un travail fantastique, chaque jour depuis son arrivée.`,
-    `__MANAGEMENT__ (Patron) : Je propose donc de le promouvoir au rang de manager. Il peut gérer facilement de plus grosses équipes.`,
+    `__MANAGEMENT__ (Patron) : Je propose donc une promotion au rang de manager. ${gameData.relouName} peut gérer facilement de plus grosses équipes.`,
     `__ENDSCENE__`,
     `__WAIT__`,
     `__BOSSTURN__`,
@@ -105,7 +105,7 @@ function cutsceneEndThirdLevel() {
     `(Collègue) : On ne laissera pas ${gameData.relouName} s'attribuer encore le mérite de ton travail !`,
     `__STOP__`,
     `__BOSSBACK__`,
-    `(Patron) : Je suis très content de voir que le management de ${gameData.relouName} a été très efficace.`,
+    `(Patron) : Je suis très content de voir que le management de ${gameData.relouName} a été efficace.`,
     `(${gameData.relouName}) : Je ne pouvais pas vous décevoir après cette preuve de confiance.`,
     `(Collègue) : Chef, je peux vous parler ?`,
     `(${gameData.relouName}) : Oui ?`,
@@ -126,7 +126,7 @@ function cutsceneEndThirdLevel() {
     `__NORELOU__`,
     `(Patron) : Je suis désolé d'apprendre ce qui s'est passé ces derniers jours.`,
     `(Patron) : J'ai entendu vos plaintes et revu votre travail en détails.`,
-    `(Patron) : ${gameData.relouName} s'est joué de moi. Je vous présente mes excuses. Vous auriez dû pouvoir me parler librement.`,
+    `(Patron) : ${gameData.relouName} m'a induit en erreur. Je vous présente mes excuses. Vous auriez dû pouvoir me parler librement.`,
     `(Patron) : J'espère que l'environnement de travail sera plus agréable à compter d'aujourd'hui.`,
   ];
 
@@ -154,7 +154,7 @@ function cutsceneEndThirdLevel() {
     `(${gameData.playerName}) : Si tu n'avais pas voulu t'attribuer le mérite de notre travail, tu n'en serais pas là.`,
     `(${gameData.relouName}) : Ce n'est pas terminé.`,
     `__RELOULEAVE__`,
-    `(Collègue) : ${gameData.relouName} n'avait vraiment pas l'air content.`,
+    `(Collègue) : ${gameData.relouName} avait vraiment l'air en colère.`,
     `(Collègue) : On s'en fiche. On en est débarrassés ! C'est la fête !`,
   ];
 
