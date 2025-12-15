@@ -83,6 +83,7 @@ const confirmBtn = document.getElementById("confirm-button");
 const closeConfirm = document.getElementById("close-confirm");
 const confirmZone = document.getElementById("confirm-menu");
 const closeBtn = document.getElementById("close-menu");
+const rulesBtn = document.getElementById("display-rules");
 
 export {
   menu,
@@ -92,6 +93,7 @@ export {
   closeConfirm,
   confirmZone,
   closeBtn,
+  rulesBtn,
 };
 
 // Ecran de jeu
