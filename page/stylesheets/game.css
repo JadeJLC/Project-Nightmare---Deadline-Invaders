@@ -88,6 +88,10 @@
   top: 10vh;
 }
 
+#rules {
+  top: 46.5%;
+}
+
 #cutscene {
   position: absolute;
   width: 100%;

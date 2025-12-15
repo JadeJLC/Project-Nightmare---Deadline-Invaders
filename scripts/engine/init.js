@@ -7,9 +7,11 @@ import {
   musicBtn,
   effectBtn,
   toCutscene,
+  rulesBtn,
 } from "../variables.js";
 import { movePlayer } from "../animations/player-movement.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
+import { displayRules } from "../menus/rules.js";
 
 // Gestion du jeu (déplacement des collègues et du joueur)
 
@@ -28,6 +30,7 @@ function setEventListeners() {
   musicBtn.addEventListener("click", toggleMusic);
   effectBtn.addEventListener("click", toggleEffects);
   toCutscene.addEventListener("click", selectCutscene);
+  rulesBtn.addEventListener("click", displayRules);
 }
 
 init();
