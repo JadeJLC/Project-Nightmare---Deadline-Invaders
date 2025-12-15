@@ -38,7 +38,13 @@ export function specialLines() {
   }
 
   // Scènes où le patron n'est pas là
-  if ((line == "") | (line === "__STOP__") | (line === "__BOSSBACK__")) {
+  if (
+    (line == "") |
+    (line === "__STOP__") |
+    (line === "__BOSSBACK__") |
+    (line === "__CUT__") |
+    (line === "__RELOUSEUL__")
+  ) {
     noBoss(line);
   }
 
@@ -293,7 +299,7 @@ function noBoss(line) {
   let relou = document.getElementById("cwr");
 
   // Dicussion des collègues
-  if (line == "") {
+  if ((line == "") | (line == "__CUT__")) {
     if (boss) boss.classList.add("is-hidden");
     if (relou) relou.classList.add("is-hidden");
 
@@ -302,7 +308,14 @@ function noBoss(line) {
     let coworker5 = document.getElementById(`cw5`);
     if (coworker5) coworker5.style.transform = "scaleX(-1)";
 
-    cutsceneData.textList[cutsceneData.currentLine] = "... ...";
+    if (line === "") {
+      cutsceneData.textList[cutsceneData.currentLine] = "... ...";
+    }
+  }
+
+  if (line === "__RELOUSEUL__") {
+    if (relou) relou.classList.remove("is-hidden");
+    cutsceneData.currentLine++;
   }
 
   if (line === "__STOP__") {

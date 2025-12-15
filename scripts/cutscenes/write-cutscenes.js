@@ -18,7 +18,6 @@ let cutsceneData = {
 
 function advanceCutScene(cutsceneTextList) {
   skipBtn.addEventListener("click", skipCutscene);
-  document.addEventListener("keydown", fastSkip);
 
   cutsceneData.textList = cutsceneTextList;
   cutsceneData.currentLine = 0;
@@ -45,8 +44,8 @@ function endCutscene() {
   sceneZone.classList.add("is-hidden");
   typeZone.textContent = "";
 
-  document.removeEventListener("keydown", fastSkip);
   document.removeEventListener("keydown", pressEnter);
+  document.removeEventListener("keydown", fastSkip);
 
   cutsceneDeleteCoworkers();
 
@@ -65,6 +64,9 @@ function nextLine(skip) {
     endCutscene();
     return;
   }
+
+  document.addEventListener("keydown", fastSkip);
+  skipBtn.classList.remove("is-hidden");
 
   specialLines();
 

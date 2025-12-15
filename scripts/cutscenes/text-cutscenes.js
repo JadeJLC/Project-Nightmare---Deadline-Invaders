@@ -15,8 +15,13 @@ function cutsceneFailedLevel() {
     ``,
     `(Collègue) : Je ne comprends rien de ce que ${gameData.relouName} a fait.`,
     `(Collègue) : Il n'y a rien à comprendre ! Tout le projet est fichu en l'air.`,
-    `(Collègue) : Le patron va être furieux...`,
-    `(Collègue) : Le voilà.`,
+    `__RELOUSEUL__`,
+    `__STOP__`,
+    `(Collègue) : Ah, ${gameData.relouName}, à propos du problème dont on a parlé...`,
+    `(${gameData.relouName}) : La deadline c'était hier. J'ai assez donnné, si vous voulez vous y mettre, faites-le.`,
+    `(Collègue) : ...`,
+    `(${gameData.playerName}) : Tu dis ça comme si on n'avait rien fait.`,
+    `(Collègue) : Le patron arrive.`,
     `__STOP__`,
     `__BOSSBACK__`,
     `(Patron) : Je ne comprends pas. Vous êtes supposés être compétents !`,
@@ -28,7 +33,38 @@ function cutsceneFailedLevel() {
   advanceCutScene(failedTxt);
 }
 
+function cutsceneGameOver() {
+  const badEndingTxt = [
+    ``,
+    `__BOSSBACK__`,
+    `(Patron ) : ... Vous me décevez énormément. Le client est furieux, nous n'avons rien de propre à lui rendre.`,
+    `(Collègue) : C'est ${gameData.relouName} qui...`,
+    `(Patron) : Je ne veux pas de vos excuses. Toute l'équipe s'est montrée inefficace.`,
+    `(Collègues) : ...`,
+    `(Patron) : Je vais devoir reformer une nouvelle équipe. Sans vous.`,
+    `(Collègues) : Vous ne pouvez pas faire ça !`,
+    `(Patron) : Bien sûr que si. Je ne peux visiblement pas compter sur vous.`,
+    `(Patron) :  Ne vous en faites pas. Je vous trouverais d'autres tâches. Plus à votre niveau.`,
+    `(${gameData.playerName}) : ... `,
+    `__CUT__`,
+    `(Collègue) : Je n'arrive pas à y croire...`,
+    `(Collègue) : Tout ça, c'est de la faute de ${gameData.relouName}...`,
+    `(Collègue) : Au moins, on n'a pas été renvoyés...`,
+    `(Collègue) : Pour l'instant...`,
+    `(Collègue) : Désolé, ${gameData.playerName}... On n'a pas été à la hauteur...`,
+    `(${gameData.playerName}) : Ce n'est pas votre faute. Tout finira par s'arranger.`,
+    `(${gameData.playerName}) : *chuchote* Enfin, j'espère...`,
+  ];
+
+  advanceCutScene(badEndingTxt);
+}
+
 function cutsceneEndFirstLevel() {
+  let very = "";
+  if (lastLevel.score === 100) {
+    very = "très";
+  }
+
   const firstLvlTxt = [
     ``,
     `(Collègue) : ${gameData.relouName} a modifié la moitié de mon travail.`,
@@ -39,7 +75,7 @@ function cutsceneEndFirstLevel() {
     `__STOP__`,
     `__BOSSBACK__`,
     `__BOSSTURN__`,
-    `(Patron) : Bravo à tous. Le client est satisfait de nos résultats.`,
+    `(Patron) : Bravo à tous. Le client est ${very} satisfait de nos résultats.`,
     `(${gameData.playerName}) : Mer...`,
     `(${gameData.relouName}) : Merci. Ce n'était pas toujours facile de coordonner l'équipe mais j'ai bien réussi.`,
     `(${gameData.playerName}) : ...`,
@@ -55,10 +91,6 @@ function cutsceneEndFirstLevel() {
     `(Patron) : Nous avons reçu une nouvelle commande. ${gameData.relouName} sera votre chef de projet.`,
     `(${gameData.playerName}) : !!!`,
   ];
-
-  if (lastLevel.score === 100) {
-    firstLvlTxt[0] = `(Patron) : Bravo à tous. Le client est très satisfait de nos résultats.`;
-  }
 
   advanceCutScene(firstLvlTxt);
 }
@@ -180,4 +212,5 @@ export {
   cutsceneEndFirstLevel,
   cutsceneEndSecondLevel,
   cutsceneEndThirdLevel,
+  cutsceneGameOver,
 };
