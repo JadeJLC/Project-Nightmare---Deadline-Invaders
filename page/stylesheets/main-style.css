@@ -69,7 +69,8 @@ body::before {
 /* #endregion **** generalités de page ===== */
 
 /* #region **** Menu principal */
-#main-menu {
+#main-menu,
+#rules {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -79,10 +80,12 @@ body::before {
   align-items: center;
   gap: 24px;
   text-align: center;
+  z-index: 9;
 }
 
 /* Boutons du menu principal */
-#main-menu button {
+#main-menu button,
+#rules button {
   font-size: 16px;
   padding: 14px 24px;
   background: rgba(10, 20, 40, 0.85);
@@ -99,7 +102,8 @@ body::before {
   margin-bottom: 0;
 }
 
-#main-menu button:hover {
+#main-menu button:hover,
+#rules button:hover {
   border-color: var(--neon-soft);
   box-shadow: 0 0 12px var(--neon-soft);
 }
@@ -113,6 +117,12 @@ body::before {
   color: var(--neon);
   text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon-soft);
   margin: 0;
+}
+
+#rules h1 {
+  font-size: 28px;
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon-soft);
 }
 
 /* #endregion **** Menu principal  */
@@ -154,6 +164,20 @@ body::before {
   box-shadow: 0 0 12px var(--shadow);
   text-align: center;
   z-index: 8;
+}
+
+.game-rules {
+  background: var(--panel);
+  border: 2px solid var(--neon);
+  border-radius: 10px;
+  box-shadow: 0 0 12px var(--shadow);
+  width: 80vw;
+  max-height: 80vh;
+  overflow: auto;
+  padding: 10px;
+  /* position: absolute;
+  left: 50%;
+  transform: translateX(-50%); */
 }
 
 #score-board {
