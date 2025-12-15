@@ -42,7 +42,8 @@ export function specialLines() {
     (line == "") |
     (line === "__STOP__") |
     (line === "__BOSSBACK__") |
-    (line === "__CUT__")
+    (line === "__CUT__") |
+    (line === "__RELOUSEUL__")
   ) {
     noBoss(line);
   }
@@ -310,6 +311,11 @@ function noBoss(line) {
     if (line === "") {
       cutsceneData.textList[cutsceneData.currentLine] = "... ...";
     }
+  }
+
+  if (line === "__RELOUSEUL__") {
+    if (relou) relou.classList.remove("is-hidden");
+    cutsceneData.currentLine++;
   }
 
   if (line === "__STOP__") {
