@@ -1,5 +1,5 @@
 import { mainMenuContainer, menu } from "../variables.js";
-import { pauseMenu } from "./pause.js";
+import { pauseMenu, resumeGame } from "./pause.js";
 
 const rulesContainer = document.getElementById("rules");
 
@@ -10,6 +10,7 @@ function displayRules() {
     pauseMenu();
   } else {
     console.log("Fermeture des règles du jeu");
+    resumeGame();
     closeRules();
   }
 }
