@@ -6,6 +6,7 @@ import {
   cutsceneFailedLevel,
   cutsceneIntro,
   cutsceneEndThirdLevel,
+  cutsceneGameOver,
 } from "./text-cutscenes.js";
 import { loseLife } from "../mechanics/life.js";
 import { addScoreToScoreboard } from "../scores/scoreboard.js";
@@ -97,6 +98,8 @@ function failedLevel() {
 
 function badEnding() {
   // ---- Cinématique quand on n'a plus de vies
+
+  cutsceneGameOver();
 }
 
 function goodEnding() {
