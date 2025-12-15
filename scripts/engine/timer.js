@@ -4,7 +4,6 @@ import { finishLevel } from "./levels.js";
 let timerId = null;
 
 function startTimer() {
-  gameData.timer = 0;
   if (timerId !== null) return; // évite de lancer plusieurs fois
 
   timerId = setInterval(() => {
@@ -24,9 +23,11 @@ function displayTimer() {
 
 function pauseTimer() {
   clearInterval(timerId);
+  timerId = null;
 }
 
 function removeTimer() {
+  gameData.timer = 0;
   timerZone.textContent = "";
   timerId = null;
 }

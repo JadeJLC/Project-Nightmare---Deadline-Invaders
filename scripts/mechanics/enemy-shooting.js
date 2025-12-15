@@ -81,10 +81,14 @@ function displayEnemyShot(enemy) {
   });
 }
 
+let enemyShotsAnimId = null;
+let enemyShotsPaused = false;
+
 function animateEnemyShots() {
   const container = document.getElementById("projectiles");
   const containerRect = container.parentElement.getBoundingClientRect();
   const playerRect = playerIcon.getBoundingClientRect();
+
   enemyShots.forEach((projectile, index) => {
     const pRect = projectile.element.getBoundingClientRect();
     projectile.y += projectileSpeed;
@@ -105,10 +109,10 @@ function animateEnemyShots() {
         gameData.goodScore -= gameData.goodScore;
       }
       console.log("Le joueur est touché ! Score valide :" + gameData.goodScore);
-      // Animation de dégâts
+
       playerIcon.classList.add("player--hit");
       setTimeout(() => playerIcon.classList.remove("player--hit"), 200);
-      // Supprimer le projectile
+
       projectile.element.remove();
       enemyShots.splice(index, 1);
       shootingEnemies--;
@@ -117,7 +121,30 @@ function animateEnemyShots() {
     }
   });
 
-  requestAnimationFrame(animateEnemyShots);
+  if (!enemyShotsPaused) {
+    enemyShotsAnimId = requestAnimationFrame(animateEnemyShots);
+  }
 }
 
-export { enableEnemyShooting, disableEnemyShooting };
+// --- Fonctions de contrôle ---
+function pauseEnemyShots() {
+  enemyShotsPaused = true;
+  if (enemyShotsAnimId) {
+    cancelAnimationFrame(enemyShotsAnimId);
+    enemyShotsAnimId = null;
+  }
+}
+
+function resumeEnemyShots() {
+  if (enemyShotsPaused) {
+    enemyShotsPaused = false;
+    enemyShotsAnimId = requestAnimationFrame(animateEnemyShots);
+  }
+}
+
+export {
+  enableEnemyShooting,
+  disableEnemyShooting,
+  pauseEnemyShots,
+  resumeEnemyShots,
+};

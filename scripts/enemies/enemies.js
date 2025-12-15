@@ -3,6 +3,9 @@ import { EnemyCarousel } from "./lines-builder.js";
 
 window.addEventListener("resize", createGameScreen);
 
+let enemyLoopId = null;
+let currentCarousel = null;
+
 function createGameScreen() {
   const gameScreenWidth = window
     .getComputedStyle(gameScreen)
@@ -37,13 +40,22 @@ function newCarousel() {
   console.log(
     `Largeur écran: ${screenConfig.screenWidth}, Espacement: ${screenConfig.enemySpacingX}`
   );
-  const carousel = new EnemyCarousel(screenConfig, levelData);
-  return carousel;
+  currentCarousel = new EnemyCarousel(screenConfig, levelData);
+  return currentCarousel;
 }
 
 function enemyLoop(carousel) {
   carousel.update();
-  requestAnimationFrame(() => enemyLoop(carousel));
+  enemyLoopId = requestAnimationFrame(() => enemyLoop(carousel));
 }
 
-export { enemyLoop, newCarousel };
+function pauseEnemyLoop() {
+  cancelAnimationFrame(enemyLoopId);
+  enemyLoopId = null;
+}
+
+function resumeEnemyLoop() {
+  enemyLoop(currentCarousel);
+}
+
+export { enemyLoop, newCarousel, pauseEnemyLoop, resumeEnemyLoop };

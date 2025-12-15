@@ -1,5 +1,18 @@
 import { menu, closeConfirm, closeBtn } from "../variables.js";
 import { cancelConfirm } from "./confirm.js";
+import {
+  disableMovement,
+  enableMovement,
+} from "../animations/player-movement.js";
+import { disableShooting, enableShooting } from "../mechanics/shooting.js";
+import {
+  disableEnemyShooting,
+  enableEnemyShooting,
+  pauseEnemyShots,
+  resumeEnemyShots,
+} from "../mechanics/enemy-shooting.js";
+import { pauseTimer, startTimer } from "../engine/timer.js";
+import { pauseEnemyLoop, resumeEnemyLoop } from "../enemies/enemies.js";
 
 // Ouverture du menu en fonction du mode (Paramètre ou Pause)
 function openSettingsMenu() {
@@ -8,6 +21,15 @@ function openSettingsMenu() {
 
 function openPauseMenu() {
   pauseMenu("pause");
+}
+
+function pauseGame() {
+  disableMovement();
+  disableShooting();
+  disableEnemyShooting();
+  pauseEnemyShots();
+  pauseTimer();
+  pauseEnemyLoop();
 }
 
 // Fonction pour l'ouverture du menu pause
@@ -28,14 +50,20 @@ function pauseMenu(type) {
       closeBtn.textContent = "Reprendre";
       break;
   }
-
-  closeConfirm.addEventListener("click", cancelConfirm);
-
+  pauseGame();
+  closeConfirm.addEventListener("click", resumeGame);
   // Fonctionnalité manquante : mise en pause des fonctions du jeu (vaisseau, tirs, mouvements des ennemis, etc)
 }
 
 function resumeGame() {
   menu.classList.add("is-hidden");
+  enableMovement();
+  enableEnemyShooting();
+  enableShooting();
+  resumeEnemyShots();
+  startTimer();
+  resumeEnemyLoop();
+
   console.log("Reprise du jeu");
 
   // Fonctionnalité manquante : remise en marche des fonctions du jeu
