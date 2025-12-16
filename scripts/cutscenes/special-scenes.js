@@ -152,21 +152,11 @@ function managementMeeting(line) {
     cutsceneData.currentLine++;
     cutsceneAnimation.appendChild(managers);
   } else {
-    if (
-      line ===
-      `__MANAGEMENT__ (Patron) : Je pense que ${gameData.relouName} a vraiment fait un travail fantastique, chaque jour depuis son arrivée.`
-    )
-      cutsceneData.textList[
-        cutsceneData.currentLine
-      ] = `(Patron) : Je pense que ${gameData.relouName} a vraiment fait un travail fantastique, chaque jour depuis son arrivée.`;
-
-    if (
-      line ===
-      `__MANAGEMENT__ (Patron) : Je propose donc de le promouvoir au rang de manager. Il peut gérer facilement de plus grosses équipes.`
-    )
-      cutsceneData.textList[
-        cutsceneData.currentLine
-      ] = `(Patron) : Je propose donc de le promouvoir au rang de manager. Il peut gérer facilement de plus grosses équipes.`;
+    if (line.includes("__MANAGEMENT__"))
+      cutsceneData.textList[cutsceneData.currentLine] = line.replace(
+        "__MANAGEMENT__",
+        ""
+      );
   }
 }
 
