@@ -10,6 +10,7 @@ import {
 } from "../variables.js";
 import { startGame } from "../engine/startgame.js";
 import { displayScores, newMenuOption } from "../scores/scoreboard.js";
+import { displayRules } from "./rules.js";
 
 const settingsIcon = document.getElementById("pause-btn");
 
@@ -52,6 +53,7 @@ function mainMenuButtons() {
     { label: "Mode Histoire", onClick: () => startGame("Story") },
     { label: "Mode Sans-Fin", onClick: () => startGame("Endless") },
     { label: "Tableau des scores", onClick: () => displayScores() },
+    { label: "Règles du jeu", onClick: () => displayRules() },
   ];
 
   const buttonmainMenu = document.createElement("div");

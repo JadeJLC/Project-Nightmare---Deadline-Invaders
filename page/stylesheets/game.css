@@ -109,6 +109,12 @@
   transform: translateX(-50%);
 }
 
+.shift {
+  float: left;
+  margin-top: -3px;
+  margin-right: 5px;
+}
+
 #cutscene-action {
   position: absolute;
   bottom: 200px;

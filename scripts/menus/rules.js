@@ -1,5 +1,5 @@
-import { mainMenuContainer, menu } from "../variables.js";
-import { pauseMenu } from "./pause.js";
+import { gameData, mainMenuContainer, menu } from "../variables.js";
+import { pauseMenu, resumeGame } from "./pause.js";
 
 const rulesContainer = document.getElementById("rules");
 
@@ -7,11 +7,11 @@ function displayRules() {
   if (rulesContainer.innerHTML === "") {
     rulesTitle();
     createRulesHTML();
-    pauseMenu();
   } else {
-    console.log("Fermeture des règles du jeu");
     closeRules();
   }
+
+  menu.classList.add("is-hidden");
 }
 
 function rulesTitle() {
@@ -60,6 +60,8 @@ function closeRules() {
   menu.classList.add("is-hidden");
   mainMenuContainer.classList.remove("is-hidden");
   rulesContainer.innerHTML = "";
+  console.log("Fermeture des règles du jeu");
+  resumeGame();
 }
 
 export { displayRules };

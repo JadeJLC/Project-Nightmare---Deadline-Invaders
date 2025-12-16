@@ -102,8 +102,9 @@ const timerZone = document.getElementById("timer");
 const playerIcon = document.getElementById("player-icon");
 const enemyLines = document.getElementById("enemy-carousel");
 const HUD = document.getElementById("HUD");
+const projectiles = document.getElementById("projectiles");
 
-export { playerIcon, gameScreen, timerZone, enemyLines, HUD };
+export { playerIcon, gameScreen, timerZone, enemyLines, HUD, projectiles };
 
 // Cinématiques
 const sceneZone = document.getElementById("cutscene");
