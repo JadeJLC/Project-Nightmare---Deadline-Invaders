@@ -1,5 +1,8 @@
 import { changeMusic } from "../audio/music.js";
-import { disableShooting, enableShooting } from "../mechanics/shooting.js";
+import {
+  disableShooting,
+  enableShooting,
+} from "../mechanics/player-shooting.js";
 import { newCarousel, enemyLoop, resumeEnemyLoop } from "../enemies/enemies.js";
 import {
   levelData,
@@ -19,7 +22,7 @@ import {
 import {
   disableMovement,
   enableMovement,
-} from "../animations/player-movement.js";
+} from "../mechanics/player-movement.js";
 import { updateProgressBar } from "../scores/progress-bar.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { loadMainMenu } from "../menus/main-menu.js";

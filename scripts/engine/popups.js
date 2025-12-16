@@ -1,9 +1,10 @@
 import { gameData, style, mainMenuContainer, sceneZone } from "../variables.js";
-import { completeIntroText } from "../cutscenes/helper-functions.js";
+import { completeIntroText } from "../cutscenes/cutscenes-helpers.js";
 import { nextLine, pauseCutscene } from "../cutscenes/write-cutscenes.js";
 import { loadMainMenu } from "../menus/main-menu.js";
 import { startGame } from "./startgame.js";
 import { skipCutscene } from "../cutscenes/skip-cutscene.js";
+import { resumeCutscene } from "../cutscenes/write-cutscenes.js";
 
 // Fonction pour demander au joueur d'entrer un nom
 // ---- Accepte un argument "mode" (Cutscene pour la cinématique d'intro, SkipCutscene si on la passe, Story pour le mode histoire et Endless pour le mode sans fin

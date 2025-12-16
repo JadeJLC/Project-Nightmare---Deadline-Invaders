@@ -3,8 +3,11 @@ import { cancelConfirm } from "./confirm.js";
 import {
   disableMovement,
   enableMovement,
-} from "../animations/player-movement.js";
-import { disableShooting, enableShooting } from "../mechanics/shooting.js";
+} from "../mechanics/player-movement.js";
+import {
+  disableShooting,
+  enableShooting,
+} from "../mechanics/player-shooting.js";
 import {
   disableEnemyShooting,
   enableEnemyShooting,

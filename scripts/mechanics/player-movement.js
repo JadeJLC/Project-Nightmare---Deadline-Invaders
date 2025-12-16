@@ -1,5 +1,5 @@
 import { playerIcon, gameData } from "../variables.js";
-import { getPlayArea } from "./helper-functions.js";
+import { getPlayArea } from "../engine/positions.js";
 
 let movingRight = false;
 let movingLeft = false;

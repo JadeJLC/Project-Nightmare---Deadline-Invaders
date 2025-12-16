@@ -10,7 +10,7 @@ import {
   rulesBtn,
   gameData,
 } from "../variables.js";
-import { movePlayer } from "../animations/player-movement.js";
+import { movePlayer } from "../mechanics/player-movement.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { displayRules } from "../menus/rules.js";
 import { pauseMenu } from "../menus/pause.js";

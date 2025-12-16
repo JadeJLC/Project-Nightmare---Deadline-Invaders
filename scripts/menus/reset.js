@@ -14,8 +14,8 @@ import {
 import { loadMainMenu } from "./main-menu.js";
 import { loadLevel } from "../engine/levels.js";
 import { disableEnemyShooting } from "../mechanics/enemy-shooting.js";
-import { disableMovement } from "../animations/player-movement.js";
-import { disableShooting } from "../mechanics/shooting.js";
+import { disableMovement } from "../mechanics/player-movement.js";
+import { disableShooting } from "../mechanics/player-shooting.js";
 import { removeTimer, pauseTimer } from "../engine/timer.js";
 import { resumeGame } from "./pause.js";
 

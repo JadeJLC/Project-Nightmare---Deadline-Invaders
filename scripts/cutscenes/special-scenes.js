@@ -6,7 +6,7 @@ import {
   moveCharacters,
   completeIntroText,
   animateRelou,
-} from "./helper-functions.js";
+} from "./cutscenes-helpers.js";
 import { changeMusic } from "../audio/music.js";
 import { namePopup } from "../engine/popups.js";
 
