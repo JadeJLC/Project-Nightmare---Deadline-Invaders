@@ -1,6 +1,6 @@
 import { changeMusic } from "../audio/music.js";
 import { disableShooting, enableShooting } from "../mechanics/shooting.js";
-import { newCarousel, enemyLoop } from "../enemies/enemies.js";
+import { newCarousel, enemyLoop, resumeEnemyLoop } from "../enemies/enemies.js";
 import {
   levelData,
   allLevelData,
@@ -14,6 +14,7 @@ import {
 import {
   disableEnemyShooting,
   enableEnemyShooting,
+  resumeEnemyShots,
 } from "../mechanics/enemy-shooting.js";
 import {
   disableMovement,
@@ -49,6 +50,8 @@ function loadLevel() {
   enableShooting();
   enableEnemyShooting();
   enableMovement();
+  resumeEnemyShots();
+  resumeEnemyLoop();
   gameData.badScore = 0;
   gameData.goodScore = 0;
   gameData.countPoint = true;

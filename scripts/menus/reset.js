@@ -8,6 +8,8 @@ import {
   confirmZone,
   playerIcon,
   enemyLines,
+  projectiles,
+  menu,
 } from "../variables.js";
 import { loadMainMenu } from "./main-menu.js";
 import { loadLevel } from "../engine/levels.js";
@@ -15,6 +17,7 @@ import { disableEnemyShooting } from "../mechanics/enemy-shooting.js";
 import { disableMovement } from "../animations/player-movement.js";
 import { disableShooting } from "../mechanics/shooting.js";
 import { removeTimer, pauseTimer } from "../engine/timer.js";
+import { resumeGame } from "./pause.js";
 
 // Fonction pour redémarrer le jeu depuis le menu principal
 // ---- Réinitialise gameData et defaultLevel à leur valeur de départ et replace le joueur au centre de l'écran de jeu, puis ouvre le menu principal
@@ -23,19 +26,27 @@ function resetGame() {
   confirmZone.classList.add("is-hidden");
 
   Object.assign(gameData, defaultData);
+
+  console.log(gameData);
   Object.assign(lastLevel, defaultLevel);
-  playerIcon.style.removeProperty("left");
-  enemyLines.innerHTML = "";
+  resetSteps();
 
   gameScreen.classList.add("is-hidden");
+
+  // location.reload(true);
+  loadMainMenu();
+}
+
+function resetSteps() {
+  playerIcon.style.removeProperty("left");
+  enemyLines.innerHTML = "";
+  projectiles.innerHTML = "";
 
   disableEnemyShooting();
   disableMovement();
   disableShooting();
   pauseTimer();
   removeTimer();
-
-  loadMainMenu();
 }
 
 // Fonction pour recommencer le niveau en cours
@@ -48,12 +59,8 @@ function restartLevel() {
   gameData.lives = lastLevel.lives;
   gameData.powerups = lastLevel.powerups;
 
-  enemyLines.innerHTML = "";
-  disableEnemyShooting();
-  disableMovement();
-  disableShooting();
-  pauseTimer();
-  removeTimer();
+  resetSteps();
+  resumeGame();
 
   loadLevel();
 }

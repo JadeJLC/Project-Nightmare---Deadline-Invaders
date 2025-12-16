@@ -65,8 +65,6 @@ function resumeGame() {
   resumeEnemyLoop();
 
   console.log("Reprise du jeu");
-
-  // Fonctionnalité manquante : remise en marche des fonctions du jeu
 }
 
 export { pauseMenu, openPauseMenu, openSettingsMenu, resumeGame };
