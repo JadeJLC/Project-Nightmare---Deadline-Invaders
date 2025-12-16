@@ -8,6 +8,7 @@ import {
   animateRelou,
 } from "./helper-functions.js";
 import { changeMusic } from "../audio/music.js";
+import { namePopup } from "../engine/popups.js";
 
 let finalScene = false;
 
@@ -21,8 +22,8 @@ export function specialLines() {
 
   // Présentation du collègue
   if (line === `__PROMPT__`) {
+    namePopup("Cutscene", "Relou");
     boss.style.transform = "scaleX(-1)";
-    completeIntroText();
     cutsceneData.currentLine++;
   }
 

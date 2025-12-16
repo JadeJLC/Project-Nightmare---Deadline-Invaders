@@ -1,5 +1,5 @@
 import { cutsceneAnimation, gameData } from "../variables.js";
-import { cutsceneData } from "./write-cutscenes.js";
+import { cutsceneData, nextLine, resumeCutscene } from "./write-cutscenes.js";
 
 let lastFrameTime = 0;
 let relouLeaveAnimationID;
@@ -47,15 +47,6 @@ function moveCharacters(line) {
 // Début de la cinématique d'introduction
 // ---- Entrer le nom du collègue puis l'intégrer aux dialogues
 function completeIntroText() {
-  gameData.relouName = prompt("Entrez le nom de votre collègue relou :");
-  while (
-    gameData.relouName === "" ||
-    gameData.relouName === gameData.playerName
-  ) {
-    gameData.relouName = prompt(
-      "Votre collègue ne peut avoir un nom vide ou identique au vôtre. Entrez le nom de votre collègue relou :"
-    );
-  }
   cutsceneData.textList.push(
     `(Patron) : ${gameData.relouName} va travailler avec vous dès aujourd'hui. Je suis sûr que tout se passera très bien.`
   );
@@ -64,6 +55,9 @@ function completeIntroText() {
     `(${gameData.relouName}) : Si tout le monde travaille correctement, il ne devrait pas y avoir de problème, hahaha.`
   );
   cutsceneData.textList.push(`(${gameData.playerName}) : ...`);
+
+  resumeCutscene();
+  nextLine();
 }
 
 // Départ du collègue relou pendant la cinématique de fin

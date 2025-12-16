@@ -8,6 +8,17 @@
   width: 100%;
 }
 
+#main-menu h1 {
+  position: absolute;
+  top: 40px; /* distance par rapport au haut du cadre */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon-soft);
+  margin: 0;
+}
+
 /* Colonne gauche avec les boutons */
 .button-stack {
   grid-column: 1; /* colonne gauche */
