@@ -281,4 +281,14 @@ body::before {
   margin-top: 15px;
 }
 
+button:focus,
+input:focus {
+  box-shadow: 0 0 12px var(--neon-soft) !important;
+  outline: var(--neon-soft) !important;
+}
+
+.popup button:focus {
+  padding: 16px !important;
+}
+
 /* #endregion **** Écran de jeu  */

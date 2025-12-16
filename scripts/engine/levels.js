@@ -95,6 +95,8 @@ function finishLevel() {
   } else {
     endLvl.firstElementChild.innerHTML = `Vous avez terminé le niveau ${gameData.currentLevel} avec un score de ${gameData.levelscores[index]}%.`;
   }
+
+  document.getElementById("launch-cutscene").focus();
 }
 
 function endGame() {
@@ -109,6 +111,7 @@ function endGame() {
   toCutscene.addEventListener("click", thanksScreen);
 
   toCutscene.textContent = "Continuer";
+  toCutscene.focus();
 }
 
 function thanksScreen() {
@@ -118,6 +121,7 @@ function thanksScreen() {
   toCutscene.addEventListener("click", finalScreen);
 
   toCutscene.textContent = "Retour au menu principal";
+  toCutscene.focus();
 }
 
 function finalScreen() {
