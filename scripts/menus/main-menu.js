@@ -8,9 +8,9 @@ import {
   gameData,
   scoreBoardContainer,
 } from "../variables.js";
-import { startGame } from "../engine/startgame.js";
 import { displayScores, newMenuOption } from "../scores/scoreboard.js";
 import { displayRules } from "./rules.js";
+import { namePopup } from "../engine/popups.js";
 
 const settingsIcon = document.getElementById("pause-btn");
 
@@ -50,8 +50,8 @@ function mainMenuTitle() {
 
 function mainMenuButtons() {
   const buttons = [
-    { label: "Mode Histoire", onClick: () => startGame("Story") },
-    { label: "Mode Sans-Fin", onClick: () => startGame("Endless") },
+    { label: "Mode Histoire", onClick: () => namePopup("Story", "Player") },
+    { label: "Mode Sans-Fin", onClick: () => namePopup("Endless") },
     { label: "Tableau des scores", onClick: () => displayScores() },
     { label: "Règles du jeu", onClick: () => displayRules() },
   ];

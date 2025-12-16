@@ -59,6 +59,16 @@ function endCutscene() {
   }
 }
 
+function pauseCutscene() {
+  document.removeEventListener("keydown", pressEnter);
+  document.removeEventListener("keydown", fastSkip);
+}
+
+function resumeCutscene() {
+  document.addEventListener("keydown", pressEnter);
+  document.addEventListener("keydown", fastSkip);
+}
+
 function nextLine(skip) {
   if (cutsceneData.currentLine >= cutsceneData.textList.length || skip) {
     endCutscene();
@@ -101,4 +111,10 @@ function typeWriter(txt, onComplete) {
   }
 }
 
-export { advanceCutScene, cutsceneData, nextLine };
+export {
+  advanceCutScene,
+  cutsceneData,
+  nextLine,
+  pauseCutscene,
+  resumeCutscene,
+};

@@ -8,10 +8,12 @@ import {
   effectBtn,
   toCutscene,
   rulesBtn,
+  gameData,
 } from "../variables.js";
 import { movePlayer } from "../animations/player-movement.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { displayRules } from "../menus/rules.js";
+import { pauseMenu } from "../menus/pause.js";
 
 // Gestion du jeu (déplacement des collègues et du joueur)
 
@@ -31,6 +33,14 @@ function setEventListeners() {
   effectBtn.addEventListener("click", toggleEffects);
   toCutscene.addEventListener("click", selectCutscene);
   rulesBtn.addEventListener("click", displayRules);
+
+  document.addEventListener("keydown", pauseInit);
+}
+
+function pauseInit(e) {
+  if (e.key === "p" && gameData.loadedCutscene) {
+    pauseMenu("pause");
+  }
 }
 
 init();

@@ -38,6 +38,11 @@ function pauseMenu(type) {
   menu.classList.toggle("is-hidden");
   closeBtn.addEventListener("click", resumeGame);
 
+  if (menu.classList.contains("is-hidden")) {
+    resumeGame();
+    return;
+  }
+
   switch (type) {
     case "settings":
       menu.querySelector("h2").textContent = "Paramètres";
@@ -52,7 +57,6 @@ function pauseMenu(type) {
   }
   pauseGame();
   closeConfirm.addEventListener("click", resumeGame);
-  // Fonctionnalité manquante : mise en pause des fonctions du jeu (vaisseau, tirs, mouvements des ennemis, etc)
 }
 
 function resumeGame() {

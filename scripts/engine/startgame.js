@@ -1,25 +1,12 @@
-import { gameData, style, mainMenuContainer } from "../variables.js";
+import { gameData } from "../variables.js";
 import { openPauseMenu, openSettingsMenu } from "../menus/pause.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { initLives } from "../mechanics/life.js";
-import { loadMainMenu } from "../menus/main-menu.js";
 
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
 
 function startGame(mode) {
-  style.setAttribute("href", "stylesheets/game.css");
-  mainMenuContainer.innerHTML = "";
-  gameData.playerName = prompt("Entrez votre nom :");
-  while (gameData.playerName === "") {
-    gameData.playerName = prompt(
-      "Votre nom ne peut être vide. Entrez votre nom :"
-    );
-  }
-  if (gameData.playerName === null) {
-    loadMainMenu();
-  }
-
   switch (mode) {
     case "Story":
       storyMode();

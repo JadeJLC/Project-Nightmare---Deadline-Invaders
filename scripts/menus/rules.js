@@ -8,6 +8,7 @@ function displayRules() {
     rulesTitle();
     createRulesHTML();
   } else {
+    console.log("Fermeture des règles du jeu");
     closeRules();
   }
 
