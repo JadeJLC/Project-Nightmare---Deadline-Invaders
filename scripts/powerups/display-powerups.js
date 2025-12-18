@@ -92,7 +92,7 @@ function displayTeamBuild() {
   const team = document.createElement("div");
   team.class = "power-up";
   team.alt =
-    team.title = `Team Building<br/> - Tirer sur ${gameData.relouName} compte comme du score positifi.`;
+    team.title = `Team Building<br/> - Tirer sur ${gameData.relouName} compte comme du score positif.`;
   team.innerHTML = `<img src="/images/interface/team.png"/> <span>${powerups.Team} [B]</span>`;
 
   if (displayDetails) {
