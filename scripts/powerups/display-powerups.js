@@ -10,7 +10,7 @@ let powerups = {
 };
 
 function displayPowerUps() {
-  powerupsZone.innerHTML = "";
+  powerupsZone.innerHTML = `Effets bonus<br/> <span class="pup-detail">[i] pour les détails</span><br/>`;
   powerups = {
     Coffee: 0,
     Boss: 0,
@@ -40,11 +40,22 @@ function displayPowerUps() {
   console.log(powerups);
 }
 
+let displayDetails = false;
+
+function powerupDetails() {
+  displayDetails = !displayDetails;
+  displayPowerUps();
+}
+
+// #region ---- Détails des powerups
 function displayCoffee() {
   const coffees = document.createElement("div");
   coffees.class = "power-up";
-  coffees.alt = coffees.title = "Café - Boost de vitesse";
-  coffees.innerHTML = `<img src="/images/interface/coffee.svg"/><span>${powerups.Coffee} [C]</span>`;
+  coffees.alt = coffees.title = "Café<br/> - Boost de vitesse";
+  coffees.innerHTML = `<img src="/images/interface/coffee.svg"/> <span>${powerups.Coffee} [C]</span>`;
+  if (displayDetails) {
+    coffees.innerHTML += `<span class="pup-detail">${coffees.alt}</span>`;
+  }
 
   powerupsZone.appendChild(coffees);
 }
@@ -53,8 +64,12 @@ function displayBoss() {
   const bossTalks = document.createElement("div");
   bossTalks.class = "power-up";
   bossTalks.alt =
-    bossTalks.title = `Parler au patron - Retire 1 ${gameData.relouName}`;
-  bossTalks.innerHTML = `<img src="/images/interface/boss.png"/><span>${powerups.Boss} [X]</span>`;
+    bossTalks.title = `Parler au patron<br/> - Retire 1 ${gameData.relouName}`;
+  bossTalks.innerHTML = `<img src="/images/interface/boss.png"/> <span>${powerups.Boss} [X]</span>`;
+
+  if (displayDetails) {
+    bossTalks.innerHTML += `<span class="pup-detail">${bossTalks.alt}</span>`;
+  }
 
   powerupsZone.appendChild(bossTalks);
 }
@@ -63,8 +78,12 @@ function displayDiplomacy() {
   const diplomat = document.createElement("div");
   diplomat.class = "power-up";
   diplomat.alt = diplomat.title =
-    "Collègue diplomate - Arrêter les mouvements ennemis";
-  diplomat.innerHTML = `<img src="/images/interface/diplomat.png"/><span>${powerups.Diplomat} [V]</span>`;
+    "Collègue diplomate<br/> - Arrête les mouvements ennemis";
+  diplomat.innerHTML = `<img src="/images/interface/diplomat.png"/> <span>${powerups.Diplomat} [V]</span>`;
+
+  if (displayDetails) {
+    diplomat.innerHTML += `<span class="pup-detail">${diplomat.alt}</span>`;
+  }
 
   powerupsZone.appendChild(diplomat);
 }
@@ -73,8 +92,12 @@ function displayTeamBuild() {
   const team = document.createElement("div");
   team.class = "power-up";
   team.alt =
-    team.title = `Team Building - Tirer sur ${gameData.relouName} compte comme du score positifi.`;
-  team.innerHTML = `<img src="/images/interface/team.png"/><span>${powerups.Team} [B]</span>`;
+    team.title = `Team Building<br/> - Tirer sur ${gameData.relouName} compte comme du score positifi.`;
+  team.innerHTML = `<img src="/images/interface/team.png"/> <span>${powerups.Team} [B]</span>`;
+
+  if (displayDetails) {
+    team.innerHTML += `<span class="pup-detail">${team.alt}</span>`;
+  }
 
   powerupsZone.appendChild(team);
 }
@@ -82,8 +105,12 @@ function displayTeamBuild() {
 function displayProducivityBoost() {
   const boost = document.createElement("div");
   boost.class = "power-up";
-  boost.alt = boost.title = "Boost de productivité - Pourcentage gagné x2";
-  boost.innerHTML = `<img src="/images/interface/boost.svg"/><span>${powerups.Boost} [N]</span>`;
+  boost.alt = boost.title = "Boost de productivité<br/> - Pourcentage gagné x2";
+  boost.innerHTML = `<img src="/images/interface/boost.svg"/> <span>${powerups.Boost} [N]</span>`;
+
+  if (displayDetails) {
+    boost.innerHTML += `<span class="pup-detail">${boost.alt}</span>`;
+  }
 
   powerupsZone.appendChild(boost);
 }
@@ -91,10 +118,16 @@ function displayProducivityBoost() {
 function displayPerfectionism() {
   const perfect = document.createElement("div");
   perfect.class = "power-up";
-  perfect.alt = perfect.title = "Perfectionnisme - désactive les tirs ennemis";
-  perfect.innerHTML = `<img src="/images/interface/perfect.svg"/><span>${powerups.Perfect} [W]</span>`;
+  perfect.alt = perfect.title =
+    "Perfectionnisme<br/> - Désactive les tirs ennemis";
+  perfect.innerHTML = `<img src="/images/interface/perfect.svg"/> <span>${powerups.Perfect} [W]</span>`;
+
+  if (displayDetails) {
+    perfect.innerHTML += `<span class="pup-detail">${perfect.alt}</span>`;
+  }
 
   powerupsZone.appendChild(perfect);
 }
+// #endregion
 
-export { displayPowerUps };
+export { displayPowerUps, powerupDetails };
