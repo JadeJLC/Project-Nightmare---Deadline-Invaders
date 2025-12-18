@@ -67,7 +67,7 @@ function cutsceneMoveCoworkers() {
   }
 
   let party = document.getElementById("party-lights");
-  if (party) party.src = `/images/party_${currentPose}.png`;
+  if (party) party.src = `/images/cutscenes/party_${currentPose}.png`;
 
   let relou = document.getElementById("cwr");
   if (relou) {

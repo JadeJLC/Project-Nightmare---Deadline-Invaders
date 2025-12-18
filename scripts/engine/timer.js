@@ -4,6 +4,7 @@ import { finishLevel } from "./levels.js";
 let timerId = null;
 
 function startTimer() {
+  console.log("Ajout du timer");
   if (timerId !== null) return; // évite de lancer plusieurs fois
 
   timerId = setInterval(() => {

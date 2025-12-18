@@ -45,7 +45,7 @@ function newCarousel() {
 }
 
 function enemyLoop(carousel) {
-  carousel.update();
+  if (carousel) carousel.update();
   enemyLoopId = requestAnimationFrame(() => enemyLoop(carousel));
 }
 

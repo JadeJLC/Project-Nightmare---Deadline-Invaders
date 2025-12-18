@@ -1,11 +1,5 @@
-import {
-  playerIcon,
-  gameData,
-  enemiesRegistry,
-  levelData,
-} from "../variables.js";
-import { rectsIntersect } from "./collisions.js";
-import { Coworker, Relou } from "../enemies/coworker-class.js";
+import { playerIcon, gameData, enemiesRegistry } from "../variables.js";
+import { rectsIntersect, enemyDamage } from "./collisions.js";
 import { soundEffect } from "../audio/sound-effects.js";
 import { updateProgressBar } from "../scores/progress-bar.js";
 
@@ -131,33 +125,13 @@ function animateProjectiles() {
         projectile.element.remove();
         projectiles.splice(index, 1);
 
-        if (enemy instanceof Coworker) {
-          enemy.hit();
-          if (difference >= levelData.coworkerBonus) {
-            gameData.goodScore += levelData.coworkerBonus;
-          } else {
-            gameData.goodScore += difference;
-          }
-          console.log("Collègue éliminé, score:", gameData.goodScore);
-        } else if (enemy instanceof Relou) {
-          enemy.hit();
-          if (difference >= levelData.relouMalus) {
-            gameData.badScore += levelData.relouMalus;
-          } else {
-            gameData.badScore += difference;
-          }
-
-          gameData.badScore += levelData.relouMalus;
-          console.log("Relou touché, compteur:", gameData.badScore);
-        }
+        enemyDamage(enemy, difference);
 
         updateProgressBar();
         break; // projectile détruit, on sort de la boucle ennemis
       }
     }
   }
-
-  //requestAnimationFrame(animateProjectiles);
 }
 
 export { enableShooting, disableShooting };

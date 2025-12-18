@@ -1,6 +1,6 @@
 import { soundEffect } from "../audio/sound-effects.js";
 import { gameData, levelData } from "../variables.js";
-import { rectsIntersect } from "./collisions.js";
+import { playerDamage, rectsIntersect } from "./collisions.js";
 import { playerIcon } from "../variables.js";
 import { updateProgressBar } from "../scores/progress-bar.js";
 
@@ -101,17 +101,7 @@ function animateEnemyShots() {
     }
 
     if (rectsIntersect(playerRect, pRect) && gameData.countPoint) {
-      if (gameData.goodScore === 0) {
-        gameData.badScore += levelData.relouMalus;
-      } else if (gameData.goodScore >= levelData.coworkerBonus) {
-        gameData.goodScore -= levelData.coworkerBonus;
-      } else if (gameData.goodScore < levelData.coworkerBonus) {
-        gameData.goodScore -= gameData.goodScore;
-      }
-      console.log("Le joueur est touché ! Score valide :" + gameData.goodScore);
-
-      playerIcon.classList.add("player--hit");
-      setTimeout(() => playerIcon.classList.remove("player--hit"), 200);
+      playerDamage();
 
       projectile.element.remove();
       enemyShots.splice(index, 1);
