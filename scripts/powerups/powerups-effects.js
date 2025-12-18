@@ -1,5 +1,15 @@
 import { pauseEnemyLoop, resumeEnemyLoop } from "../enemies/enemies.js";
-import { gameData, levelData, enemyLines, gameMessage } from "../variables.js";
+import {
+  disableEnemyShooting,
+  enableEnemyShooting,
+} from "../mechanics/enemy-shooting.js";
+import {
+  gameData,
+  levelData,
+  enemyLines,
+  gameMessage,
+  projectiles,
+} from "../variables.js";
 import { displayPowerUps } from "./display-powerups.js";
 
 let teamBuild = false;
@@ -111,7 +121,6 @@ function talkToBoss() {
     var coworker = coworkers[i];
     if (coworker.id === "") {
       coworker.remove();
-      displayPowerUps();
       break;
     }
   }
@@ -132,11 +141,45 @@ function talkToBoss() {
   }, 2000);
 }
 
+// Powerup Perfectionnisme : les collègues cessent d'envoyer des bugs pendant un court instant
+// ----- Activé en appuyant sur la touche "W"
+function perfectionism() {
+  gameData.activePU = "Bonus actif : Perfectionnisme";
+
+  disableEnemyShooting();
+
+  let shots = projectiles.children;
+
+  for (var i = shots.length - 1; i >= 0; i--) {
+    var projectile = shots[i];
+    if (projectile.classList.contains("enemy-projectile")) {
+      projectile.remove();
+    }
+  }
+
+  for (let i = 0; i < gameData.powerups.length; i++) {
+    console.log(gameData.powerups[i]);
+    if (gameData.powerups[i] === "Perfect") {
+      gameData.powerups.splice(i, 1);
+      displayPowerUps();
+      break;
+    }
+  }
+
+  // Retire l'effet au bout de 5 secondes
+  setTimeout(() => {
+    enableEnemyShooting();
+    gameData.activePU = "";
+    gameMessage.textContent = gameData.activePU;
+  }, 5000);
+}
+
 export {
   speedBoost,
   diplomacy,
   teamBuilding,
   productivityBoost,
   talkToBoss,
+  perfectionism,
   teamBuild,
 };

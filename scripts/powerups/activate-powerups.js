@@ -1,6 +1,7 @@
 import { gameData } from "../variables.js";
 import {
   diplomacy,
+  perfectionism,
   productivityBoost,
   speedBoost,
   talkToBoss,
@@ -22,6 +23,7 @@ function usePowerUps(e) {
   if (e.key === "b" && gameData.powerups.includes("Team")) teamBuilding();
   if (e.key === "x" && gameData.powerups.includes("Patron")) talkToBoss();
   if (e.key === "n" && gameData.powerups.includes("Boost")) productivityBoost();
+  if (e.key === "w" && gameData.powerups.includes("Perfect")) perfectionism();
 }
 
 export { enablePowerUps, disablePowerUps };

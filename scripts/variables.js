@@ -10,7 +10,7 @@ let gameData = {
   levelscores: [0, 0, 0],
   goodScore: 0,
   badScore: 0,
-  powerups: ["Diplomate", "Café", "Team", "Patron", "Boost"],
+  powerups: ["Diplomate", "Café", "Team", "Patron", "Boost", "Perfect"],
   job: "dev",
   speed: 5,
   loadedCutscene: false,

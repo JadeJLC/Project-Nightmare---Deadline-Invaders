@@ -1,4 +1,4 @@
-import { gameData, levelData } from "../variables.js";
+import { gameData, levelData, playerIcon } from "../variables.js";
 import { teamBuild } from "../powerups/powerups-effects.js";
 import { Coworker, Relou } from "../enemies/coworker-class.js";
 
@@ -33,4 +33,20 @@ function enemyDamage(enemy, difference) {
   }
 }
 
-export { rectsIntersect, enemyDamage };
+function playerDamage() {
+  if (playerIcon.classList.contains("player--hit")) return;
+
+  if (gameData.goodScore === 0) {
+    gameData.badScore += levelData.relouMalus;
+  } else if (gameData.goodScore >= levelData.coworkerBonus) {
+    gameData.goodScore -= levelData.coworkerBonus;
+  } else if (gameData.goodScore < levelData.coworkerBonus) {
+    gameData.goodScore -= gameData.goodScore;
+  }
+  console.log("Le joueur est touché ! Score valide :" + gameData.goodScore);
+
+  playerIcon.classList.add("player--hit");
+  setTimeout(() => playerIcon.classList.remove("player--hit"), 400);
+}
+
+export { rectsIntersect, enemyDamage, playerDamage };

@@ -6,6 +6,7 @@ let powerups = {
   Diplomat: 0,
   Team: 0,
   Boost: 0,
+  Perfect: 0,
 };
 
 function displayPowerUps() {
@@ -16,6 +17,7 @@ function displayPowerUps() {
     Diplomat: 0,
     Team: 0,
     Boost: 0,
+    Perfect: 0,
   };
   gameMessage.textContent = gameData.activePU;
 
@@ -25,6 +27,7 @@ function displayPowerUps() {
     if (powerup === "Diplomate") powerups.Diplomat++;
     if (powerup === "Team") powerups.Team++;
     if (powerup === "Boost") powerups.Boost++;
+    if (powerup === "Perfect") powerups.Perfect++;
   });
 
   if (powerups.Coffee > 0) displayCoffee();
@@ -32,6 +35,9 @@ function displayPowerUps() {
   if (powerups.Diplomat > 0) displayDiplomacy();
   if (powerups.Team > 0) displayTeamBuild();
   if (powerups.Boost > 0) displayProducivityBoost();
+  if (powerups.Perfect > 0) displayPerfectionism();
+
+  console.log(powerups);
 }
 
 function displayCoffee() {
@@ -80,6 +86,15 @@ function displayProducivityBoost() {
   boost.innerHTML = `<img src="/images/interface/boost.svg"/><span>${powerups.Boost} [N]</span>`;
 
   powerupsZone.appendChild(boost);
+}
+
+function displayPerfectionism() {
+  const perfect = document.createElement("div");
+  perfect.class = "power-up";
+  perfect.alt = perfect.title = "Perfectionnisme - désactive les tirs ennemis";
+  perfect.innerHTML = `<img src="/images/interface/perfect.svg"/><span>${powerups.Perfect} [W]</span>`;
+
+  powerupsZone.appendChild(perfect);
 }
 
 export { displayPowerUps };
