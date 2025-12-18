@@ -9,7 +9,6 @@ import {
   playerIcon,
   enemyLines,
   projectiles,
-  menu,
 } from "../variables.js";
 import { loadMainMenu } from "./main-menu.js";
 import { loadLevel } from "../engine/levels.js";
@@ -18,6 +17,7 @@ import { disableMovement } from "../mechanics/player-movement.js";
 import { disableShooting } from "../mechanics/player-shooting.js";
 import { removeTimer, pauseTimer } from "../engine/timer.js";
 import { resumeGame } from "./pause.js";
+import { pauseCutscene } from "../cutscenes/write-cutscenes.js";
 
 // Fonction pour redémarrer le jeu depuis le menu principal
 // ---- Réinitialise gameData et defaultLevel à leur valeur de départ et replace le joueur au centre de l'écran de jeu, puis ouvre le menu principal
@@ -47,6 +47,7 @@ function resetSteps() {
   disableShooting();
   pauseTimer();
   removeTimer();
+  pauseCutscene();
 }
 
 // Fonction pour recommencer le niveau en cours

@@ -27,6 +27,11 @@ import { updateProgressBar } from "../scores/progress-bar.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { loadMainMenu } from "../menus/main-menu.js";
 import { displayTimer, pauseTimer, removeTimer, startTimer } from "./timer.js";
+import {
+  disablePowerUps,
+  enablePowerUps,
+} from "../powerups/activate-powerups.js";
+import { displayPowerUps } from "../powerups/display-powerups.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;
@@ -50,22 +55,24 @@ function loadLevel() {
     }
   }, 200);
 
+  enablePowerUps();
   enableShooting();
   enableEnemyShooting();
   enableMovement();
   resumeEnemyShots();
-  resumeEnemyLoop();
   gameData.badScore = 0;
   gameData.goodScore = 0;
   gameData.countPoint = true;
-
+  displayPowerUps();
   updateProgressBar();
   setInterval(displayTimer, 10);
   startTimer();
+  resumeEnemyLoop();
   console.log("Niveau chargé");
 }
 
 function finishLevel() {
+  disablePowerUps();
   disableShooting();
   disableMovement();
   disableEnemyShooting();

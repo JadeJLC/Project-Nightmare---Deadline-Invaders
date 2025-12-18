@@ -10,7 +10,7 @@ let gameData = {
   levelscores: [0, 0, 0],
   goodScore: 0,
   badScore: 0,
-  powerups: [],
+  powerups: ["Diplomate", "Café", "Team", "Patron", "Boost"],
   job: "dev",
   speed: 5,
   loadedCutscene: false,
@@ -18,6 +18,7 @@ let gameData = {
   currentMusic: "main-menu",
   shotCooldown: 600,
   gameMode: "",
+  activePU: "",
 };
 
 let gameOptions = {
@@ -102,9 +103,20 @@ const timerZone = document.getElementById("timer");
 const playerIcon = document.getElementById("player-icon");
 const enemyLines = document.getElementById("enemy-carousel");
 const HUD = document.getElementById("HUD");
+const powerupsZone = document.getElementById("power-ups");
 const projectiles = document.getElementById("projectiles");
+const gameMessage = document.getElementById("game-message");
 
-export { playerIcon, gameScreen, timerZone, enemyLines, HUD, projectiles };
+export {
+  playerIcon,
+  gameScreen,
+  timerZone,
+  enemyLines,
+  HUD,
+  projectiles,
+  powerupsZone,
+  gameMessage,
+};
 
 // Cinématiques
 const sceneZone = document.getElementById("cutscene");

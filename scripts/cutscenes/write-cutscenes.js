@@ -16,6 +16,7 @@ let cutsceneData = {
   currentLine: 0,
 };
 
+// #region ---- Ecriture du texte de la cinématique
 function advanceCutScene(cutsceneTextList) {
   skipBtn.addEventListener("click", skipCutscene);
 
@@ -36,37 +37,6 @@ function advanceCutScene(cutsceneTextList) {
 
   document.addEventListener("keydown", pressEnter);
   nextLine();
-}
-
-function endCutscene() {
-  console.log("Cutscene finished.");
-  gameData.loadedCutscene = true;
-  sceneZone.classList.add("is-hidden");
-  typeZone.textContent = "";
-
-  document.removeEventListener("keydown", pressEnter);
-  document.removeEventListener("keydown", fastSkip);
-
-  cutsceneDeleteCoworkers();
-
-  clearTimeout(typewriterTimeout);
-  typewriterTimeout = null;
-
-  if (gameData.currentLevel <= 3) {
-    loadLevel();
-  } else {
-    endGame();
-  }
-}
-
-function pauseCutscene() {
-  document.removeEventListener("keydown", pressEnter);
-  document.removeEventListener("keydown", fastSkip);
-}
-
-function resumeCutscene() {
-  document.addEventListener("keydown", pressEnter);
-  document.addEventListener("keydown", fastSkip);
 }
 
 function nextLine(skip) {
@@ -110,6 +80,42 @@ function typeWriter(txt, onComplete) {
     }
   }
 }
+
+// #endregion
+
+// #region ---- Gestion de la pause, fin et redémarrage de la cinématique
+function endCutscene() {
+  console.log("Cutscene finished.");
+  gameData.loadedCutscene = true;
+  sceneZone.classList.add("is-hidden");
+  typeZone.textContent = "";
+
+  document.removeEventListener("keydown", pressEnter);
+  document.removeEventListener("keydown", fastSkip);
+
+  cutsceneDeleteCoworkers();
+
+  clearTimeout(typewriterTimeout);
+  typewriterTimeout = null;
+
+  if (gameData.currentLevel <= 3) {
+    loadLevel();
+  } else {
+    endGame();
+  }
+}
+
+function pauseCutscene() {
+  document.removeEventListener("keydown", pressEnter);
+  document.removeEventListener("keydown", fastSkip);
+}
+
+function resumeCutscene() {
+  document.addEventListener("keydown", pressEnter);
+  document.addEventListener("keydown", fastSkip);
+}
+
+// #endregion
 
 export {
   advanceCutScene,

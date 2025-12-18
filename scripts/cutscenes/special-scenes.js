@@ -146,7 +146,7 @@ function managementMeeting(line) {
 
   if (line === "__MANAGEMENT__") {
     let managers = document.createElement("img");
-    managers.src = "/images/managers.png";
+    managers.src = "/images/cutscenes/managers.png";
     managers.title = managers.alt = "Managers";
     managers.id = "managers";
     cutsceneData.currentLine++;
@@ -231,7 +231,7 @@ function partyTime() {
   let partyLights = document.createElement("img");
   partyLights.id = partyLights.alt = partyLights.title = "party-lights";
 
-  partyLights.src = `/images/party_1.png`;
+  partyLights.src = `/images/cutscenes/party_1.png`;
 
   sceneZone.appendChild(partyLights);
 

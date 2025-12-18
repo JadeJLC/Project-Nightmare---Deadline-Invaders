@@ -281,3 +281,25 @@
 #good-progress {
   background: var(--good);
 }
+
+/* Powerups */
+#power-ups {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 10px;
+  top: 10%;
+}
+
+#power-ups img {
+  width: 25px;
+}
+
+.botHUD {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: fit-content;
+}
