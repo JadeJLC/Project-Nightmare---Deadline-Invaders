@@ -56,9 +56,9 @@ function pauseMenu(type) {
       menu.querySelector("h2").textContent = "Pause";
       menu.querySelector("div").classList.remove("is-hidden");
       closeBtn.textContent = "Reprendre";
+      pauseGame();
       break;
   }
-  pauseGame();
   closeConfirm.addEventListener("click", resumeGame);
 }
 

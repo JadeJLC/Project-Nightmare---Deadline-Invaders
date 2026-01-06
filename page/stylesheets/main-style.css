@@ -292,3 +292,48 @@ input:focus {
 }
 
 /* #endregion **** Écran de jeu  */
+
+/* Gestion des maps */
+.small-tile,
+.medium-tile,
+.big-tile {
+  background-repeat: no-repeat;
+  margin: 5px;
+  display: inline-block;
+  image-rendering: pixelated;
+}
+
+.small-tile {
+  width: 48px;
+  height: 48px;
+  background-size: 200% 200%;
+  /* background-color: #ff4848; */
+}
+
+.medium-tile {
+  width: 96px;
+  height: 96px;
+  background-size: 576px 1632px !important;
+}
+
+.big-tile {
+  width: 144px;
+  height: 144px;
+  background-size: 300% 300%;
+}
+
+.map-0 {
+  background-image: url("/images/map00-tileset.png");
+}
+
+.map-1 {
+  background-image: url("/images/map01-tileset.png");
+}
+
+.map-2 {
+  background-image: url("/images/map02-tileset.png");
+}
+
+.map-3 {
+  background-image: url("/images/map03-tileset.png");
+}

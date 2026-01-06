@@ -98,7 +98,7 @@ function confirmSkip() {
   const popup = document.createElement("form");
   popup.classList.add("confirm-pannel");
   popup.classList.add("popup");
-  popup.name = "PlayerName";
+  popup.name = "SkipScene";
   popup.innerHTML = "<label>Passer la cinématique ?</label>";
 
   const confirm = document.createElement("button");
