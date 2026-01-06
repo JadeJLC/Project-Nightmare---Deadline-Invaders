@@ -11,7 +11,7 @@ function createCoworkers() {
 
   if (i > 5) i = 5;
 
-  return `../images/coworker${i}.png`;
+  return (i - 1) * 48;
 }
 
 export { createRelou, createCoworkers };

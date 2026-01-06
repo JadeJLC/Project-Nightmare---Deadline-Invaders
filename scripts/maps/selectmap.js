@@ -1,6 +1,8 @@
 import { mainMenuContainer } from "../variables.js";
 
 let mapID = 0;
+let popup;
+const root = document.documentElement;
 const tilesize = 48;
 const coworkerTiles = [
   [0, 8, "boss"],
@@ -13,9 +15,9 @@ const coworkerTiles = [
   [0, 16, "player"],
 ];
 
-function selectMap() {
-  console.log("Ouverture de la popup de choix de map");
+function selectMapPopup() {
   let coworkerID = 0;
+  root.style.setProperty("--map", `url("/images/map0${mapID}-tileset.png"`);
 
   // Création du formulaire de base
   let popup = document.getElementById("map-popup");
@@ -49,7 +51,16 @@ function selectMap() {
 
   document.addEventListener("keydown", changeMap);
 
-  console.log("Création du collègue");
+  const confirm = document.createElement("button");
+  confirm.type = "button";
+  confirm.textContent = "Confirmer";
+  confirm.id = "confirm-btn";
+
+  confirm.addEventListener("click", function () {
+    document.removeEventListener("keydown", changeMap);
+    popup.remove();
+  });
+
   while (coworkerID < 8) {
     let current = coworkerTiles[coworkerID];
     let newCoworker = document.createElement("div");
@@ -60,7 +71,6 @@ function selectMap() {
 
     newCoworker.id = current[2];
     newCoworker.classList.add("medium-tile");
-    newCoworker.classList.add(`map-${mapID}`);
     newCoworker.style.backgroundPosition = `-${sourceX}px -${sourceY}px`;
     popup.appendChild(newCoworker);
     coworkerID++;
@@ -68,6 +78,7 @@ function selectMap() {
 
   popup.appendChild(next);
   popup.appendChild(previous);
+  popup.appendChild(confirm);
 
   mainMenuContainer.appendChild(popup);
 }
@@ -75,13 +86,31 @@ function selectMap() {
 function nextMap() {
   mapID++;
   if (mapID > 3) mapID = 0;
-  selectMap();
+  selectMapPopup();
+  const next = document.getElementById("next-btn");
+  next.classList.add("acted");
+
+  setTimeout(() => {
+    next.classList.remove("acted");
+
+    const confirm = document.getElementById("confirm-btn");
+    confirm.focus();
+  }, 200);
 }
 
 function previousMap() {
   mapID--;
   if (mapID < 0) mapID = 3;
-  selectMap();
+  selectMapPopup();
+  const previous = document.getElementById("previous-btn");
+  previous.classList.add("acted");
+
+  setTimeout(() => {
+    previous.classList.remove("acted");
+
+    const confirm = document.getElementById("confirm-btn");
+    confirm.focus();
+  }, 200);
 }
 
 function changeMap(e) {
@@ -89,4 +118,4 @@ function changeMap(e) {
   if (e.key === "ArrowRight") nextMap();
 }
 
-export { selectMap };
+export { selectMapPopup };

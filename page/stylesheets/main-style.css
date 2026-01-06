@@ -282,7 +282,8 @@ body::before {
 }
 
 button:focus,
-input:focus {
+input:focus,
+button.acted {
   box-shadow: 0 0 12px var(--neon-soft) !important;
   outline: var(--neon-soft) !important;
 }
@@ -301,6 +302,7 @@ input:focus {
   margin: 5px;
   display: inline-block;
   image-rendering: pixelated;
+  background-image: var(--map);
 }
 
 .small-tile {
@@ -320,20 +322,4 @@ input:focus {
   width: 144px;
   height: 144px;
   background-size: 300% 300%;
-}
-
-.map-0 {
-  background-image: url("/images/map00-tileset.png");
-}
-
-.map-1 {
-  background-image: url("/images/map01-tileset.png");
-}
-
-.map-2 {
-  background-image: url("/images/map02-tileset.png");
-}
-
-.map-3 {
-  background-image: url("/images/map03-tileset.png");
 }

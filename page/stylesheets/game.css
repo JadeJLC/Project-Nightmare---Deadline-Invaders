@@ -12,6 +12,8 @@
   --good: rgb(116, 251, 116);
   --text: #cfe8ff;
   --shadow: rgba(72, 199, 255, 0.3);
+
+  --map: url("/images/map00-tileset.png");
 }
 
 /* #region **** Écran de jeu  */
@@ -194,6 +196,8 @@
   position: absolute;
   width: 48px;
   height: 48px;
+  background-image: var(--map);
+  background-repeat: no-repeat;
 }
 
 @media (orientation: portrait) {
