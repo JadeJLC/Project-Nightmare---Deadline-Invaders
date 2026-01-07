@@ -48,8 +48,8 @@ class Coworker {
     this.isAlive = false;
     this.el.className = "is-hidden";
     if (
-      this.sprite == "../images/coworker1.png" ||
-      this.sprite == "../images/coworker2.png"
+      this.el.style.backgroundPosition == "-48px 0px" ||
+      this.el.style.backgroundPosition == "0px 0px"
     ) {
       soundEffect("tir-cwf");
     } else {

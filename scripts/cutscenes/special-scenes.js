@@ -122,8 +122,11 @@ function secretConversation(line) {
     let managers = document.getElementById("managers");
     if (managers) managers.remove();
 
-    boss.style = "";
-    relou.style = "";
+    boss.style.left = "";
+    boss.style.bottom = "";
+    boss.style.transform = "";
+    relou.style.left = "";
+    relou.style.bottom = "";
 
     showAllCoworkers();
 
@@ -145,8 +148,10 @@ function managementMeeting(line) {
   boss.style.bottom = "20px";
 
   if (line === "__MANAGEMENT__") {
-    let managers = document.createElement("img");
-    managers.src = "/images/cutscenes/managers.png";
+    let managers = document.createElement("div");
+    managers.classList.add("big-tile");
+    managers.style.width = "288px";
+    managers.style.backgroundPosition = "-144px -2305px";
     managers.title = managers.alt = "Managers";
     managers.id = "managers";
     cutsceneData.currentLine++;

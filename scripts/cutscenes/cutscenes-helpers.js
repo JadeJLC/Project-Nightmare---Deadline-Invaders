@@ -36,7 +36,7 @@ function moveCharacters(line) {
   if (line === `__BOSSTURN__`) {
     console.log(line);
     if (boss.style) {
-      boss.style = "";
+      boss.style.transform = "";
     } else {
       boss.style.transform = "scaleX(-1)";
     }
