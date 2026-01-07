@@ -1,6 +1,6 @@
-import { mainMenuContainer } from "../variables.js";
+import { mainMenuContainer, gameData, gameOptions } from "../variables.js";
+import { startGame } from "../engine/startgame.js";
 
-let mapID = 0;
 let popup;
 const root = document.documentElement;
 const tilesize = 48;
@@ -17,7 +17,10 @@ const coworkerTiles = [
 
 function selectMapPopup() {
   let coworkerID = 0;
-  root.style.setProperty("--map", `url("/images/map0${mapID}-tileset.png"`);
+  root.style.setProperty(
+    "--map",
+    `url("/images/map0${gameOptions.map}-tileset.png"`
+  );
 
   // Création du formulaire de base
   let popup = document.getElementById("map-popup");
@@ -30,9 +33,8 @@ function selectMapPopup() {
   popup.classList.add("confirm-pannel");
   popup.classList.add("popup");
   popup.name = "SwitchMap";
-  popup.innerHTML = `<label>Choisissez votre équipe (${mapID}) </label><br/>`;
+  popup.innerHTML = `<label>Choisissez votre équipe </label><br/>`;
 
-  console.log("Création du bouton next");
   const next = document.createElement("button");
   next.type = "button";
   next.textContent = "➞";
@@ -41,7 +43,6 @@ function selectMapPopup() {
 
   next.addEventListener("click", nextMap);
 
-  console.log("Création du bouton previous");
   const previous = document.createElement("button");
   previous.type = "button";
   previous.textContent = "🠔";
@@ -59,6 +60,7 @@ function selectMapPopup() {
   confirm.addEventListener("click", function () {
     document.removeEventListener("keydown", changeMap);
     popup.remove();
+    startGame();
   });
 
   while (coworkerID < 8) {
@@ -69,23 +71,24 @@ function selectMapPopup() {
     let sourceX = current[0] * tilesize * 2;
     let sourceY = current[1] * tilesize * 2;
 
-    newCoworker.id = current[2];
+    newCoworker.id = `team_${current[2]}`;
     newCoworker.classList.add("medium-tile");
     newCoworker.style.backgroundPosition = `-${sourceX}px -${sourceY}px`;
     popup.appendChild(newCoworker);
     coworkerID++;
   }
 
-  popup.appendChild(next);
   popup.appendChild(previous);
+  popup.appendChild(next);
   popup.appendChild(confirm);
 
   mainMenuContainer.appendChild(popup);
+  confirm.focus();
 }
 
 function nextMap() {
-  mapID++;
-  if (mapID > 3) mapID = 0;
+  gameOptions.map++;
+  if (gameOptions.map > 3) gameOptions.map = 0;
   selectMapPopup();
   const next = document.getElementById("next-btn");
   next.classList.add("acted");
@@ -99,8 +102,8 @@ function nextMap() {
 }
 
 function previousMap() {
-  mapID--;
-  if (mapID < 0) mapID = 3;
+  gameOptions.map--;
+  if (gameOptions.map < 0) gameOptions.map = 3;
   selectMapPopup();
   const previous = document.getElementById("previous-btn");
   previous.classList.add("acted");

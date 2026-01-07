@@ -20,7 +20,12 @@
 #player-icon {
   position: absolute;
   bottom: 20px;
-  left: 50%;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  background-image: var(--map);
+  background-size: 576px 1632px !important;
+  width: 96px;
+  height: 96px;
 }
 
 /* Conteneur des projectiles */
@@ -208,6 +213,9 @@
 
   #player-icon {
     width: 42px;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    background-image: var(--map);
   }
 }
 

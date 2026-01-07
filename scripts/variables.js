@@ -24,6 +24,7 @@ let gameData = {
 let gameOptions = {
   musicOn: false,
   soundEffects: true,
+  map: 0,
 };
 
 // Variable pour enregistrer la progression du joueur lorsqu'il termine un niveau

@@ -2,14 +2,15 @@ import { gameData, style, mainMenuContainer, sceneZone } from "../variables.js";
 import { completeIntroText } from "../cutscenes/cutscenes-helpers.js";
 import { nextLine, pauseCutscene } from "../cutscenes/write-cutscenes.js";
 import { loadMainMenu } from "../menus/main-menu.js";
-import { startGame } from "./startgame.js";
 import { skipCutscene } from "../cutscenes/skip-cutscene.js";
 import { resumeCutscene } from "../cutscenes/write-cutscenes.js";
+import { selectMapPopup } from "../maps/selectmap.js";
 
 // Fonction pour demander au joueur d'entrer un nom
 // ---- Accepte un argument "mode" (Cutscene pour la cinématique d'intro, SkipCutscene si on la passe, Story pour le mode histoire et Endless pour le mode sans fin
 // ---- Accepte un deuxième argument "type" (Player ou Relou) pour l'endroit où enregistrer le nom
-function namePopup(mode, type) {
+function namePopup(mode, type, same) {
+  let validName = false;
   style.setAttribute("href", "stylesheets/game.css");
   mainMenuContainer.innerHTML = "";
 
@@ -28,6 +29,9 @@ function namePopup(mode, type) {
     popup.innerHTML = "<label>Entrez votre nom</label>";
   } else if (type === "Relou") {
     popup.innerHTML = "<label>Entrez le nom de votre collègue relou</label>";
+    if (same)
+      popup.innerHTML =
+        "<label>Entrez le nom de votre collègue relou. Ce nom ne peut être identique au vôtre.</label>";
   }
 
   const nameZone = document.createElement("input");
@@ -70,23 +74,34 @@ function namePopup(mode, type) {
 
       if (type === "Player") {
         gameData.playerName = chosenName;
+        validName = true;
       } else if (type === "Relou") {
-        gameData.relouName = chosenName;
+        if (chosenName === gameData.playerName) {
+          popup.remove();
+          namePopup(mode, type, "Nom identique");
+        } else {
+          gameData.relouName = chosenName;
+          validName = true;
+        }
       }
     } else {
       popup.remove();
-      namePopup();
+      namePopup(mode, type);
     }
 
     popup.remove();
 
-    // Lance le jeu ou relance/skip la cinématique
-    if (mode === "Story" || mode === "Endless") {
-      startGame(mode);
-    } else if (mode === "Cutscene") {
-      completeIntroText();
-    } else if (mode === "SkipCutscene") {
-      nextLine(true);
+    if (validName) {
+      // Lance le jeu ou relance/skip la cinématique
+      if (mode === "Story" || mode === "Endless") {
+        console.log("namePopup mode :", mode);
+        gameData.gameMode = mode;
+        selectMapPopup();
+      } else if (mode === "Cutscene") {
+        completeIntroText();
+      } else if (mode === "SkipCutscene") {
+        nextLine(true);
+      }
     }
   });
 }

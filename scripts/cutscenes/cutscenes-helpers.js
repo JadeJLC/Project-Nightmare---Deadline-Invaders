@@ -1,4 +1,4 @@
-import { cutsceneAnimation, gameData } from "../variables.js";
+import { cutsceneAnimation, gameData, gameOptions } from "../variables.js";
 import { cutsceneData, nextLine, resumeCutscene } from "./write-cutscenes.js";
 
 let lastFrameTime = 0;
@@ -47,8 +47,11 @@ function moveCharacters(line) {
 // Début de la cinématique d'introduction
 // ---- Entrer le nom du collègue puis l'intégrer aux dialogues
 function completeIntroText() {
+  let bossName = ["(Patron)", ""];
+  if (gameOptions.map === 1) bossName = ["(Patronne)", "e"];
+
   cutsceneData.textList.push(
-    `(Patron) : ${gameData.relouName} va travailler avec vous dès aujourd'hui. Je suis sûr que tout se passera très bien.`
+    `${bossName[0]} : ${gameData.relouName} va travailler avec vous dès aujourd'hui. Je suis sûr${bossName[1]} que tout se passera très bien.`
   );
   cutsceneData.textList.push(`__BOSSTURN__`);
   cutsceneData.textList.push(

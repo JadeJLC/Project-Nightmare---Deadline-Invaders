@@ -12,7 +12,6 @@ import {
 import { displayScores, newMenuOption } from "../scores/scoreboard.js";
 import { displayRules } from "./rules.js";
 import { namePopup } from "../engine/popups.js";
-import { selectMapPopup } from "../maps/selectmap.js";
 
 const settingsIcon = document.getElementById("pause-btn");
 
@@ -36,7 +35,6 @@ export function loadMainMenu() {
   } else {
     openSettingsMenu();
   }
-  selectMapPopup();
 }
 
 function resetScoreBoard() {

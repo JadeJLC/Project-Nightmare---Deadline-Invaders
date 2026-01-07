@@ -295,15 +295,24 @@ button.acted {
 /* #endregion **** Écran de jeu  */
 
 /* Gestion des maps */
+#next-btn,
+#previous-btn {
+  display: inline-block;
+  width: 40% !important;
+  margin-right: 10px;
+  height: 50px !important;
+  padding: 10px !important;
+}
+
 .small-tile,
 .medium-tile,
 .big-tile,
 .mini-tile {
   background-repeat: no-repeat;
-  margin: 5px;
-  display: inline-block;
   image-rendering: pixelated;
   background-image: var(--map);
+  margin: 5px;
+  display: inline-block;
 }
 
 .mini-tile {

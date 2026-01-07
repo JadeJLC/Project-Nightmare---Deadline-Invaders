@@ -86,6 +86,7 @@ const cutsceneMaps = {
   coworker5,
   relou,
   boss,
+  party,
 };
 
 export { cutsceneMaps };
