@@ -297,7 +297,8 @@ button.acted {
 /* Gestion des maps */
 .small-tile,
 .medium-tile,
-.big-tile {
+.big-tile,
+.mini-tile {
   background-repeat: no-repeat;
   margin: 5px;
   display: inline-block;
@@ -305,11 +306,13 @@ button.acted {
   background-image: var(--map);
 }
 
+.mini-tile {
+  width: 27px;
+  height: 27px;
+}
 .small-tile {
   width: 48px;
   height: 48px;
-  background-size: 200% 200%;
-  /* background-color: #ff4848; */
 }
 
 .medium-tile {
@@ -321,5 +324,5 @@ button.acted {
 .big-tile {
   width: 144px;
   height: 144px;
-  background-size: 300% 300%;
+  background-size: 864px 2448px !important;
 }
