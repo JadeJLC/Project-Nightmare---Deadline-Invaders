@@ -234,6 +234,7 @@ function partyTime() {
   let partyLights = document.createElement("div");
   partyLights.classList.add("big-tile");
   partyLights.id = partyLights.alt = partyLights.title = "party-lights";
+  partyLights.style.backgroundPosition = "0px -1440px";
 
   sceneZone.appendChild(partyLights);
 
