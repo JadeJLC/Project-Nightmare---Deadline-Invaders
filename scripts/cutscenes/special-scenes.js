@@ -243,6 +243,7 @@ function partyTime() {
 // Début de la cinématique pour le pot de départ du relou
 // ----- Place les collègues différemment, supprime le patron, change l'image du collègue relou
 function lastWorkDay() {
+  showAllCoworkers();
   finalScene = true;
   let relou = document.getElementById("cwr");
   if (relou) relou.classList.remove("is-hidden");
