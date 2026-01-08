@@ -52,7 +52,7 @@ function displayCoffee() {
   const coffees = document.createElement("div");
   coffees.class = "power-up";
   coffees.alt = coffees.title = "Café<br/> - Boost de vitesse";
-  coffees.innerHTML = `<img src="/images/interface/coffee.svg"/> <span>${powerups.Coffee} [C]</span>`;
+  coffees.innerHTML = `<div class="mini-tile coffee"></div> <span>${powerups.Coffee} [C]</span>`;
   if (displayDetails) {
     coffees.innerHTML += `<span class="pup-detail">${coffees.alt}</span>`;
   }
@@ -65,7 +65,7 @@ function displayBoss() {
   bossTalks.class = "power-up";
   bossTalks.alt =
     bossTalks.title = `Parler au patron<br/> - Retire 1 ${gameData.relouName}`;
-  bossTalks.innerHTML = `<img src="/images/interface/boss.png"/> <span>${powerups.Boss} [X]</span>`;
+  bossTalks.innerHTML = `<div class="mini-tile boss"></div> <span>${powerups.Boss} [X]</span>`;
 
   if (displayDetails) {
     bossTalks.innerHTML += `<span class="pup-detail">${bossTalks.alt}</span>`;
@@ -79,7 +79,7 @@ function displayDiplomacy() {
   diplomat.class = "power-up";
   diplomat.alt = diplomat.title =
     "Collègue diplomate<br/> - Arrête les mouvements ennemis";
-  diplomat.innerHTML = `<img src="/images/interface/diplomat.png"/> <span>${powerups.Diplomat} [V]</span>`;
+  diplomat.innerHTML = `<div class="mini-tile diplomat"></div> <span>${powerups.Diplomat} [V]</span>`;
 
   if (displayDetails) {
     diplomat.innerHTML += `<span class="pup-detail">${diplomat.alt}</span>`;
@@ -93,7 +93,7 @@ function displayTeamBuild() {
   team.class = "power-up";
   team.alt =
     team.title = `Team Building<br/> - Tirer sur ${gameData.relouName} compte comme du score positif.`;
-  team.innerHTML = `<img src="/images/interface/team.png"/> <span>${powerups.Team} [B]</span>`;
+  team.innerHTML = `<div class="mini-tile team"></div> <span>${powerups.Team} [B]</span>`;
 
   if (displayDetails) {
     team.innerHTML += `<span class="pup-detail">${team.alt}</span>`;
@@ -106,7 +106,7 @@ function displayProducivityBoost() {
   const boost = document.createElement("div");
   boost.class = "power-up";
   boost.alt = boost.title = "Boost de productivité<br/> - Pourcentage gagné x2";
-  boost.innerHTML = `<img src="/images/interface/boost.svg"/> <span>${powerups.Boost} [N]</span>`;
+  boost.innerHTML = `<div class="mini-tile boost"></div> <span>${powerups.Boost} [N]</span>`;
 
   if (displayDetails) {
     boost.innerHTML += `<span class="pup-detail">${boost.alt}</span>`;
@@ -120,7 +120,7 @@ function displayPerfectionism() {
   perfect.class = "power-up";
   perfect.alt = perfect.title =
     "Perfectionnisme<br/> - Désactive les tirs ennemis";
-  perfect.innerHTML = `<img src="/images/interface/perfect.svg"/> <span>${powerups.Perfect} [W]</span>`;
+  perfect.innerHTML = `<div class="mini-tile perfect"></div> <span>${powerups.Perfect} [W]</span>`;
 
   if (displayDetails) {
     perfect.innerHTML += `<span class="pup-detail">${perfect.alt}</span>`;

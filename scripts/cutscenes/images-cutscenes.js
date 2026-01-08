@@ -1,4 +1,5 @@
 import { sceneZone, cutsceneAnimation } from "../variables.js";
+import { cutsceneMaps } from "./images-map.js";
 
 let animationFrameId;
 
@@ -15,23 +16,30 @@ function cutsceneDeleteCoworkers() {
 function cutsceneDisplayCoworkers() {
   cutsceneAnimation.innerHTML = "";
   let coworkerID = 1;
+  let poseKey = "pose" + currentPose;
 
   while (coworkerID < 6) {
-    let newCoworker = document.createElement("img");
+    let newCoworker = document.createElement("div");
 
-    newCoworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
+    newCoworker.classList.add("big-tile");
+    let cwKey = "coworker" + coworkerID;
+    let cwMap = cutsceneMaps[cwKey];
+
+    newCoworker.style.backgroundPosition = cwMap[poseKey];
     newCoworker.id = `cw${coworkerID}`;
     cutsceneAnimation.appendChild(newCoworker);
     coworkerID++;
   }
 
-  let relou = document.createElement("img");
-  relou.src = `/images/cutscenes/cwr_pose${currentPose}.png`;
+  let relou = document.createElement("div");
+  relou.classList.add("big-tile");
+  relou.style.backgroundPosition = cutsceneMaps.relou[poseKey];
   relou.id = "cwr";
   cutsceneAnimation.appendChild(relou);
 
-  let boss = document.createElement("img");
-  boss.src = `/images/cutscenes/boss_pose${currentPose}.png`;
+  let boss = document.createElement("div");
+  boss.classList.add("big-tile");
+  boss.style.backgroundPosition = cutsceneMaps.boss[poseKey];
   boss.id = "boss";
   cutsceneAnimation.appendChild(boss);
 
@@ -51,15 +59,20 @@ function animateCoworkers(timestamp) {
 function cutsceneMoveCoworkers() {
   currentPose = (currentPose % lastPose) + 1;
 
+  const normalPose = "pose" + currentPose;
+  const partyPose = "party_pose" + currentPose;
+
   let coworkerID = 1;
   while (coworkerID < 6) {
     let coworker = document.getElementById(`cw${coworkerID}`);
+    let cwKey = "coworker" + coworkerID;
+    let cwMap = cutsceneMaps[cwKey];
 
     if (coworker) {
       if (coworker.classList.contains("final-scene")) {
-        coworker.src = `/images/cutscenes/cw${coworkerID}_party_pose${currentPose}.png`;
+        coworker.style.backgroundPosition = cwMap[partyPose];
       } else {
-        coworker.src = `/images/cutscenes/cw${coworkerID}_pose${currentPose}.png`;
+        coworker.style.backgroundPosition = cwMap[normalPose];
       }
     }
 
@@ -67,19 +80,19 @@ function cutsceneMoveCoworkers() {
   }
 
   let party = document.getElementById("party-lights");
-  if (party) party.src = `/images/cutscenes/party_${currentPose}.png`;
+  if (party) party.style.backgroundPosition = cutsceneMaps.party[normalPose];
 
   let relou = document.getElementById("cwr");
   if (relou) {
     if (relou.classList.contains("final-scene")) {
-      relou.src = `/images/cutscenes/cwr_carton_pose${currentPose}.png`;
+      relou.style.backgroundPosition = cutsceneMaps.relou[partyPose];
     } else {
-      relou.src = `/images/cutscenes/cwr_pose${currentPose}.png`;
+      relou.style.backgroundPosition = cutsceneMaps.relou[normalPose];
     }
   }
 
   let boss = document.getElementById("boss");
-  if (boss) boss.src = `/images/cutscenes/boss_pose${currentPose}.png`;
+  if (boss) boss.style.backgroundPosition = cutsceneMaps.boss[normalPose];
 }
 
 function stopCutsceneAnimation() {

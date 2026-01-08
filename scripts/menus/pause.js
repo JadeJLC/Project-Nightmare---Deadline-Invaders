@@ -1,4 +1,4 @@
-import { menu, closeConfirm, closeBtn } from "../variables.js";
+import { menu, closeConfirm, closeBtn, gameData } from "../variables.js";
 import { cancelConfirm } from "./confirm.js";
 import {
   disableMovement,
@@ -56,14 +56,17 @@ function pauseMenu(type) {
       menu.querySelector("h2").textContent = "Pause";
       menu.querySelector("div").classList.remove("is-hidden");
       closeBtn.textContent = "Reprendre";
+      pauseGame();
+      closeConfirm.addEventListener("click", resumeGame);
       break;
   }
-  pauseGame();
-  closeConfirm.addEventListener("click", resumeGame);
 }
 
 function resumeGame() {
   menu.classList.add("is-hidden");
+  console.log(gameData);
+
+  if (gameData.currentMusic === "main-menu") return;
   enableMovement();
   enableEnemyShooting();
   enableShooting();

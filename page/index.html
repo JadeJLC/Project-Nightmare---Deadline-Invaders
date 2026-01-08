@@ -25,7 +25,7 @@
     <div id="pause-menu" class="is-hidden">
       <h2></h2>
       <button type="button" id="close-menu">Fermer le menu</button>
-      <button type="button" id="toggle-music">🎵 / Couper la musique</button>
+      <button type="button" id="toggle-music">🔇 / Activer la musique</button>
       <button type="button" id="toggle-effects">
         🔉 / Désactiver les effets sonores
       </button>
@@ -72,14 +72,18 @@
         <div id="cutscene-text"></div>
 
         <button type="button" id="skip-cutscene" class="menu-button">
-          <img src="/images/interface/shift.png" class="shift" /> Passer
+          <img src="/images/shift.png" class="shift" /> Passer
         </button>
       </div>
       <div id="enemy-carousel"></div>
 
       <div id="projectiles"></div>
 
-      <img src="../images/player.png" alt="Joueur" id="player-icon" />
+      <div
+        style="background-position: 0px -1536px"
+        alt="Joueur"
+        id="player-icon"
+      ></div>
     </div>
 
     <audio id="audio" src="../musiques/main-menu.mp3" loop></audio>

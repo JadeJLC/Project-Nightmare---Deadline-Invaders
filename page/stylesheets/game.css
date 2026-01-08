@@ -18,7 +18,12 @@
 #player-icon {
   position: absolute;
   bottom: 20px;
-  left: 50%;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  background-image: var(--map);
+  background-size: 576px 1632px !important;
+  width: 96px;
+  height: 96px;
 }
 
 /* Conteneur des projectiles */
@@ -128,6 +133,11 @@
   left: -90px;
 }
 
+#cw2 {
+  position: absolute;
+  bottom: 40px;
+}
+
 #cw3 {
   position: absolute;
   bottom: -25px;
@@ -138,12 +148,13 @@
 #cw4 {
   position: absolute;
   bottom: -15px;
-  left: -30px;
+  left: -40px;
 }
 
 #cw5 {
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
+  left: 100px;
   z-index: 1;
 }
 
@@ -194,6 +205,8 @@
   position: absolute;
   width: 48px;
   height: 48px;
+  background-image: var(--map);
+  background-repeat: no-repeat;
 }
 
 @media (orientation: portrait) {
@@ -204,6 +217,9 @@
 
   #player-icon {
     width: 42px;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    background-image: var(--map);
   }
 }
 
@@ -292,22 +308,29 @@
   width: 8%;
 }
 
-#power-ups div {
+/* #power-ups div {
   margin-left: 5px;
   margin-top: 5px;
-}
+} */
 
-#power-ups img {
-  width: 25px;
+#power-ups .mini-tile {
   float: left;
   margin-right: 5px;
 }
 
-.pup-detail {
+#power-ups span {
+  height: 27px;
   display: block;
+  white-space: nowrap;
+}
+
+.pup-detail {
   width: 100%;
+  height: fit-content !important;
+  margin-bottom: 10px;
   font-size: 10px;
   text-align: right;
+  white-space: initial !important;
 }
 
 .botHUD {
@@ -321,4 +344,29 @@
 
 .player--hit {
   opacity: 0.7;
+}
+
+/* Images de power-ups */
+.diplomat {
+  background-position: -96px -240px;
+}
+
+.boss {
+  background-position: -144px -240px;
+}
+
+.team {
+  background-position: -192px -240px;
+}
+
+.boost {
+  background-position: -240px -240px;
+}
+
+.coffee {
+  background-position: -192px -288px;
+}
+
+.perfect {
+  background-position: -240px -288px;
 }

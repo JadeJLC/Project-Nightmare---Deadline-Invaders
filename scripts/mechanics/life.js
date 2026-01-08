@@ -5,8 +5,9 @@ function initLives() {
   const livesContainer = document.getElementById("lives");
   livesContainer.innerHTML = "";
   for (let i = 0; i < gameData.lives; i++) {
-    const heart = document.createElement("img");
-    heart.src = "/images/interface/life.png";
+    const heart = document.createElement("div");
+    heart.classList.add("mini-tile");
+    heart.style.backgroundPosition = "-144px -288px";
     heart.alt = "Vie";
     livesContainer.appendChild(heart);
   }

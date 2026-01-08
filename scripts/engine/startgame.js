@@ -6,8 +6,8 @@ import { initLives } from "../mechanics/life.js";
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
 
-function startGame(mode) {
-  switch (mode) {
+function startGame() {
+  switch (gameData.gameMode) {
     case "Story":
       storyMode();
       break;

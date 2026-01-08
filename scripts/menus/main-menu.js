@@ -7,6 +7,7 @@ import {
   menu,
   gameData,
   scoreBoardContainer,
+  gameOptions,
 } from "../variables.js";
 import { displayScores, newMenuOption } from "../scores/scoreboard.js";
 import { displayRules } from "./rules.js";
@@ -29,8 +30,10 @@ export function loadMainMenu() {
   updateSettingsButton();
 
   // Lancement de la musique
-  if (gameData.musicOn) {
+  if (gameOptions.musicOn) {
     playMusic(gameData.currentMusic);
+  } else {
+    openSettingsMenu();
   }
 }
 

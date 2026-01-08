@@ -9,6 +9,7 @@ import {
 } from "./cutscenes-helpers.js";
 import { changeMusic } from "../audio/music.js";
 import { namePopup } from "../engine/popups.js";
+import { cutsceneMaps } from "./images-map.js";
 
 let finalScene = false;
 
@@ -122,8 +123,8 @@ function secretConversation(line) {
     let managers = document.getElementById("managers");
     if (managers) managers.remove();
 
-    boss.style = "";
-    relou.style = "";
+    boss.style.left = boss.style.bottom = boss.style.transform = "";
+    relou.style.left = relou.style.bottom = relou.style.transform = "";
 
     showAllCoworkers();
 
@@ -145,8 +146,10 @@ function managementMeeting(line) {
   boss.style.bottom = "20px";
 
   if (line === "__MANAGEMENT__") {
-    let managers = document.createElement("img");
-    managers.src = "/images/cutscenes/managers.png";
+    let managers = document.createElement("div");
+    managers.classList.add("big-tile");
+    managers.style.width = "288px";
+    managers.style.backgroundPosition = "-144px -2305px";
     managers.title = managers.alt = "Managers";
     managers.id = "managers";
     cutsceneData.currentLine++;
@@ -228,10 +231,9 @@ function partyTime() {
   gameData.currentMusic = "party";
   changeMusic(30);
 
-  let partyLights = document.createElement("img");
+  let partyLights = document.createElement("div");
+  partyLights.classList.add("big-tile");
   partyLights.id = partyLights.alt = partyLights.title = "party-lights";
-
-  partyLights.src = `/images/cutscenes/party_1.png`;
 
   sceneZone.appendChild(partyLights);
 
@@ -241,6 +243,7 @@ function partyTime() {
 // Début de la cinématique pour le pot de départ du relou
 // ----- Place les collègues différemment, supprime le patron, change l'image du collègue relou
 function lastWorkDay() {
+  showAllCoworkers();
   finalScene = true;
   let relou = document.getElementById("cwr");
   if (relou) relou.classList.remove("is-hidden");

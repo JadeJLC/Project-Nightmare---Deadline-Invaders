@@ -8,11 +8,11 @@ class Coworker {
     this.x = x;
     this.baseY = y; // position de base
     this.wavePhase = Math.random() * Math.PI * 2; // phase aléatoire
-    this.sprite = createCoworkers();
     this.el = document.createElement("img");
-    this.el.src = this.sprite;
+    this.el.src = "/images/empty.png";
     this.el.className = "enemy";
     this.el.id = `cw${coworkerID}`;
+    this.el.style.backgroundPosition = `-${createCoworkers()}px 0px`;
     this.isAlive = true;
     document.getElementById("enemy-carousel").appendChild(this.el);
     enemiesRegistry.push(this);
@@ -48,8 +48,8 @@ class Coworker {
     this.isAlive = false;
     this.el.className = "is-hidden";
     if (
-      this.sprite == "../images/coworker1.png" ||
-      this.sprite == "../images/coworker2.png"
+      this.el.style.backgroundPosition == "-48px 0px" ||
+      this.el.style.backgroundPosition == "0px 0px"
     ) {
       soundEffect("tir-cwf");
     } else {
@@ -67,6 +67,7 @@ class Relou {
     this.el = document.createElement("img");
     this.el.src = this.sprite;
     this.el.className = "enemy";
+    this.el.style.backgroundPosition = "-240px 0px";
     this.isAlive = true;
     this.isRelou = true;
     enemiesRegistry.push(this);
