@@ -12,8 +12,6 @@
   --good: rgb(116, 251, 116);
   --text: #cfe8ff;
   --shadow: rgba(72, 199, 255, 0.3);
-
-  --map: url("/images/map00-tileset.png");
 }
 
 /* #region **** Écran de jeu  */
@@ -135,6 +133,11 @@
   left: -90px;
 }
 
+#cw2 {
+  position: absolute;
+  bottom: 40px;
+}
+
 #cw3 {
   position: absolute;
   bottom: -25px;
@@ -145,12 +148,13 @@
 #cw4 {
   position: absolute;
   bottom: -15px;
-  left: -30px;
+  left: -40px;
 }
 
 #cw5 {
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
+  left: 100px;
   z-index: 1;
 }
 

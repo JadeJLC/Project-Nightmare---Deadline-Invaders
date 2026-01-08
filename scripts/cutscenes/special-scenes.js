@@ -9,6 +9,7 @@ import {
 } from "./cutscenes-helpers.js";
 import { changeMusic } from "../audio/music.js";
 import { namePopup } from "../engine/popups.js";
+import { cutsceneMaps } from "./images-map.js";
 
 let finalScene = false;
 
@@ -122,11 +123,8 @@ function secretConversation(line) {
     let managers = document.getElementById("managers");
     if (managers) managers.remove();
 
-    boss.style.left = "";
-    boss.style.bottom = "";
-    boss.style.transform = "";
-    relou.style.left = "";
-    relou.style.bottom = "";
+    boss.style.left = boss.style.bottom = boss.style.transform = "";
+    relou.style.left = relou.style.bottom = relou.style.transform = "";
 
     showAllCoworkers();
 
@@ -233,10 +231,9 @@ function partyTime() {
   gameData.currentMusic = "party";
   changeMusic(30);
 
-  let partyLights = document.createElement("img");
+  let partyLights = document.createElement("div");
+  partyLights.classList.add("big-tile");
   partyLights.id = partyLights.alt = partyLights.title = "party-lights";
-
-  partyLights.src = `/images/cutscenes/party_1.png`;
 
   sceneZone.appendChild(partyLights);
 

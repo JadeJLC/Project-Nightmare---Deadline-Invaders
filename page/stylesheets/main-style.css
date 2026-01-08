@@ -9,6 +9,7 @@
   --danger: #ff5e7a; /* rouge/rose accent */
   --text: #cfe8ff;
   --shadow: rgba(72, 199, 255, 0.3);
+  --map: url("/images/map00-tileset.png");
 }
 /* #endregion **** Variables de thème  */
 
