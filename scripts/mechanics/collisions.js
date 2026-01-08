@@ -17,7 +17,7 @@ function enemyDamage(enemy, difference) {
     enemy.hit();
 
     // Mode Histoire : système de score valide/invalide
-    if (gameData.gameMode === "Histoire") {
+    if (gameData.gameMode === "Story") {
       if (difference >= levelData.coworkerBonus) {
         gameData.goodScore += levelData.coworkerBonus;
       } else {
@@ -34,7 +34,7 @@ function enemyDamage(enemy, difference) {
     enemy.hit();
 
     // Mode Histoire : score corrompu
-    if (gameData.gameMode === "Histoire") {
+    if (gameData.gameMode === "Story") {
       if (difference >= levelData.relouMalus) {
         gameData.badScore += levelData.relouMalus;
       } else {
@@ -58,7 +58,7 @@ function playerDamage() {
   if (playerIcon.classList.contains("player--hit")) return;
 
   // Mode Histoire : perte de score valide
-  if (gameData.gameMode === "Histoire") {
+  if (gameData.gameMode === "Story") {
     if (gameData.goodScore === 0) {
       gameData.badScore += levelData.relouMalus;
     } else if (gameData.goodScore >= levelData.coworkerBonus) {

@@ -54,7 +54,7 @@ function updateProgressScore() {
 
 // ===== INITIALISATION =====
 function initProgressDisplay() {
-  if (gameData.gameMode === "Histoire") {
+  if (gameData.gameMode === "Story") {
     // Afficher les barres de progression
     progressBar.style.display = "block";
     updateProgressBar();

@@ -96,7 +96,7 @@ function initLevel() {
 }
 
 function finishLevel() {
-  if (gameData.gameMode === "Sans fin") {
+  if (gameData.gameMode === "Endless") {
     return;
   }
 
