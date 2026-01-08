@@ -2,6 +2,7 @@ import { gameData } from "../variables.js";
 import { openPauseMenu, openSettingsMenu } from "../menus/pause.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
 import { initLives } from "../mechanics/life.js";
+import { createEndlessRules } from "../menus/rules.js";
 
 const gameScreenContainer = document.getElementById("game-screen");
 const settingsIcon = document.getElementById("pause-btn");
@@ -19,9 +20,11 @@ function startGame() {
 
 function storyMode() {
   console.log(`Lancement du jeu en mode Histoire par ${gameData.playerName}`);
-  gameData.gameMode = "Histoire";
   document.getElementById("pause-menu").classList.add("is-hidden");
   gameScreenContainer.classList.remove("is-hidden");
+  document.getElementById("level-score").classList.remove("is-hidden");
+  document.getElementById("progress-score").classList.remove("is-hidden");
+  document.getElementById("progress-text").classList.add("is-hidden");
   updatePauseButton();
   selectCutscene();
   initLives();
@@ -29,8 +32,14 @@ function storyMode() {
 
 function endlessMode() {
   console.log("Mode Sans-Fin");
-  gameData.gameMode = "Sans fin";
-  // ---- Lance le mode sans fin
+  gameScreenContainer.classList.remove("is-hidden");
+  HUD.classList.remove("is-hidden");
+  document.getElementById("level-score").classList.add("is-hidden");
+  document.getElementById("progress-score").classList.add("is-hidden");
+  document.getElementById("progress-text").classList.remove("is-hidden");
+  updatePauseButton();
+  createEndlessRules();
+  initLives();
 }
 
 function updatePauseButton() {

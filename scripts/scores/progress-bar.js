@@ -1,7 +1,11 @@
-import { gameData } from "../variables.js";
+import { gameData, HUD } from "../variables.js";
 import { finishLevel } from "../engine/levels.js";
 
-export function updateProgressBar() {
+const progressBar = document.getElementById("progress-score");
+const progressText = document.getElementById("progress-text");
+
+function updateProgressBar() {
+  if (gameData.gameMode == "Endless") return;
   let total = gameData.goodScore + gameData.badScore;
 
   const goodBar = document.getElementById("good-progress");
@@ -35,3 +39,30 @@ export function updateProgressBar() {
     finishLevel();
   }
 }
+
+function updateProgressScore() {
+  if (gameData.gameMode !== "Endless") return;
+
+  const score = gameData.goodScore;
+
+  // Afficher uniquement le score
+  progressText.textContent = `Score : ${score}`;
+
+  // Pas de barre de progression en mode Sans Fin, juste le score
+  document.getElementById("progress-container").style.display = "none";
+}
+
+// ===== INITIALISATION =====
+function initProgressDisplay() {
+  if (gameData.gameMode === "Histoire") {
+    // Afficher les barres de progression
+    progressBar.style.display = "block";
+    updateProgressBar();
+  } else if (gameData.gameMode === "Endless") {
+    // Masquer les barres, afficher juste le score
+    progressBar.style.display = "none";
+    updateProgressScore();
+  }
+}
+
+export { updateProgressBar, updateProgressScore, initProgressDisplay };

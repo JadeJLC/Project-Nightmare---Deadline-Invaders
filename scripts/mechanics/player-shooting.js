@@ -1,7 +1,16 @@
-import { playerIcon, gameData, enemiesRegistry } from "../variables.js";
+import {
+  levelData,
+  playerIcon,
+  gameData,
+  enemiesRegistry,
+} from "../variables.js";
+import { Coworker, Relou } from "../enemies/coworker-class.js";
 import { rectsIntersect, enemyDamage } from "./collisions.js";
 import { soundEffect } from "../audio/sound-effects.js";
-import { updateProgressBar } from "../scores/progress-bar.js";
+import {
+  updateProgressScore,
+  updateProgressBar,
+} from "../scores/progress-bar.js";
 
 const projectileSpeed = 5;
 let projectiles = [];
@@ -120,14 +129,23 @@ function animateProjectiles() {
       const eRect = enemy.el.getBoundingClientRect();
 
       if (rectsIntersect(pRect, eRect) && gameData.countPoint) {
+        // Calculer la différence pour le mode Histoire
         let difference = 100 - gameData.goodScore - gameData.badScore;
+
         // Collision détectée
         projectile.element.remove();
         projectiles.splice(index, 1);
 
+        // Utiliser la fonction enemyDamage qui gère les deux modes
         enemyDamage(enemy, difference);
 
-        updateProgressBar();
+        // Mettre à jour l'affichage selon le mode
+        if (gameData.gameMode === "Endless") {
+          updateProgressScore();
+        } else {
+          updateProgressBar();
+        }
+
         break; // projectile détruit, on sort de la boucle ennemis
       }
     }

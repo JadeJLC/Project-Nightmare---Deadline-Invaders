@@ -1,4 +1,10 @@
-import { gameData, style, mainMenuContainer, sceneZone } from "../variables.js";
+import {
+  gameData,
+  style,
+  mainMenuContainer,
+  sceneZone,
+  menu,
+} from "../variables.js";
 import { completeIntroText } from "../cutscenes/cutscenes-helpers.js";
 import { nextLine, pauseCutscene } from "../cutscenes/write-cutscenes.js";
 import { loadMainMenu } from "../menus/main-menu.js";
@@ -10,6 +16,7 @@ import { selectMapPopup } from "../maps/selectmap.js";
 // ---- Accepte un argument "mode" (Cutscene pour la cinématique d'intro, SkipCutscene si on la passe, Story pour le mode histoire et Endless pour le mode sans fin
 // ---- Accepte un deuxième argument "type" (Player ou Relou) pour l'endroit où enregistrer le nom
 function namePopup(mode, type, same) {
+  menu.classList.add("is-hidden");
   let validName = false;
   style.setAttribute("href", "stylesheets/game.css");
   mainMenuContainer.innerHTML = "";

@@ -1,6 +1,7 @@
 import { gameData, levelData, playerIcon } from "../variables.js";
 import { teamBuild } from "../powerups/powerups-effects.js";
 import { Coworker, Relou } from "../enemies/coworker-class.js";
+import { loseLife } from "./life.js";
 
 function rectsIntersect(r1, r2) {
   return !(
@@ -14,36 +15,64 @@ function rectsIntersect(r1, r2) {
 function enemyDamage(enemy, difference) {
   if (enemy instanceof Coworker || teamBuild) {
     enemy.hit();
-    if (difference >= levelData.coworkerBonus) {
-      gameData.goodScore += levelData.coworkerBonus;
-    } else {
-      gameData.goodScore += difference;
+
+    // Mode Histoire : système de score valide/invalide
+    if (gameData.gameMode === "Histoire") {
+      if (difference >= levelData.coworkerBonus) {
+        gameData.goodScore += levelData.coworkerBonus;
+      } else {
+        gameData.goodScore += difference;
+      }
+      console.log("Collègue éliminé, score:", gameData.goodScore);
     }
-    console.log("Collègue éliminé, score:", gameData.goodScore);
+    // Mode Sans fin : score simple
+    else if (gameData.gameMode === "Endless") {
+      gameData.goodScore += levelData.coworkerBonus;
+      console.log("Collègue éliminé, score:", gameData.goodScore);
+    }
   } else if (enemy instanceof Relou) {
     enemy.hit();
-    if (difference >= levelData.relouMalus) {
-      gameData.badScore += levelData.relouMalus;
-    } else {
-      gameData.badScore += difference;
-    }
 
-    gameData.badScore += levelData.relouMalus;
-    console.log("Relou touché, compteur:", gameData.badScore);
+    // Mode Histoire : score corrompu
+    if (gameData.gameMode === "Histoire") {
+      if (difference >= levelData.relouMalus) {
+        gameData.badScore += levelData.relouMalus;
+      } else {
+        gameData.badScore += difference;
+      }
+      console.log("Relou touché, compteur invalide:", gameData.badScore);
+    }
+    // Mode Sans fin : perte de score
+    else if (gameData.gameMode === "Endless") {
+      if (gameData.goodScore >= levelData.relouMalus) {
+        gameData.goodScore -= levelData.relouMalus;
+      } else {
+        gameData.goodScore = 0;
+      }
+      console.log("Relou touché, score réduit:", gameData.goodScore);
+    }
   }
 }
 
 function playerDamage() {
   if (playerIcon.classList.contains("player--hit")) return;
 
-  if (gameData.goodScore === 0) {
-    gameData.badScore += levelData.relouMalus;
-  } else if (gameData.goodScore >= levelData.coworkerBonus) {
-    gameData.goodScore -= levelData.coworkerBonus;
-  } else if (gameData.goodScore < levelData.coworkerBonus) {
-    gameData.goodScore -= gameData.goodScore;
+  // Mode Histoire : perte de score valide
+  if (gameData.gameMode === "Histoire") {
+    if (gameData.goodScore === 0) {
+      gameData.badScore += levelData.relouMalus;
+    } else if (gameData.goodScore >= levelData.coworkerBonus) {
+      gameData.goodScore -= levelData.coworkerBonus;
+    } else if (gameData.goodScore < levelData.coworkerBonus) {
+      gameData.goodScore -= gameData.goodScore;
+    }
+    console.log("Le joueur est touché ! Score valide :" + gameData.goodScore);
   }
-  console.log("Le joueur est touché ! Score valide :" + gameData.goodScore);
+  // Mode Sans fin : perte de vie
+  else if (gameData.gameMode === "Endless") {
+    loseLife();
+    console.log("Le joueur est touché ! Vies restantes :" + gameData.lives);
+  }
 
   playerIcon.classList.add("player--hit");
   setTimeout(() => playerIcon.classList.remove("player--hit"), 400);

@@ -1,4 +1,4 @@
-import { pauseEnemyLoop, resumeEnemyLoop } from "../enemies/enemies.js";
+import { pauseCarousel, resumeCarousel } from "../enemies/enemies.js";
 import {
   disableEnemyShooting,
   enableEnemyShooting,
@@ -43,7 +43,7 @@ function speedBoost() {
 function diplomacy() {
   gameData.activePU = "Bonus actif : Collègue diplomate";
 
-  pauseEnemyLoop();
+  pauseCarousel();
 
   for (let i = 0; i < gameData.powerups.length; i++) {
     console.log(gameData.powerups[i]);
@@ -56,7 +56,7 @@ function diplomacy() {
 
   // Retire l'effet au bout de 3 secondes
   setTimeout(() => {
-    resumeEnemyLoop();
+    resumeCarousel();
     gameData.activePU = "";
     gameMessage.textContent = gameData.activePU;
   }, 3000);

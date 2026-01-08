@@ -44,7 +44,6 @@ class EnemyLine {
     };
 
     const time = Date.now();
-
     this.enemies.forEach((e) => {
       if (e.isAlive) {
         e.update(this.direction, modifiedCfg, time);
@@ -54,6 +53,19 @@ class EnemyLine {
 
   getEnemies() {
     return this.enemies.filter((e) => e.isAlive);
+  }
+
+  onlyRelous() {
+    // On récupère uniquement les coworkers
+    const coworkers = this.enemies.filter((e) => e.type === "coworker");
+
+    // Si au moins un coworker est encore vivant → false
+    if (coworkers.some((cw) => cw.isAlive)) {
+      return false;
+    }
+
+    // Sinon (aucun coworker vivant), il ne reste que des relous → true
+    return true;
   }
 }
 
@@ -69,6 +81,18 @@ class EnemyCarousel {
       const direction = i % 2 === 0 ? "right" : "left";
       return new EnemyLine(y, direction, this.cfg, levelConfig.relouPerLine, i);
     });
+  }
+
+  createLine(lineIndex) {
+    const y = 60; // position de départ en haut
+    const direction = lineIndex % 2 === 0 ? "right" : "left";
+    return new EnemyLine(
+      y,
+      direction,
+      this.cfg,
+      this.levelConfig.relouPerLine,
+      lineIndex
+    );
   }
 
   update() {

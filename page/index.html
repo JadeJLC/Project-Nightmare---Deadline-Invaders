@@ -44,8 +44,10 @@
 
     <div id="HUD" class="is-hidden">
       <div id="progress-container">
-        <div id="good-progress"></div>
-        <div id="bad-progress"></div>
+        <div id="progress-score">
+          <div id="good-progress"></div>
+          <div id="bad-progress"></div>
+        </div>
       </div>
 
       <div id="power-ups"></div>
@@ -58,10 +60,11 @@
         <div id="lives"></div>
         <div id="timer"></div>
 
-        <div class="level-score">
+        <div class="level-score" id="level-score">
           <span id="level-num"></span> - Score : <span id="good-score"></span>%
           | <span id="bad-score"></span>%
         </div>
+        <div id="progress-text"></div>
       </div>
     </div>
 

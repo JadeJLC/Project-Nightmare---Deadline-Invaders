@@ -2,7 +2,10 @@ import { soundEffect } from "../audio/sound-effects.js";
 import { gameData, levelData } from "../variables.js";
 import { playerDamage, rectsIntersect } from "./collisions.js";
 import { playerIcon } from "../variables.js";
-import { updateProgressBar } from "../scores/progress-bar.js";
+import {
+  updateProgressBar,
+  updateProgressScore,
+} from "../scores/progress-bar.js";
 
 let shootingEnemies = 0;
 let enemyShots = [];
@@ -106,7 +109,11 @@ function animateEnemyShots() {
       projectile.element.remove();
       enemyShots.splice(index, 1);
       shootingEnemies--;
-      updateProgressBar();
+      if (gameData.gameMode == "Endless") {
+        updateProgressScore();
+      } else {
+        updateProgressBar();
+      }
       return;
     }
   });
@@ -118,8 +125,8 @@ function animateEnemyShots() {
 
 // --- Fonctions de contrôle ---
 function pauseEnemyShots() {
-  enemyShotsPaused = true;
   if (enemyShotsAnimId) {
+    enemyShotsPaused = true;
     cancelAnimationFrame(enemyShotsAnimId);
     enemyShotsAnimId = null;
   }

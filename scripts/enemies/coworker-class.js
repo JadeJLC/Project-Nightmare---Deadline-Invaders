@@ -6,6 +6,7 @@ import { soundEffect } from "../audio/sound-effects.js";
 class Coworker {
   constructor(x, y) {
     this.x = x;
+    this.type = "coworker";
     this.baseY = y; // position de base
     this.wavePhase = Math.random() * Math.PI * 2; // phase aléatoire
     this.el = document.createElement("img");
@@ -46,7 +47,9 @@ class Coworker {
 
   hit() {
     this.isAlive = false;
-    this.el.className = "is-hidden";
+    if (this.el) {
+      this.el.remove(); // supprime du DOM
+    }
     if (
       this.el.style.backgroundPosition == "-48px 0px" ||
       this.el.style.backgroundPosition == "0px 0px"
@@ -61,6 +64,7 @@ class Coworker {
 class Relou {
   constructor(x, y, name) {
     this.x = x;
+    this.type = "relou";
     this.baseY = y; // position de base
     this.wavePhase = Math.random() * Math.PI * 2; // phase aléatoire
     this.sprite = createRelou(name);

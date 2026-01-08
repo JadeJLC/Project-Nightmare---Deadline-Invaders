@@ -3,7 +3,11 @@ import {
   disableShooting,
   enableShooting,
 } from "../mechanics/player-shooting.js";
-import { newCarousel, enemyLoop, resumeEnemyLoop } from "../enemies/enemies.js";
+import {
+  createCarousel,
+  startCarousel,
+  destroyCarousel,
+} from "../enemies/enemies.js";
 import {
   levelData,
   allLevelData,
@@ -23,9 +27,12 @@ import {
   disableMovement,
   enableMovement,
 } from "../mechanics/player-movement.js";
-import { updateProgressBar } from "../scores/progress-bar.js";
+import {
+  updateProgressBar,
+  initProgressDisplay,
+} from "../scores/progress-bar.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
-import { loadMainMenu } from "../menus/main-menu.js";
+import { resetGame } from "../menus/reset.js";
 import { displayTimer, pauseTimer, removeTimer, startTimer } from "./timer.js";
 import {
   disablePowerUps,
@@ -38,40 +45,64 @@ function loadLevel() {
   console.log("Chargement du niveau", gameData.currentLevel);
 
   let levelNum = document.getElementById("level-num");
-
   if (levelNum) levelNum.textContent = `Niveau ${gameData.currentLevel}`;
 
+  // Configurer le niveau
   Object.assign(levelData, allLevelData[gameData.currentLevel]);
-
   HUD.classList.remove("is-hidden");
   changeMusic();
 
-  console.log("Création des ennemis");
+  // Attendre que la cutscene soit chargée
+  console.log("Attente de la cutscene...");
   const checkCutscene = setInterval(() => {
     if (gameData.loadedCutscene) {
       clearInterval(checkCutscene);
-      const carousel = newCarousel();
-      enemyLoop(carousel);
+      initLevel();
     }
   }, 200);
+}
 
+function initLevel() {
+  console.log("Initialisation du niveau");
+
+  // Réinitialiser les scores
+  gameData.badScore = 0;
+  gameData.goodScore = 0;
+  gameData.countPoint = true;
+
+  // Créer le carousel
+  createCarousel();
+
+  // Activer les systèmes de jeu
   enablePowerUps();
+  displayPowerUps();
+  initProgressDisplay();
+  updateProgressBar();
+
+  // Activer les contrôles et tirs
   enableShooting();
   enableEnemyShooting();
   enableMovement();
   resumeEnemyShots();
-  gameData.badScore = 0;
-  gameData.goodScore = 0;
-  gameData.countPoint = true;
-  displayPowerUps();
-  updateProgressBar();
+
+  // Démarrer le timer
   setInterval(displayTimer, 10);
   startTimer();
-  resumeEnemyLoop();
-  console.log("Niveau chargé");
+
+  // Démarrer la boucle du carousel (mode standard)
+  startCarousel();
+
+  console.log("✅ Niveau chargé et démarré");
 }
 
 function finishLevel() {
+  if (gameData.gameMode === "Sans fin") {
+    return;
+  }
+
+  console.log("Fin du niveau");
+
+  // Désactiver tous les systèmes
   disablePowerUps();
   disableShooting();
   disableMovement();
@@ -79,24 +110,26 @@ function finishLevel() {
   pauseTimer();
   removeTimer();
 
-  // Réinitialisation de la zone de jeu
+  // Détruire le carousel
+  destroyCarousel();
+
+  // Réinitialisation de l'interface
   typeZone.textContent = "";
   enemyLines.innerHTML = "";
   playerIcon.style.removeProperty("left");
 
   const projectiles = document.getElementById("projectiles");
+  projectiles.innerHTML = "";
 
   let index = gameData.currentLevel - 1;
-
   gameData.loadedCutscene = false;
+  gameData.countPoint = false;
 
   console.log(gameData);
   HUD.classList.add("is-hidden");
-  console.log("Niveau terminé. Chargement de la cinématique.");
-  projectiles.innerHTML = "";
 
+  // Afficher l'écran de fin de niveau
   endLvl.classList.remove("is-hidden");
-  gameData.countPoint = false;
   if (gameData.goodScore > 50) {
     endLvl.firstElementChild.innerHTML = `Félicitations ! Vous avez terminé le niveau ${gameData.currentLevel} avec un score de ${gameData.levelscores[index]}% !`;
   } else {
@@ -114,9 +147,7 @@ function endGame() {
     Peut-être vous retrouverez-vous bientôt...`;
 
   toCutscene.removeEventListener("click", selectCutscene);
-
   toCutscene.addEventListener("click", thanksScreen);
-
   toCutscene.textContent = "Continuer";
   toCutscene.focus();
 }
@@ -124,19 +155,18 @@ function endGame() {
 function thanksScreen() {
   endLvl.firstElementChild.innerHTML = `Merci d'avoir joué !`;
   toCutscene.removeEventListener("click", thanksScreen);
-
   toCutscene.addEventListener("click", finalScreen);
-
   toCutscene.textContent = "Retour au menu principal";
   toCutscene.focus();
 }
 
 function finalScreen() {
+  console.log("Retour au menu principal");
   endLvl.classList.add("is-hidden");
   toCutscene.textContent = "Continuer";
   toCutscene.removeEventListener("click", finalScreen);
   toCutscene.addEventListener("click", selectCutscene);
-  loadMainMenu();
+  resetGame();
 }
 
-export { loadLevel, finishLevel, endGame };
+export { loadLevel, finishLevel, endGame, thanksScreen };

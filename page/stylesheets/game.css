@@ -239,7 +239,8 @@
   width: 95%;
 }
 
-.level-score {
+.level-score,
+#progress-text {
   position: absolute;
   left: 45%;
   top: 20px;

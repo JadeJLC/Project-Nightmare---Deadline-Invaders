@@ -11,13 +11,18 @@ let newMenuOption = null;
 
 function addScoreToScoreboard() {
   console.log("Sauvegarde du score");
-  if (gameData.gameMode === "") {
-    return;
-  }
+  let gameMode = "";
+  if (gameData.gameMode === "Story") gameMode = "Histoire";
+  if (gameData.gameMode === "Endless") gameMode = "Sans fin";
+  if (gameData.gameMode === "") return;
+
   const scoreToSave = {
     player: gameData.playerName,
-    score: gameData.score,
-    mode: gameData.gameMode,
+    score:
+      gameData.levelscores[0] +
+      gameData.levelscores[1] +
+      gameData.levelscores[2],
+    mode: gameMode,
     timestamp: new Date(),
   };
 

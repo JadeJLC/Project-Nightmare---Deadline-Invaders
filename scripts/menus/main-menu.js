@@ -54,7 +54,7 @@ function mainMenuTitle() {
 function mainMenuButtons() {
   const buttons = [
     { label: "Mode Histoire", onClick: () => namePopup("Story", "Player") },
-    { label: "Mode Sans-Fin", onClick: () => namePopup("Endless") },
+    { label: "Mode Sans-Fin", onClick: () => namePopup("Endless", "Player") },
     { label: "Tableau des scores", onClick: () => displayScores() },
     { label: "Règles du jeu", onClick: () => displayRules() },
   ];

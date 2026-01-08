@@ -1,5 +1,4 @@
 import { menu, closeConfirm, closeBtn, gameData } from "../variables.js";
-import { cancelConfirm } from "./confirm.js";
 import {
   disableMovement,
   enableMovement,
@@ -15,9 +14,9 @@ import {
   resumeEnemyShots,
 } from "../mechanics/enemy-shooting.js";
 import { pauseTimer, startTimer } from "../engine/timer.js";
-import { pauseEnemyLoop, resumeEnemyLoop } from "../enemies/enemies.js";
+import { pauseCarousel, resumeCarousel } from "../enemies/enemies.js";
 
-// Ouverture du menu en fonction du mode (Paramètre ou Pause)
+// ===== OUVERTURE DU MENU =====
 function openSettingsMenu() {
   pauseMenu("settings");
 }
@@ -26,26 +25,19 @@ function openPauseMenu() {
   pauseMenu("pause");
 }
 
-function pauseGame() {
-  disableMovement();
-  disableShooting();
-  disableEnemyShooting();
-  pauseEnemyShots();
-  pauseTimer();
-  pauseEnemyLoop();
-}
-
-// Fonction pour l'ouverture du menu pause
-// ----- Le menu se crée en mode "Paramètres" ou "Pause" selon la page sur laquelle on se trouve
 function pauseMenu(type) {
-  menu.classList.toggle("is-hidden");
-  closeBtn.addEventListener("click", resumeGame);
+  closeBtn.onclick = resumeGame;
+  closeConfirm.onclick = resumeGame;
 
+  menu.classList.toggle("is-hidden");
+
+  // Si le menu se ferme, reprendre le jeu
   if (menu.classList.contains("is-hidden")) {
     resumeGame();
     return;
   }
 
+  // Configurer le menu selon le type
   switch (type) {
     case "settings":
       menu.querySelector("h2").textContent = "Paramètres";
@@ -60,8 +52,24 @@ function pauseMenu(type) {
       closeConfirm.addEventListener("click", resumeGame);
       break;
   }
+
+  // Mettre le jeu en pause
+  pauseGame();
 }
 
+// ===== PAUSE DU JEU =====
+function pauseGame() {
+  disableMovement();
+  disableShooting();
+  disableEnemyShooting();
+  pauseEnemyShots();
+  pauseTimer();
+
+  pauseCarousel();
+  closeBtn.focus();
+}
+
+// ===== REPRISE DU JEU =====
 function resumeGame() {
   menu.classList.add("is-hidden");
   console.log(gameData);
@@ -72,9 +80,9 @@ function resumeGame() {
   enableShooting();
   resumeEnemyShots();
   startTimer();
-  resumeEnemyLoop();
 
-  console.log("Reprise du jeu");
+  // ✅ Un seul appel pour reprendre le carousel, quel que soit le mode
+  resumeCarousel();
 }
 
-export { pauseMenu, openPauseMenu, openSettingsMenu, resumeGame };
+export { pauseMenu, openPauseMenu, openSettingsMenu, resumeGame, pauseGame };

@@ -1,5 +1,6 @@
+import { startEndless } from "../engine/endless.js";
 import { gameData, mainMenuContainer, menu } from "../variables.js";
-import { pauseMenu, resumeGame } from "./pause.js";
+import { resumeGame } from "./pause.js";
 
 const rulesContainer = document.getElementById("rules");
 
@@ -18,9 +19,42 @@ function displayRules() {
 function rulesTitle() {
   mainMenuContainer.classList.add("is-hidden");
   const title = document.createElement("h1");
-  title.innerHTML = "Règles du jeu";
+  if (gameData.gameMode === "Endless") {
+    title.innerHTML = "Règles du mode sans fin";
+  } else {
+    title.innerHTML = "Règles du jeu";
+  }
   title.className = "menu-title";
   rulesContainer.appendChild(title);
+}
+
+function createEndlessRules() {
+  rulesTitle();
+  const rulesBox = document.createElement("div");
+  rulesBox.className = "game-rules";
+  rulesBox.innerHTML = `Le jeu est inspiré de Space Invaders : vous pouvez vous déplacer sur l'écran avec les flèches gauche et droite du clavier, et tirer avec la touche espace.
+<br/><br/>
+Travaillez en collaboration avec vos collègues efficaces en évitant le "collègue relou" (portant une casquette). En mode sans fin, des lignes apparaissent 
+indéfiniment. Une fois qu'une ligne est vidée de ses collègues efficaces, une nouvelle ligne apparaît en haut de l'écran.
+<br/><br/>
+Tirer sur un collègue efficace augmentera votre score, tandis que toucher un collègue relou vous fera perdre des points. Attention : vous perdrez une vie si vous 
+êtes touchés par les rapports de bugs (tirs rouges) de vos collègues, quels qu'ils soient. Faites bien attention : les collègues efficaces disparaissent quand vous 
+leur tirez dessus, mais le "collègue relou" reste. 
+<br/><br/>
+Pendant le jeu, vous pourrez obtenir des bonus divers qui vous permettront de progresser plus facilement. Ils seront affichés à droite de l'écran. Chaque bonus à sa 
+touche associée, indiquée directement à côté. N'hésitez pas à les utiliser !
+<br/><br/>
+Bonne chance ! 
+<br/><br/>`;
+
+  const goBack = document.createElement("button");
+  goBack.textContent = "Commencer à jouer";
+  goBack.addEventListener("click", startEndless);
+
+  rulesBox.appendChild(goBack);
+
+  rulesContainer.appendChild(rulesBox);
+  goBack.focus();
 }
 
 function createRulesHTML() {
@@ -65,4 +99,4 @@ function closeRules() {
   resumeGame();
 }
 
-export { displayRules };
+export { displayRules, createEndlessRules, closeRules };
