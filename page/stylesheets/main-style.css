@@ -26,7 +26,9 @@ body::after {
   inset: 20px; /* marge intérieure du cadre */
   border: 3px solid var(--neon);
   border-radius: 12px;
-  box-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon-soft);
+  box-shadow:
+    0 0 15px var(--neon),
+    0 0 30px var(--neon-soft);
   pointer-events: none;
 }
 
@@ -49,16 +51,16 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     radial-gradient(
       circle at 50% 50%,
       rgba(72, 199, 255, 0.06),
       transparent 50%
     );
-  background-size: 100% 2px, 600px 600px;
+  background-size:
+    100% 2px,
+    600px 600px;
   mix-blend-mode: overlay;
   pointer-events: none;
 }
@@ -91,11 +93,14 @@ body::before {
   padding: 14px 24px;
   background: rgba(10, 20, 40, 0.85);
   border: 2px solid var(--neon);
+  box-shadow: 0 0 8px var(--shadow);
   color: var(--text);
   border-radius: 8px;
   box-shadow: 0 0 8px var(--shadow);
   cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   width: min(320px, 80vw);
   margin-bottom: 16px;
 }
@@ -112,7 +117,9 @@ body::before {
 #rules h1 {
   font-size: 28px;
   color: var(--neon);
-  text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon-soft);
+  text-shadow:
+    0 0 10px var(--neon),
+    0 0 20px var(--neon-soft);
 }
 
 /* #endregion **** Menu principal  */

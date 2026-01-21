@@ -1,8 +1,4 @@
-import {
-  createCarousel,
-  startCarousel,
-  getCarousel,
-} from "../enemies/enemies.js";
+import { createCarousel, startCarousel } from "../enemies/enemies.js";
 import { EnemyLine } from "../enemies/lines-builder.js";
 import {
   enableEnemyShooting,
@@ -32,7 +28,7 @@ class EndlessMode {
     // 2. Nettoyer les lignes sans coworkers vivants
     this.carousel.lines.forEach((line) => {
       const coworkersAlive = line.enemies.some(
-        (e) => e.type === "coworker" && e.isAlive
+        (e) => e.type === "coworker" && e.isAlive,
       );
       if (!coworkersAlive) {
         line.enemies.forEach((e) => {
@@ -47,7 +43,7 @@ class EndlessMode {
 
     // 3. Retirer les lignes vides
     this.carousel.lines = this.carousel.lines.filter(
-      (line) => !line.onlyRelous()
+      (line) => !line.onlyRelous(),
     );
 
     // 4. Ajouter de nouvelles lignes si nécessaire
@@ -73,7 +69,7 @@ class EndlessMode {
       direction,
       this.carousel.cfg,
       this.levelConfig.relouPerLine,
-      0
+      0,
     );
     this.carousel.lines.unshift(newLine);
   }

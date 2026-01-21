@@ -142,9 +142,16 @@ function finishLevel() {
 function endGame() {
   console.log("Fin du jeu");
   endLvl.classList.remove("is-hidden");
-  endLvl.firstElementChild.innerHTML = `Félicitations ! Vous avez terminé Project Nightmare : Deadline Invaders ! <br/><br/>
+
+  if (gameData.lives === 0) {
+    endLvl.firstElementChild.innerHTML = `Votre histoire dans Project Nightmare : Deadline Invaders s'arrête ici.<br/><br/>
+    Malheureusement, ${gameData.relouName} a eu raison de vous et de votre équipe.<br/><br/>
+    Mais il n'est pas trop tard pour réctifier le tir... dans une nouvelle partie.`;
+  } else {
+    endLvl.firstElementChild.innerHTML = `Félicitations ! Vous avez terminé Project Nightmare : Deadline Invaders ! <br/><br/>
     Il semble que ${gameData.relouName} ne compte pas en rester là.<br/><br/>
     Peut-être vous retrouverez-vous bientôt...`;
+  }
 
   toCutscene.removeEventListener("click", selectCutscene);
   toCutscene.addEventListener("click", thanksScreen);

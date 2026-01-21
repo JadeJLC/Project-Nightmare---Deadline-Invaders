@@ -32,6 +32,7 @@ function storyMode() {
 
 function endlessMode() {
   console.log("Mode Sans-Fin");
+  gameData.relouName("Collègue relou");
   gameScreenContainer.classList.remove("is-hidden");
   HUD.classList.remove("is-hidden");
   document.getElementById("level-score").classList.add("is-hidden");

@@ -98,7 +98,9 @@ function endCutscene() {
   clearTimeout(typewriterTimeout);
   typewriterTimeout = null;
 
-  if (gameData.currentLevel <= 3) {
+  if (gameData.lives === 0) {
+    endGame();
+  } else if (gameData.currentLevel <= 3) {
     loadLevel();
   } else {
     endGame();
