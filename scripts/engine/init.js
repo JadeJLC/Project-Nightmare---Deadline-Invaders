@@ -9,6 +9,7 @@ import {
   toCutscene,
   rulesBtn,
   gameData,
+  gameState,
 } from "../variables.js";
 import { movePlayer } from "../mechanics/player-movement.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
@@ -19,6 +20,16 @@ import { pauseMenu } from "../menus/pause.js";
 
 // Initialisation du jeu
 function init() {
+  if (gameState.hasInit || gameState.freezeInit) {
+    console.log(
+      "init() bloqué : freezeInit actif ou init() en cours d'utilisation",
+      gameState.freezeInit,
+      gameState.hasInit,
+    );
+    return;
+  }
+  gameState.hasInit = true;
+
   setEventListeners();
   loadMainMenu();
   movePlayer();

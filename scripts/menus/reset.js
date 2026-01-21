@@ -41,6 +41,11 @@ import { cutsceneDeleteCoworkers } from "../cutscenes/images-cutscenes.js";
  * - Recharge le menu principal
  */
 function resetGame() {
+  if (gameState.screen === "scoreboard") {
+    console.log("resetGame() bloqué : affichage du tableau des scores");
+    return;
+  }
+
   confirmBtn.removeEventListener("click", resetGame);
   confirmZone.classList.add("is-hidden");
 
