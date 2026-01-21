@@ -6,6 +6,7 @@ import {
   mainMenuContainer,
   menu,
   gameData,
+  gameState,
   scoreBoardContainer,
   gameOptions,
 } from "../variables.js";
@@ -35,6 +36,12 @@ export function loadMainMenu() {
   } else {
     openSettingsMenu();
   }
+
+  console.log("Menu principal chargé")
+  
+  //Déblocage de Init()
+  gameState.hasInit = false;
+
 }
 
 function resetScoreBoard() {

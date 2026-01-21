@@ -22,18 +22,21 @@ import { pauseCutscene } from "../cutscenes/write-cutscenes.js";
 // Fonction pour redémarrer le jeu depuis le menu principal
 // ---- Réinitialise gameData et defaultLevel à leur valeur de départ et replace le joueur au centre de l'écran de jeu, puis ouvre le menu principal
 function resetGame() {
+
+  if (gameState.screen === "scoreboard") {
+    console.log("resetGame() bloqué : affichage du tableau des scores");
+    return;
+  }
+  
   confirmBtn.removeEventListener("click", resetGame);
   confirmZone.classList.add("is-hidden");
 
   Object.assign(gameData, defaultData);
-
-  console.log(gameData);
   Object.assign(lastLevel, defaultLevel);
   resetSteps();
 
   gameScreen.classList.add("is-hidden");
-
-  // location.reload(true);
+  
   loadMainMenu();
 }
 

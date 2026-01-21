@@ -21,6 +21,14 @@ let gameData = {
   activePU: "",
 };
 
+//objet global qui stocke le dernier score enregistré pour l'affichage du tableau des scores
+let gameState = {
+  lastAddedScore: null,
+  screen: "menu",
+  hasInit: false,
+  freezeInit: false,
+};
+
 let gameOptions = {
   musicOn: false,
   soundEffects: true,
@@ -47,6 +55,7 @@ const cookieName = "ScoreBoard";
 
 export {
   gameData,
+  gameState,
   gameOptions,
   defaultData,
   lastLevel,

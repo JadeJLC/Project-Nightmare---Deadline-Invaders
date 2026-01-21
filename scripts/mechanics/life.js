@@ -1,8 +1,7 @@
 import { gameData, endLvl, toCutscene, enemyLines } from "../variables.js";
 import { badEnding } from "../cutscenes/select-cutscene.js";
-import { addScoreToScoreboard } from "../scores/scoreboard.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
-import { thanksScreen } from "../engine/levels.js";
+import { scoreScreen } from "../engine/levels.js";
 import { pauseGame } from "../menus/pause.js";
 
 function initLives() {
@@ -46,10 +45,8 @@ function endlessGameOver() {
 
   gameData.levelscores[0] = gameData.goodScore;
 
-  addScoreToScoreboard();
-
   toCutscene.removeEventListener("click", selectCutscene);
-  toCutscene.addEventListener("click", thanksScreen);
+  toCutscene.addEventListener("click", scoreScreen);
   toCutscene.textContent = "Continuer";
   toCutscene.focus();
 }

@@ -12,6 +12,7 @@ import {
   levelData,
   allLevelData,
   gameData,
+  gameState,
   typeZone,
   enemyLines,
   playerIcon,
@@ -39,6 +40,7 @@ import {
   enablePowerUps,
 } from "../powerups/activate-powerups.js";
 import { displayPowerUps } from "../powerups/display-powerups.js";
+import { displayScores, addScoreToScoreboard } from "../scores/scoreboard.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;
@@ -141,32 +143,62 @@ function finishLevel() {
 
 function endGame() {
   console.log("Fin du jeu");
+     
   endLvl.classList.remove("is-hidden");
   endLvl.firstElementChild.innerHTML = `Félicitations ! Vous avez terminé Project Nightmare : Deadline Invaders ! <br/><br/>
     Il semble que ${gameData.relouName} ne compte pas en rester là.<br/><br/>
     Peut-être vous retrouverez-vous bientôt...`;
 
   toCutscene.removeEventListener("click", selectCutscene);
-  toCutscene.addEventListener("click", thanksScreen);
+  toCutscene.addEventListener("click", scoreScreen);
   toCutscene.textContent = "Continuer";
   toCutscene.focus();
 }
 
-function thanksScreen() {
-  endLvl.firstElementChild.innerHTML = `Merci d'avoir joué !`;
-  toCutscene.removeEventListener("click", thanksScreen);
+let scoreScreenLock = false;
+
+async function scoreScreen() {
+  console.log("Ecran des scores");
+  if (scoreScreenLock) return;
+  scoreScreenLock = true;
+
+  gameState.freezeInit = true;    
+  gameState.screen = "scoreboard";
+
+  await addScoreToScoreboard();
+
+  console.log("Score enregistré, percentile :", gameState.lastAddedScore.percentile);
+
+  endLvl.classList.add("is-hidden");
+  displayScores(1, true);
+
+  toCutscene.removeEventListener("click", scoreScreen);
   toCutscene.addEventListener("click", finalScreen);
-  toCutscene.textContent = "Retour au menu principal";
+  toCutscene.textContent = "Retour au menu principal";  
   toCutscene.focus();
+
+  scoreScreenLock = false;
+
+  
+  // paramètres ouverts par défaut ?
+  //conflits api création fichiers json et gitignore 
+  
+  //vrai serveur personalisé api
+  //changer date rajouter une heure, heure d'hiver
+
 }
 
 function finalScreen() {
   console.log("Retour au menu principal");
-  endLvl.classList.add("is-hidden");
-  toCutscene.textContent = "Continuer";
+  
   toCutscene.removeEventListener("click", finalScreen);
   toCutscene.addEventListener("click", selectCutscene);
+  toCutscene.textContent = "Continuer";
+
+  gameState.screen = "menu";
+  gameState.freezeInit = false;
+
   resetGame();
 }
 
-export { loadLevel, finishLevel, endGame, thanksScreen };
+export { loadLevel, finishLevel, endGame, scoreScreen};

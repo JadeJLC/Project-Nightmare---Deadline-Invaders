@@ -1,6 +1,7 @@
 import { loadMainMenu } from "../menus/main-menu.js";
 import {
   gameData,
+  gameState,
   cookieName,
   mainMenuContainer,
   scoreBoardContainer,
@@ -8,16 +9,19 @@ import {
 } from "../variables.js";
 
 let newMenuOption = null;
+let currentPage = 1;
+let totalPages = 1;
 
-function addScoreToScoreboard() {
-  console.log("Sauvegarde du score");
+async function addScoreToScoreboard() {
+  console.log("Sauvegarde du score en cours");
+
   let gameMode = "";
   if (gameData.gameMode === "Story") gameMode = "Histoire";
   if (gameData.gameMode === "Endless") gameMode = "Sans fin";
   if (gameData.gameMode === "") return;
 
   const scoreToSave = {
-    player: gameData.playerName,
+    name: gameData.playerName,
     score:
       gameData.levelscores[0] +
       gameData.levelscores[1] +
@@ -26,33 +30,92 @@ function addScoreToScoreboard() {
     timestamp: new Date(),
   };
 
-  const existingScores = localStorage.getItem(cookieName);
+  try {
+    const res = await fetch("http://localhost:5280/scores", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(scoreToSave),
+    });
 
-  let scoreboardData = existingScores ? JSON.parse(existingScores) : [];
-  scoreboardData.push(scoreToSave);
+    if (!res.ok) {
+      console.error("Erreur la requête POST vers l'API :", res.status);
+    }
 
-  localStorage.setItem(cookieName, JSON.stringify(scoreboardData));
+    let currentScore = await res.json();
+    gameState.lastAddedScore = currentScore;
+
+    console.log("Score enregistré");
+    return currentScore;
+  } catch (err) {
+    console.error("Pas de réponse de l'API :", err);
+  }
 }
 
-function retrieveScores() {
-  const scoreString = localStorage.getItem(cookieName);
-  const scores = scoreString ? JSON.parse(scoreString) : [];
+async function retrieveScores(pageToDisplay = 1) {
+  try {
+    const res = await fetch(
+      `http://localhost:5280/scores?page=${pageToDisplay}`,
+    );
+    if (!res.ok) {
+      console.error("Erreur lors de la requête GET vers l'API :", res.status);
+      return { scores: [], pageToDisplay: 1, totalPages: 1 };
+    }
 
-  scores.sort((a, b) => b.score - a.score);
+    const data = await res.json();
+    console.log("Scores réceptionnés");
 
-  return scores;
+    return {
+      scores: data.scores,
+      page: data.page,
+      totalPages: data.totalPages,
+    };
+  } catch (err) {
+    console.error("Impossible de récupérer les scores :", err);
+    return { scores: [], pageToDisplay: 1, totalPages: 1 };
+  }
 }
 
-function displayScores() {
+async function displayScores(pageNumber = 1, gameEnd = false) {
+  console.log(
+    `Affichage du scoreboard - page demandée: ${pageNumber}, gameEnd: ${gameEnd}`,
+  );
+
   mainMenuContainer.innerHTML = "";
   scoreBoardTitle();
-  const scores = retrieveScores();
 
-  if (scores.length === 0) {
+  try {
+    const data = await retrieveScores(pageNumber);
+
+    currentPage = data.page || 1;
+    totalPages = data.totalPages || 1;
+
+    if (!data.scores || data.scores.length === 0) {
+      console.log("Aucun score à afficher");
+      emptyScoreBoard();
+    } else {
+      console.log(`${data.scores.length} score(s) récupéré(s)`);
+      createScoreBoard(data.scores, gameEnd);
+    }
+  } catch (err) {
+    console.error("Erreur lors de la récupération des scores :", err);
     emptyScoreBoard();
-  } else {
-    createScoreBoard(scores);
   }
+}
+
+function displayPercentile(score) {
+  const info = document.createElement("div");
+  info.classList.add("percentile-info");
+  info.innerHTML = `
+    Bravo ${score.name} !
+    Ton score est meilleur que <strong>${score.percentile}%</strong> des joueurs, tu es en ${score.rank}e position.
+  `;
+  scoreBoardContainer.insertBefore(info, scoreBoardContainer.firstChild);
+  console.log(
+    "Percentile affiché :",
+    score.percentile,
+    "% - Rang :",
+    score.rank,
+  );
 }
 
 // #region ----- Création des éléments HTML
@@ -70,48 +133,114 @@ function emptyScoreBoard() {
   noScores.innerHTML = "Aucun score à afficher pour l'instant<br/><br/>";
 
   const backToMain = document.createElement("button");
+  backToMain.type = "button";
   backToMain.textContent = "Retour au menu principal";
   backToMain.addEventListener("click", loadMainMenu);
   noScores.appendChild(backToMain);
   scoreBoardContainer.appendChild(noScores);
 }
+//
+function createPaginationButton(sign, pageNumber, disabled = false) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = sign;
+  button.classList.add("pagination-button");
+  button.addEventListener("click", () => {
+    displayScores(pageNumber);
+  });
+  return button;
+}
 
-function createScoreBoard(scores) {
+function createScoreBoard(scores, gameEnd) {
+  scoreBoardContainer.innerHTML = "";
+
+  //Percentile si fin de partie
+  if (gameEnd && gameState.lastAddedScore) {
+    console.log("Affichage du percentile pour:", gameState.lastAddedScore);
+    displayPercentile(gameState.lastAddedScore);
+  } else {
+    console.log(
+      "Pas d'affichage du percentile - gameEnd:",
+      gameEnd,
+      "lastAddedScore:",
+      gameState.lastAddedScore,
+    );
+  }
+
+  //Création du tableau
   let scoreBoard = document.createElement("table");
-  scoreBoard.innerHTML =
-    "<thead><th>Joueur</th><th>Score</th><th>Mode</th><th>Date</th></thead>";
-
   scoreBoard.classList.add("scoreboard");
+  scoreBoard.innerHTML = `<thead>
+    <th>Rang</th>
+    <th>Joueur</th>
+    <th>Score</th>
+    <th>Mode</th>
+    <th>Date</th>
+    </thead>`;
 
   let scoreBoardBody = document.createElement("tbody");
-
   scores.forEach((score) => {
     let newRow = document.createElement("tr");
     let date = formatDate(new Date(score.timestamp));
-    newRow.innerHTML = `<td>${score.player}</td><td>${score.score}</td><td>${score.mode}</td><td>${date}</td>`;
+    newRow.innerHTML = `
+    <td>${score.rank}</td>
+    <td>${score.name}</td>
+    <td>${score.score}</td>
+    <td>${score.mode}</td>
+    <td>${date}</td>`;
     scoreBoardBody.appendChild(newRow);
   });
 
-  let buttonRow = document.createElement("tr");
-  let buttonContainer = document.createElement("td");
-  buttonContainer.setAttribute("colspan", "4");
-
-  const backToMain = document.createElement("button");
-  backToMain.textContent = "Retour au menu principal";
-  backToMain.classList.add("back-to-main");
-  backToMain.addEventListener("click", loadMainMenu);
-
-  buttonContainer.appendChild(backToMain);
-  buttonRow.appendChild(buttonContainer);
-  scoreBoardBody.appendChild(buttonRow);
-
   scoreBoard.appendChild(scoreBoardBody);
 
-  newMenuOption = document.createElement("button");
-  newMenuOption.textContent = "Retour au menu principal";
-  newMenuOption.addEventListener("click", loadMainMenu);
-  menu.appendChild(newMenuOption);
-  scoreBoardContainer.append(scoreBoard);
+  //Pagination
+  let paginationContainer = document.createElement("div");
+  paginationContainer.classList.add("pagination-container");
+
+  const firstButton = createPaginationButton("<<", 1, currentPage === 1);
+  const prevButton = createPaginationButton(
+    "<",
+    currentPage - 1,
+    currentPage === 1,
+  );
+  const nextButton = createPaginationButton(
+    ">",
+    currentPage + 1,
+    currentPage === totalPages,
+  );
+  const lastButton = createPaginationButton(
+    ">>",
+    totalPages,
+    currentPage === totalPages,
+  );
+  const pageIndicator = document.createElement("span");
+  pageIndicator.textContent = `Page ${currentPage} / ${totalPages}`;
+  pageIndicator.style.margin = "0 10px";
+
+  paginationContainer.appendChild(firstButton);
+  paginationContainer.appendChild(prevButton);
+  paginationContainer.appendChild(pageIndicator);
+  paginationContainer.appendChild(nextButton);
+  paginationContainer.appendChild(lastButton);
+
+  scoreBoardContainer.appendChild(scoreBoard);
+  scoreBoardContainer.appendChild(paginationContainer);
+
+  // Bouton de retour au menu (screen menu)
+  if (gameState.screen === "menu") {
+    const backToMain = document.createElement("button");
+    backToMain.textContent = "Retour au menu principal";
+    backToMain.classList.add("back-to-main");
+    backToMain.addEventListener("click", loadMainMenu);
+    scoreBoardContainer.appendChild(backToMain);
+  }
+
+  console.log("Tableau des scores créé et rempli");
+
+  if (newMenuOption) {
+    newMenuOption.remove();
+    newMenuOption = null;
+  }
 }
 
 function formatDate(date) {
@@ -120,7 +249,7 @@ function formatDate(date) {
   let year = date.getUTCFullYear();
 
   let time =
-    date.getHours().toString() +
+    (date.getHours() + 1).toString() +
     "h" +
     date.getMinutes().toString().padStart(2, "0");
 

@@ -242,11 +242,29 @@ body::before {
 .back-to-main {
   max-width: 400px;
   margin: auto;
+  margin-bottom: 12px;
+}
+
+.pagination-container {
+    margin-left: 36%;
+    margin-bottom: 9px;
+
+}
+.pagination-button {
+  color: var(--text);
+    background: rgba(10, 20, 40, 0.85);
+    border: 2px solid var(--neon);
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 2px;
+    padding: 2px;
+    width: 25px;
 }
 
 #pause-menu button:hover,
 .confirm-pannel button:hover,
-.back-to-main:hover {
+.back-to-main:hover,
+.pagination-button:hover {
   border-color: var(--neon-soft);
   box-shadow: 0 0 12px var(--neon-soft);
 }

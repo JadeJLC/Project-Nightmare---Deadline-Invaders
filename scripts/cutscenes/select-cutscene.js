@@ -9,7 +9,6 @@ import {
   cutsceneGameOver,
 } from "./text-cutscenes.js";
 import { loseLife } from "../mechanics/life.js";
-import { addScoreToScoreboard } from "../scores/scoreboard.js";
 import { cutsceneDisplayCoworkers } from "./images-cutscenes.js";
 
 // Gestion des cinématiques
@@ -22,7 +21,6 @@ function selectCutscene() {
     gameData.levelscores[0] + gameData.levelscores[1] + gameData.levelscores[2];
 
   if (gameData.lives === 0) {
-    addScoreToScoreboard();
     badEnding();
     return;
   }
@@ -48,6 +46,7 @@ function selectCutscene() {
       break;
     case 3:
       goodEnding();
+      console.log("good ending")
       break;
   }
 }
@@ -111,8 +110,7 @@ function goodEnding() {
   lastLevel.powerups = gameData.powerups;
   lastLevel.score = gameData.score;
   lastLevel.lives = gameData.lives;
-
-  addScoreToScoreboard();
+  
   cutsceneEndThirdLevel();
 }
 
