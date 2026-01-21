@@ -1,4 +1,10 @@
-import { gameData, gameOptions, musicBtn, effectBtn } from "../variables.js";
+import {
+  gameData,
+  gameOptions,
+  musicBtn,
+  effectBtn,
+  tutoBtn,
+} from "../variables.js";
 import { stopMusic, playMusic } from "../audio/music.js";
 
 function toggleMusic() {
@@ -26,4 +32,15 @@ function toggleEffects() {
   }
 }
 
-export { toggleMusic, toggleEffects };
+function toggleTutorials() {
+  if (!gameOptions.tutos) {
+    tutoBtn.textContent = "🤝 / Désactiver les didacticiels en jeu";
+    gameOptions.tutos = true;
+  } else {
+    console.log("Arrêt de la musique");
+    tutoBtn.textContent = "🚫 / Activer les didacticiels en jeu";
+    gameOptions.tutos = false;
+  }
+}
+
+export { toggleMusic, toggleEffects, toggleTutorials };

@@ -37,13 +37,17 @@
 /* Style des projectiles façon laser */
 .player-projectile {
   background: var(--neon);
-  box-shadow: 0 0 6px var(--neon), 0 0 12px var(--neon-soft);
+  box-shadow:
+    0 0 6px var(--neon),
+    0 0 12px var(--neon-soft);
   height: 20px;
 }
 
 .enemy-projectile {
   background: var(--attack);
-  box-shadow: 0 0 6px var(--attack), 0 0 12px var(--attack-soft);
+  box-shadow:
+    0 0 6px var(--attack),
+    0 0 12px var(--attack-soft);
   height: 30px;
 }
 
@@ -362,6 +366,10 @@
 
 .boost {
   background-position: -240px -240px;
+}
+
+.backup {
+  background-position: -96px -288px;
 }
 
 .coffee {

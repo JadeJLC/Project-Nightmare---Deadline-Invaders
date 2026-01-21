@@ -1,6 +1,10 @@
 import { loadMainMenu } from "../menus/main-menu.js";
 import { confirmReset, confirmRestart } from "../menus/confirm.js";
-import { toggleMusic, toggleEffects } from "../menus/toggle-music.js";
+import {
+  toggleMusic,
+  toggleEffects,
+  toggleTutorials,
+} from "../menus/menu-toggles.js";
 import {
   restartBtn,
   resetBtn,
@@ -10,6 +14,7 @@ import {
   rulesBtn,
   gameData,
   gameState,
+  tutoBtn,
 } from "../variables.js";
 import { movePlayer } from "../mechanics/player-movement.js";
 import { selectCutscene } from "../cutscenes/select-cutscene.js";
@@ -41,6 +46,7 @@ function setEventListeners() {
   resetBtn.addEventListener("click", confirmReset);
   musicBtn.addEventListener("click", toggleMusic);
   effectBtn.addEventListener("click", toggleEffects);
+  tutoBtn.addEventListener("click", toggleTutorials);
   toCutscene.addEventListener("click", selectCutscene);
   rulesBtn.addEventListener("click", displayRules);
 

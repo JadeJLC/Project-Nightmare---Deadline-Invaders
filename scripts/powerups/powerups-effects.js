@@ -3,6 +3,7 @@ import {
   disableEnemyShooting,
   enableEnemyShooting,
 } from "../mechanics/enemy-shooting.js";
+import { updateProgressBar } from "../scores/progress-bar.js";
 import {
   gameData,
   levelData,
@@ -70,7 +71,7 @@ function teamBuilding() {
 
   for (let i = 0; i < gameData.powerups.length; i++) {
     console.log(gameData.powerups[i]);
-    if (gameData.powerups[i] === "Team") {
+    if (gameData.powerups[i] === "Team Building") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();
       break;
@@ -174,6 +175,30 @@ function perfectionism() {
   }, 5000);
 }
 
+// Powerup Backup : retire du pourcentage rouge
+// ----- Activé en appuyant sur la touche "W"
+function backup() {
+  gameData.activePU = "Bonus utilisé : Backup";
+
+  gameData.badScore -= levelData.relouMalus;
+  updateProgressBar();
+
+  for (let i = 0; i < gameData.powerups.length; i++) {
+    console.log(gameData.powerups[i]);
+    if (gameData.powerups[i] === "Patron") {
+      gameData.powerups.splice(i, 1);
+      displayPowerUps();
+      break;
+    }
+  }
+
+  // Retire le message au bout de deux secondes
+  setTimeout(() => {
+    gameData.activePU = "";
+    gameMessage.textContent = gameData.activePU;
+  }, 2000);
+}
+
 export {
   speedBoost,
   diplomacy,
@@ -181,5 +206,6 @@ export {
   productivityBoost,
   talkToBoss,
   perfectionism,
+  backup,
   teamBuild,
 };

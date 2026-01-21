@@ -10,7 +10,15 @@ let gameData = {
   levelscores: [0, 0, 0],
   goodScore: 0,
   badScore: 0,
-  powerups: ["Diplomate", "Café", "Team", "Patron", "Boost", "Perfect"],
+  powerups: [
+    "Diplomate",
+    "Café",
+    "Team",
+    "Patron",
+    "Boost",
+    "Perfect",
+    "Backup",
+  ],
   job: "dev",
   speed: 5,
   loadedCutscene: false,
@@ -33,6 +41,7 @@ let gameOptions = {
   musicOn: false,
   soundEffects: true,
   map: 0,
+  tutos: true,
 };
 
 // Variable pour enregistrer la progression du joueur lorsqu'il termine un niveau
@@ -73,6 +82,7 @@ export {
 const musicBox = document.getElementById("audio");
 const musicBtn = document.getElementById("toggle-music");
 const effectBtn = document.getElementById("toggle-effects");
+const tutoBtn = document.getElementById("toggle-tutos");
 const style = document.getElementById("style");
 const mainMenuContainer = document.getElementById("main-menu");
 const scoreBoardContainer = document.getElementById("score-board");
@@ -81,6 +91,7 @@ export {
   musicBox,
   musicBtn,
   effectBtn,
+  tutoBtn,
   style,
   mainMenuContainer,
   scoreBoardContainer,

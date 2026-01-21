@@ -73,6 +73,7 @@ class EnemyCarousel {
   constructor(cfg, levelConfig) {
     this.cfg = cfg;
     this.lines = this.createLines(levelConfig);
+    this.activePowerUp = null;
   }
 
   createLines(levelConfig) {
@@ -91,7 +92,7 @@ class EnemyCarousel {
       direction,
       this.cfg,
       this.levelConfig.relouPerLine,
-      lineIndex
+      lineIndex,
     );
   }
 

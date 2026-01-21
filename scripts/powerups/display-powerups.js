@@ -18,6 +18,7 @@ function displayPowerUps() {
     Team: 0,
     Boost: 0,
     Perfect: 0,
+    Backup: 0,
   };
   gameMessage.textContent = gameData.activePU;
 
@@ -25,9 +26,10 @@ function displayPowerUps() {
     if (powerup === "Café") powerups.Coffee++;
     if (powerup === "Patron") powerups.Boss++;
     if (powerup === "Diplomate") powerups.Diplomat++;
-    if (powerup === "Team") powerups.Team++;
+    if (powerup === "Team Building") powerups.Team++;
     if (powerup === "Boost") powerups.Boost++;
-    if (powerup === "Perfect") powerups.Perfect++;
+    if (powerup === "Perfectionnisme") powerups.Perfect++;
+    if (powerup === "Backup") powerups.Backup++;
   });
 
   if (powerups.Coffee > 0) displayCoffee();
@@ -36,6 +38,7 @@ function displayPowerUps() {
   if (powerups.Team > 0) displayTeamBuild();
   if (powerups.Boost > 0) displayProducivityBoost();
   if (powerups.Perfect > 0) displayPerfectionism();
+  if (powerups.Backup > 0) displayBackup();
 
   console.log(powerups);
 }
@@ -127,6 +130,19 @@ function displayPerfectionism() {
   }
 
   powerupsZone.appendChild(perfect);
+}
+
+function displayBackup() {
+  const backup = document.createElement("div");
+  backup.class = "power-up";
+  backup.alt = backup.title = "Backup<br/> - Retire du pourcentage négatif";
+  backup.innerHTML = `<div class="mini-tile backup"></div> <span>${powerups.Backup} [W]</span>`;
+
+  if (displayDetails) {
+    backup.innerHTML += `<span class="pup-detail">${backup.alt}</span>`;
+  }
+
+  powerupsZone.appendChild(backup);
 }
 // #endregion
 

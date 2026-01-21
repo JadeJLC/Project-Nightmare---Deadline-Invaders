@@ -19,7 +19,7 @@ function selectMapPopup() {
   let coworkerID = 0;
   root.style.setProperty(
     "--map",
-    `url("/images/map0${gameOptions.map}-tileset.png"`
+    `url("/images/map0${gameOptions.map}-tileset.png"`,
   );
 
   // Création du formulaire de base
