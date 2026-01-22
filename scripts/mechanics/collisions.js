@@ -2,6 +2,7 @@ import { gameData, levelData, playerIcon } from "../variables.js";
 import { teamBuild } from "../powerups/powerups-effects.js";
 import { Coworker, Relou } from "../enemies/coworker-class.js";
 import { loseLife } from "./life.js";
+import { PowerUp } from "../powerups/powerup-class.js";
 
 function rectsIntersect(r1, r2) {
   return !(
@@ -47,6 +48,8 @@ function enemyDamage(enemy, difference) {
         gameData.goodScore = 0;
       }
     }
+  } else if (enemy instanceof PowerUp) {
+    enemy.hit();
   }
 }
 

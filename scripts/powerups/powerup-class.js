@@ -1,10 +1,15 @@
+import { tutoPowerUps } from "../tutorials/tuto-powerups.js";
 import { gameData, gameOptions, enemiesRegistry } from "../variables.js";
+import { displayPowerUps } from "./display-powerups.js";
+import { pausePowerUpMove } from "./powerup-move.js";
 import { powerUpData, powerUpList } from "./powerup-spawn.js";
+import { floatingPowerUp } from "./powerup-spawn.js";
 
 export class PowerUp {
-  constructor(cfg, x, y, direction) {
+  constructor(x, y, direction) {
     this.x = x;
     this.baseY = y;
+    this.y = y;
     this.currentDir = direction;
     this.isAlive = true;
 
@@ -13,8 +18,9 @@ export class PowerUp {
 
     this.el = document.createElement("img");
     this.el.src = "/images/empty.png";
-    this.el.className = powerUpData.type;
-    this.el.classList.add("mini-tile");
+    this.el.id = "powerup-float";
+    this.el.className = "mini-tile";
+    this.el.classList.add(powerUpData.type);
 
     enemiesRegistry.push(this);
     document.getElementById("enemy-carousel").appendChild(this.el);
@@ -26,9 +32,9 @@ export class PowerUp {
     this.el.style.top = this.y + "px";
   }
 
-  update(direction, cfg) {
-    const speed = cfg.moveSpeedX;
-    this.x += direction === "right" ? speed : -speed;
+  update(cfg) {
+    const speed = 3;
+    this.x += this.currentDir === "right" ? speed : -speed;
 
     if (this.x > cfg.screenWidth) {
       this.x = -this.el.width;
@@ -37,7 +43,7 @@ export class PowerUp {
     }
 
     // Oscillation verticale
-    const amplitude = 8; // pixels
+    const amplitude = 20; // pixels
     const frequency = 0.002; // vitesse de l’oscillation
     const time = Date.now();
     this.y =
@@ -47,16 +53,20 @@ export class PowerUp {
   }
 
   hit() {
+    console.log("Powerup Touché ! Ajout à la liste des powerup");
     gameData.powerups.push(powerUpData.name);
     powerUpMessage(powerUpData.name);
+    pausePowerUpMove();
     this.el.remove();
 
-    floatingPowerUp = false;
+    floatingPowerUp.isThere = false;
+    floatingPowerUp.currentPowerUp = null;
     this.isAlive = false;
   }
 }
 
 function powerUpMessage(searchName) {
+  displayPowerUps();
   if (!gameOptions.tutos) return;
   const powerUp = powerUpList.find((item) => item.name === searchName);
 
@@ -64,13 +74,14 @@ function powerUpMessage(searchName) {
     if (powerUp.tutorial) return;
 
     if (!powerUp.tutorial) {
-      let popUpMessage = `Vous avez obtenu un nouveau powerup : ${powerUp.name} !<br>
+      let popUpMessage = `Vous avez obtenu un nouveau powerup : <b>${powerUp.name} !</b><br><br>
     ${powerUp.effect}<br>
-    Vous pouvez l'activer à tout moment en appuyant sur la touche ${powerUp.key}`;
+    Vous pouvez l'activer à tout moment en appuyant sur la touche [${powerUp.key}]`;
 
       // Ajouter la fonction pour l'ouverture de la popup (met en pause le jeu, affiche le message, permet de fermer la popup en appuyant sur entrée)
 
       powerUp.tutorial = true;
+      tutoPowerUps(popUpMessage);
     }
   }
 }

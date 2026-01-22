@@ -42,7 +42,7 @@ let powerUpList = [
     type: "backup",
     name: "Backup",
     tutorial: false,
-    key: ", | ?",
+    key: ",",
     effect:
       "Un backup du projet vous permet de retirer le dernier pourcentage négatif ajouté à votre score.",
   },
@@ -64,7 +64,10 @@ let powerUpList = [
 // #endregion
 
 // #region ***** Apparition des power-ups sur l'écran
-let floatingPowerUp = false;
+let floatingPowerUp = {
+  isThere: false,
+  currentPowerUp: null,
+};
 
 function randomizePowerUps() {
   // En mode sans fin, des vies peuvent défiler sur la ligne des power-ups
@@ -87,7 +90,10 @@ function randomizePowerUps() {
 }
 
 function spawnPowerUp(cfg, levelData) {
-  if (floatingPowerUp) return;
+  if (floatingPowerUp.isThere) {
+    console.log("Un powerup est déjà présent");
+    return;
+  }
   console.log("Apparition d'un powerup");
 
   randomizePowerUps();
@@ -96,9 +102,11 @@ function spawnPowerUp(cfg, levelData) {
   const direction = levelData.lineCount % 2 === 0 ? "right" : "left";
   const startX = direction === "right" ? -50 : cfg.screenWidth + 50;
 
-  new PowerUp(cfg, startX, spawnY, direction);
-  floatingPowerUp = true;
+  const currentPowerUp = new PowerUp(startX, spawnY, direction);
+  floatingPowerUp.isThere = true;
+
+  return currentPowerUp;
 }
 // #endregion
 
-export { spawnPowerUp, powerUpList, powerUpData };
+export { spawnPowerUp, powerUpList, powerUpData, floatingPowerUp };

@@ -1,15 +1,17 @@
 import { typeZone, gameData, sceneZone, skipBtn } from "../variables.js";
 import { soundEffect } from "../audio/sound-effects.js";
-import { skipCutscene, fastSkip } from "./skip-cutscene.js";
+import { fastSkip } from "./skip-cutscene.js";
 import { loadLevel } from "../engine/levels.js";
 import { specialLines } from "./special-scenes.js";
 import { cutsceneDeleteCoworkers } from "./images-cutscenes.js";
 import { endGame } from "../engine/levels.js";
+import { confirmSkip } from "../engine/popups.js";
 
 let currentLetter = 0;
 let isTyping = false;
 let pressEnter = null;
 let typewriterTimeout = null;
+let textspeed = 25;
 
 let cutsceneData = {
   textList: [],
@@ -18,7 +20,7 @@ let cutsceneData = {
 
 // #region ---- Ecriture du texte de la cinématique
 function advanceCutScene(cutsceneTextList) {
-  skipBtn.addEventListener("click", skipCutscene);
+  skipBtn.addEventListener("click", confirmSkip);
 
   cutsceneData.textList = cutsceneTextList;
   cutsceneData.currentLine = 0;
@@ -29,9 +31,13 @@ function advanceCutScene(cutsceneTextList) {
 
   pressEnter = (e) => {
     e.preventDefault();
-    if (e.code === "Enter" && !isTyping) {
-      soundEffect("beep");
-      nextLine();
+    if (e.code === "Enter" || e.code === "Space") {
+      if (!isTyping) {
+        soundEffect("beep");
+        nextLine();
+      } else {
+        textspeed = 4;
+      }
     }
   };
 
@@ -53,6 +59,7 @@ function nextLine(skip) {
   isTyping = true;
   typeWriter(cutsceneData.textList[cutsceneData.currentLine], () => {
     isTyping = false;
+    textspeed = 25;
     cutsceneData.currentLine++;
   });
 }
@@ -71,7 +78,7 @@ function typeWriter(txt, onComplete) {
     currentLetter++;
     typewriterTimeout = setTimeout(() => {
       typeWriter(txt, onComplete);
-    }, 25);
+    }, textspeed);
   } else {
     typeZone.innerHTML += '<span class="blink"> ▼</span>';
     currentLetter = 0;

@@ -1,36 +1,36 @@
-import { spawnPowerUp } from "./powerup-spawn.js";
-import { screenConfig } from "../enemies/enemies.js";
-import { levelData } from "../variables.js";
+import { resumePowerUpMove } from "./powerup-move.js";
+import { floatingPowerUp } from "./powerup-spawn.js";
 
 // #region ***** Timer pour l'apparition des powerups dans l'écran de jeu
 let powerUpTimeout;
 let isTimerActive = false;
-let minWait = 5000; // 10 seconds
-let maxWait = 15000; // 20 seconds
+let minWait = 6000;
+let maxWait = 12000;
 
-function startPowerUpTimer() {
+function startPowerUpTimeout() {
   if (!isTimerActive) return;
 
   const delay = Math.floor(Math.random() * (maxWait - minWait + 1)) + minWait;
 
+  console.log(delay);
   powerUpTimeout = setTimeout(() => {
-    spawnPowerUp(screenConfig, levelData);
-    startPowerUpTimer();
+    resumePowerUpMove();
+    startPowerUpTimeout();
   }, delay);
 }
 
-function stopPowerUpTimer() {
+function stopPowerUpTimeout() {
   isTimerActive = false;
   clearTimeout(powerUpTimeout);
 }
 
-function resumePowerUpTimer() {
+function resumePowerUpTimeout() {
   if (isTimerActive) return;
   isTimerActive = true;
-  startPowerUpTimer();
+  startPowerUpTimeout();
 }
 // #endregion
 
 // A implémenter : timer indiquant le temps restant sur le powerup
 
-export { stopPowerUpTimer, resumePowerUpTimer };
+export { stopPowerUpTimeout, resumePowerUpTimeout };

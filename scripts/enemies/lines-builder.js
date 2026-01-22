@@ -78,7 +78,7 @@ class EnemyCarousel {
 
   createLines(levelConfig) {
     return Array.from({ length: levelConfig.lineCount }, (_, i) => {
-      const y = 60 + i * this.cfg.lineSpacingY;
+      const y = 20 + i * this.cfg.lineSpacingY;
       const direction = i % 2 === 0 ? "right" : "left";
       return new EnemyLine(y, direction, this.cfg, levelConfig.relouPerLine, i);
     });

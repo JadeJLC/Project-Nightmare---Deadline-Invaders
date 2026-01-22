@@ -15,6 +15,14 @@ import {
 } from "../mechanics/enemy-shooting.js";
 import { pauseTimer, startTimer } from "../engine/timer.js";
 import { pauseCarousel, resumeCarousel } from "../enemies/enemies.js";
+import {
+  pausePowerUpMove,
+  resumePowerUpMove,
+} from "../powerups/powerup-move.js";
+import {
+  resumePowerUpTimeout,
+  stopPowerUpTimeout,
+} from "../powerups/powerup-timer.js";
 
 // ***** Ouverture du menu
 function openSettingsMenu() {
@@ -48,7 +56,6 @@ function pauseMenu(type) {
       menu.querySelector("h2").textContent = "Pause";
       menu.querySelector("div").classList.remove("is-hidden");
       closeBtn.textContent = "Reprendre";
-      pauseGame();
       closeConfirm.addEventListener("click", resumeGame);
       break;
   }
@@ -64,6 +71,9 @@ function pauseGame() {
   disableEnemyShooting();
   pauseEnemyShots();
   pauseTimer();
+
+  pausePowerUpMove();
+  stopPowerUpTimeout();
 
   pauseCarousel();
   closeBtn.focus();
@@ -81,6 +91,8 @@ function resumeGame() {
   resumeEnemyShots();
   startTimer();
   resumeCarousel();
+  resumePowerUpMove();
+  resumePowerUpTimeout();
 }
 
 export { pauseMenu, openPauseMenu, openSettingsMenu, resumeGame, pauseGame };

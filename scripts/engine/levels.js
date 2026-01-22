@@ -41,7 +41,7 @@ import {
 } from "../powerups/activate-powerups.js";
 import { displayPowerUps } from "../powerups/display-powerups.js";
 import { displayScores, addScoreToScoreboard } from "../scores/scoreboard.js";
-import { resumePowerUpTimer } from "../powerups/powerup-timer.js";
+import { resumePowerUpTimeout } from "../powerups/powerup-timer.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;
@@ -88,7 +88,7 @@ function initLevel() {
   // Démarrer le timer
   setInterval(displayTimer, 10);
   startTimer();
-  resumePowerUpTimer();
+  resumePowerUpTimeout();
 
   // Démarrer la boucle du carousel (mode standard)
   startCarousel();

@@ -30,7 +30,7 @@ import { destroyCarousel, stopCarousel } from "../enemies/enemies.js";
 import { disablePowerUps } from "../powerups/activate-powerups.js";
 import { stopMusic } from "../audio/music.js";
 import { cutsceneDeleteCoworkers } from "../cutscenes/images-cutscenes.js";
-import { stopPowerUpTimer } from "../powerups/powerup-timer.js";
+import { stopPowerUpTimeout } from "../powerups/powerup-timer.js";
 
 /**
  * Fonction pour redémarrer le jeu depuis le menu principal
@@ -62,7 +62,7 @@ function resetGame() {
   // Arrêter les timers
   pauseTimer();
   removeTimer();
-  stopPowerUpTimer();
+  stopPowerUpTimeout();
 
   // Arrêter les cinématiques
   pauseCutscene();
