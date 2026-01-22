@@ -34,13 +34,14 @@ export class PowerUp {
   }
 
   update(cfg) {
+    const direction = this.currentDir;
     const speed = 3;
-    this.x += this.currentDir === "right" ? speed : -speed;
+    this.x += direction === "right" ? speed : -speed;
 
-    if (this.x > cfg.screenWidth) {
-      this.x = -this.el.width;
-    } else if (this.x < -this.el.width) {
-      this.x = cfg.screenWidth;
+    if (this.x > cfg.screenWidth && direction === "right") {
+      this.disapear();
+    } else if (this.x < -this.el.width && direction === "left") {
+      this.disapear();
     }
 
     // Oscillation verticale
@@ -57,6 +58,10 @@ export class PowerUp {
     console.log("Powerup Touché ! Ajout à la liste des powerup");
     gameData.powerups.push(powerUpData.name);
     powerUpMessage(powerUpData.name);
+    this.disapear();
+  }
+
+  disapear() {
     pausePowerUpMove();
     this.el.remove();
 

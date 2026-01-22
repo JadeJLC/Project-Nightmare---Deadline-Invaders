@@ -41,7 +41,12 @@ import {
 } from "../powerups/activate-powerups.js";
 import { displayPowerUps } from "../powerups/display-powerups.js";
 import { displayScores, addScoreToScoreboard } from "../scores/scoreboard.js";
-import { resumePowerUpTimeout } from "../powerups/powerup-timer.js";
+import {
+  resumePowerUpTimeout,
+  stopPowerUpTimeout,
+} from "../powerups/powerup-timer.js";
+import { pausePowerUpMove } from "../powerups/powerup-move.js";
+import { floatingPowerUp } from "../powerups/powerup-spawn.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;
@@ -106,6 +111,13 @@ function finishLevel() {
   disableEnemyShooting();
   pauseTimer();
   removeTimer();
+
+  // Réinitialisation des powerups
+  pausePowerUpMove();
+  stopPowerUpTimeout();
+
+  floatingPowerUp.isThere = false;
+  floatingPowerUp.currentPowerUp = null;
 
   // Détruire le carousel
   destroyCarousel();

@@ -179,7 +179,7 @@ function backup() {
   updateProgressBar();
 
   for (let i = 0; i < gameData.powerups.length; i++) {
-    if (gameData.powerups[i] === "Patron") {
+    if (gameData.powerups[i] === "Backup") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();
       break;
