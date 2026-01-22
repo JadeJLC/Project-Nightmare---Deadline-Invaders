@@ -20,7 +20,6 @@ function loseLife() {
   if (gameData.lives > 0) {
     gameData.lives--;
     initLives();
-    console.log(`❤️ Vie perdue ! Vies restantes: ${gameData.lives}`);
   }
 
   // Game Over uniquement si plus de vies
@@ -37,7 +36,6 @@ function endlessGameOver() {
   pauseGame();
   enemyLines.innerHTML = "";
   gameData.currentMusic = "main-menu";
-  console.log("💀 Game Over en mode Sans Fin");
   endLvl.classList.remove("is-hidden");
   endLvl.firstElementChild.innerHTML = `Game Over. Vous êtes à court de vies. <br/><br/>
     Votre score final est de ${gameData.goodScore}<br/><br/>

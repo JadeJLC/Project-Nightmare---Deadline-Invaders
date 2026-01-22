@@ -10,7 +10,7 @@ let movingLeft = false;
 function movePlayer() {
   playerIcon.style.transform = "rotateZ(0deg)";
   const iconWidth = parseInt(
-    window.getComputedStyle(playerIcon).getPropertyValue("width")
+    window.getComputedStyle(playerIcon).getPropertyValue("width"),
   );
   const borders = getPlayArea();
   let currentPosition = playerIcon.offsetLeft;
@@ -36,7 +36,6 @@ function disableMovement() {
 }
 
 function enableMovement() {
-  console.log("Activation des mouvements");
   document.addEventListener("keydown", startMovement);
   document.addEventListener("keyup", stopMovement);
 }

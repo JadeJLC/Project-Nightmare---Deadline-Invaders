@@ -85,7 +85,6 @@ function typeWriter(txt, onComplete) {
 
 // #region ---- Gestion de la pause, fin et redémarrage de la cinématique
 function endCutscene() {
-  console.log("Cutscene finished.");
   gameData.loadedCutscene = true;
   sceneZone.classList.add("is-hidden");
   typeZone.textContent = "";

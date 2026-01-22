@@ -9,7 +9,6 @@ function displayRules() {
     rulesTitle();
     createRulesHTML();
   } else {
-    console.log("Fermeture des règles du jeu");
     closeRules();
   }
 
@@ -95,7 +94,6 @@ function closeRules() {
   menu.classList.add("is-hidden");
   mainMenuContainer.classList.remove("is-hidden");
   rulesContainer.innerHTML = "";
-  console.log("Fermeture des règles du jeu");
   resumeGame();
 }
 

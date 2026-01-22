@@ -42,15 +42,13 @@ function updateScreenConfig() {
     screenConfig.speed = 2;
     gameData.speed = 5;
   }
-
-  console.log("screenConfig:", screenConfig);
 }
 
 // ===== CRÉATION DU CAROUSEL =====
 function createCarousel(levelConfig = levelData) {
   updateScreenConfig();
   console.log(
-    `Création carousel - Largeur: ${screenConfig.screenWidth}, Espacement: ${screenConfig.enemySpacingX}`
+    `Création carousel - Largeur: ${screenConfig.screenWidth}, Espacement: ${screenConfig.enemySpacingX}`,
   );
 
   currentCarousel = new EnemyCarousel(screenConfig, levelConfig);
@@ -167,4 +165,5 @@ export {
 
   // Config (pour compatibilité)
   updateScreenConfig as createGameScreen,
+  screenConfig,
 };

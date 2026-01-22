@@ -33,7 +33,6 @@ function releaseSpace(e) {
 }
 
 function disableShooting() {
-  console.log("Suppression de la capacité de tir");
   document.removeEventListener("keydown", pressSpace);
   document.removeEventListener("keyup", releaseSpace);
 
@@ -56,7 +55,6 @@ function enableShooting() {
   disableShooting();
 
   gameData.countPoint = true;
-  console.log("Activation des tirs du joueur");
   document.addEventListener("keydown", pressSpace);
   document.addEventListener("keyup", releaseSpace);
 

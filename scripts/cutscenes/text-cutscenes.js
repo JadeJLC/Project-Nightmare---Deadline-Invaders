@@ -147,7 +147,6 @@ function cutsceneEndThirdLevel() {
   if (gameOptions.map === 1)
     bossName = ["(Patronne)", "à la patronne", "e", "elle"];
 
-  console.log("Fin du jeu.");
   let thirdLvlTxt = [
     ``,
     `(Collègue) : Il est vraiment temps qu'on en parle ${bossName[1]}.`,

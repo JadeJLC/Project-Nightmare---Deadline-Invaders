@@ -1,4 +1,5 @@
 import { gameData } from "../variables.js";
+import { PowerUp } from "./powerup-class.js";
 
 // #region ***** Données des powerup
 let powerUpData = {
@@ -87,6 +88,7 @@ function randomizePowerUps() {
 
 function spawnPowerUp(cfg, levelData) {
   if (floatingPowerUp) return;
+  console.log("Apparition d'un powerup");
 
   randomizePowerUps();
 
@@ -94,7 +96,7 @@ function spawnPowerUp(cfg, levelData) {
   const direction = levelData.lineCount % 2 === 0 ? "right" : "left";
   const startX = direction === "right" ? -50 : cfg.screenWidth + 50;
 
-  new PowerUp(startX, spawnY, direction);
+  new PowerUp(cfg, startX, spawnY, direction);
   floatingPowerUp = true;
 }
 // #endregion

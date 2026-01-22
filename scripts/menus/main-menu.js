@@ -37,11 +37,8 @@ export function loadMainMenu() {
     openSettingsMenu();
   }
 
-  console.log("Menu principal chargé")
-  
   //Déblocage de Init()
   gameState.hasInit = false;
-
 }
 
 function resetScoreBoard() {

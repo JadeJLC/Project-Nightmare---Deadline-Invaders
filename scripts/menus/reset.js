@@ -53,8 +53,6 @@ function resetGame() {
 
   const savedOptions = { ...gameOptions };
 
-  console.log("Désactivation des systèmes de jeu");
-
   // Désactiver les mécaniques de jeu
   disableEnemyShooting();
   disableMovement();
@@ -69,20 +67,16 @@ function resetGame() {
   // Arrêter les cinématiques
   pauseCutscene();
 
-  console.log("Destruction du carousel...");
   stopCarousel();
   destroyCarousel();
   enemiesRegistry.length = 0;
 
-  console.log("Réinitialisation des données");
   Object.assign(gameData, defaultData);
   Object.assign(lastLevel, defaultLevel);
   Object.assign(gameOptions, savedOptions);
 
-  console.log("Nettoyage du DOM");
   resetSteps();
 
-  console.log("Nettoyage des cinématiques");
   cutsceneDeleteCoworkers();
   typeZone.textContent = "";
   cutsceneAnimation.innerHTML = "";
@@ -91,17 +85,14 @@ function resetGame() {
   const managers = document.getElementById("managers");
   if (managers) managers.remove();
 
-  console.log("Masquage des écrans");
   gameScreen.classList.add("is-hidden");
   HUD.classList.add("is-hidden");
   endLvl.classList.add("is-hidden");
   sceneZone.classList.add("is-hidden");
 
-  console.log("Arrêt de la musique");
   stopMusic();
   gameData.currentMusic = "main-menu";
 
-  console.log("Chargement du menu principal");
   loadMainMenu();
 }
 

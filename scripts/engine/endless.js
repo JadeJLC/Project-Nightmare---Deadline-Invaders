@@ -104,7 +104,6 @@ function startEndless() {
   closeRules();
   gameData.currentMusic = "level2";
   changeMusic();
-  console.log("🎮 Démarrage du mode Endless");
 
   // Créer le carousel
   const carousel = createCarousel(currentLevelConfig);
@@ -129,15 +128,12 @@ function startEndless() {
 
   // Démarrer le carousel avec la fonction de update personnalisée
   startCarousel(endlessUpdate);
-
-  console.log("✅ Mode Endless démarré");
 }
 
 // ===== NETTOYAGE =====
 function cleanupEndless() {
   endlessInstance = null;
   currentLevelConfig = allLevelData[1];
-  console.log("🧹 Nettoyage du mode Endless");
 }
 
 export { startEndless, cleanupEndless };

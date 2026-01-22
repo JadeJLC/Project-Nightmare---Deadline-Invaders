@@ -23,7 +23,6 @@ function speedBoost() {
   gameData.speed = 8;
 
   for (let i = 0; i < gameData.powerups.length; i++) {
-    console.log(gameData.powerups[i]);
     if (gameData.powerups[i] === "Café") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();
@@ -47,7 +46,6 @@ function diplomacy() {
   pauseCarousel();
 
   for (let i = 0; i < gameData.powerups.length; i++) {
-    console.log(gameData.powerups[i]);
     if (gameData.powerups[i] === "Diplomate") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();
@@ -70,7 +68,6 @@ function teamBuilding() {
   teamBuild = true;
 
   for (let i = 0; i < gameData.powerups.length; i++) {
-    console.log(gameData.powerups[i]);
     if (gameData.powerups[i] === "Team Building") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();
@@ -95,7 +92,6 @@ function productivityBoost() {
   levelData.coworkerBonus *= 2;
 
   for (let i = 0; i < gameData.powerups.length; i++) {
-    console.log(gameData.powerups[i]);
     if (gameData.powerups[i] === "Boost") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();
@@ -127,7 +123,6 @@ function talkToBoss() {
   }
 
   for (let i = 0; i < gameData.powerups.length; i++) {
-    console.log(gameData.powerups[i]);
     if (gameData.powerups[i] === "Patron") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();
@@ -159,7 +154,6 @@ function perfectionism() {
   }
 
   for (let i = 0; i < gameData.powerups.length; i++) {
-    console.log(gameData.powerups[i]);
     if (gameData.powerups[i] === "Perfect") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();
@@ -184,7 +178,6 @@ function backup() {
   updateProgressBar();
 
   for (let i = 0; i < gameData.powerups.length; i++) {
-    console.log(gameData.powerups[i]);
     if (gameData.powerups[i] === "Patron") {
       gameData.powerups.splice(i, 1);
       displayPowerUps();

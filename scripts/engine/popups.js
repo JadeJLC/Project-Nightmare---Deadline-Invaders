@@ -76,7 +76,7 @@ function namePopup(mode, type, same) {
 
     if (chosenName) {
       chosenName = chosenName.replace(/^[a-z]/, (letter) =>
-        letter.toUpperCase()
+        letter.toUpperCase(),
       );
 
       if (type === "Player") {
@@ -101,7 +101,6 @@ function namePopup(mode, type, same) {
     if (validName) {
       // Lance le jeu ou relance/skip la cinématique
       if (mode === "Story" || mode === "Endless") {
-        console.log("namePopup mode :", mode);
         gameData.gameMode = mode;
         selectMapPopup();
       } else if (mode === "Cutscene") {

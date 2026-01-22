@@ -7,7 +7,6 @@ function selectMusic(musicName) {
 
 function playMusic(musicName, n) {
   if (!gameOptions.musicOn) {
-    console.log("Musique désactivée");
     return;
   }
   const musicPath = selectMusic(musicName);

@@ -31,7 +31,7 @@ function storyMode() {
 }
 
 function endlessMode() {
-  console.log("Mode Sans-Fin");
+  console.log("Lancement du jeu en mode Sans fin par ${gameData.playerName}");
   gameData.relouName("Collègue relou");
   gameScreenContainer.classList.remove("is-hidden");
   HUD.classList.remove("is-hidden");

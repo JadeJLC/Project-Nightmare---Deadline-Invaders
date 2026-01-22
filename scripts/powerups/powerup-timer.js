@@ -1,3 +1,7 @@
+import { spawnPowerUp } from "./powerup-spawn.js";
+import { screenConfig } from "../enemies/enemies.js";
+import { levelData } from "../variables.js";
+
 // #region ***** Timer pour l'apparition des powerups dans l'écran de jeu
 let powerUpTimeout;
 let isTimerActive = false;
@@ -10,7 +14,7 @@ function startPowerUpTimer() {
   const delay = Math.floor(Math.random() * (maxWait - minWait + 1)) + minWait;
 
   powerUpTimeout = setTimeout(() => {
-    spawnPowerUp(config, levelData);
+    spawnPowerUp(screenConfig, levelData);
     startPowerUpTimer();
   }, delay);
 }

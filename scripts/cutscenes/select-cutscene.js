@@ -46,7 +46,6 @@ function selectCutscene() {
       break;
     case 3:
       goodEnding();
-      console.log("good ending")
       break;
   }
 }
@@ -110,7 +109,7 @@ function goodEnding() {
   lastLevel.powerups = gameData.powerups;
   lastLevel.score = gameData.score;
   lastLevel.lives = gameData.lives;
-  
+
   cutsceneEndThirdLevel();
 }
 

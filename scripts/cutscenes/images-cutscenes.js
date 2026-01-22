@@ -97,7 +97,6 @@ function cutsceneMoveCoworkers() {
 
 function stopCutsceneAnimation() {
   cancelAnimationFrame(animationFrameId);
-  console.log("Animation stopped.");
 }
 
 export { cutsceneDisplayCoworkers, cutsceneDeleteCoworkers };

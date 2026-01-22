@@ -9,12 +9,10 @@ import { stopMusic, playMusic } from "../audio/music.js";
 
 function toggleMusic() {
   if (!gameOptions.musicOn) {
-    console.log("Lecture de la musique : ", gameData.currentMusic);
     musicBtn.textContent = "🎵 / Couper la musique";
     gameOptions.musicOn = true;
     playMusic(gameData.currentMusic);
   } else {
-    console.log("Arrêt de la musique");
     musicBtn.textContent = "🔇 / Activer la musique";
     gameOptions.musicOn = false;
     stopMusic();
@@ -26,7 +24,6 @@ function toggleEffects() {
     effectBtn.textContent = "🔉 / Désactiver les effets sonores";
     gameOptions.soundEffects = true;
   } else {
-    console.log("Arrêt de la musique");
     effectBtn.textContent = "🔇 / Activer les effets sonores";
     gameOptions.soundEffects = false;
   }
@@ -37,7 +34,6 @@ function toggleTutorials() {
     tutoBtn.textContent = "🤝 / Désactiver les didacticiels en jeu";
     gameOptions.tutos = true;
   } else {
-    console.log("Arrêt de la musique");
     tutoBtn.textContent = "🚫 / Activer les didacticiels en jeu";
     gameOptions.tutos = false;
   }

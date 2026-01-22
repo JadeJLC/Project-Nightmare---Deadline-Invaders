@@ -19,8 +19,6 @@ export function specialLines() {
   let boss = document.getElementById("boss");
   let relou = document.getElementById("cwr");
 
-  console.log(line);
-
   // Présentation du collègue
   if (line === `__PROMPT__`) {
     namePopup("Cutscene", "Relou");
@@ -158,7 +156,7 @@ function managementMeeting(line) {
     if (line.includes("__MANAGEMENT__"))
       cutsceneData.textList[cutsceneData.currentLine] = line.replace(
         "__MANAGEMENT__",
-        ""
+        "",
       );
   }
 }

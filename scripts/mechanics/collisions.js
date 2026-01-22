@@ -23,12 +23,10 @@ function enemyDamage(enemy, difference) {
       } else {
         gameData.goodScore += difference;
       }
-      console.log("Collègue éliminé, score:", gameData.goodScore);
     }
     // Mode Sans fin : score simple
     else if (gameData.gameMode === "Endless") {
       gameData.goodScore += levelData.coworkerBonus;
-      console.log("Collègue éliminé, score:", gameData.goodScore);
     }
   } else if (enemy instanceof Relou) {
     enemy.hit();
@@ -40,7 +38,6 @@ function enemyDamage(enemy, difference) {
       } else {
         gameData.badScore += difference;
       }
-      console.log("Relou touché, compteur invalide:", gameData.badScore);
     }
     // Mode Sans fin : perte de score
     else if (gameData.gameMode === "Endless") {
@@ -49,7 +46,6 @@ function enemyDamage(enemy, difference) {
       } else {
         gameData.goodScore = 0;
       }
-      console.log("Relou touché, score réduit:", gameData.goodScore);
     }
   }
 }
@@ -66,12 +62,10 @@ function playerDamage() {
     } else if (gameData.goodScore < levelData.coworkerBonus) {
       gameData.goodScore -= gameData.goodScore;
     }
-    console.log("Le joueur est touché ! Score valide :" + gameData.goodScore);
   }
   // Mode Sans fin : perte de vie
   else if (gameData.gameMode === "Endless") {
     loseLife();
-    console.log("Le joueur est touché ! Vies restantes :" + gameData.lives);
   }
 
   playerIcon.classList.add("player--hit");

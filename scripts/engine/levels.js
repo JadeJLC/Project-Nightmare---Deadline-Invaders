@@ -41,6 +41,7 @@ import {
 } from "../powerups/activate-powerups.js";
 import { displayPowerUps } from "../powerups/display-powerups.js";
 import { displayScores, addScoreToScoreboard } from "../scores/scoreboard.js";
+import { resumePowerUpTimer } from "../powerups/powerup-timer.js";
 
 function loadLevel() {
   gameData.currentMusic = `level${gameData.currentLevel}`;
@@ -55,7 +56,6 @@ function loadLevel() {
   changeMusic();
 
   // Attendre que la cutscene soit chargée
-  console.log("Attente de la cutscene...");
   const checkCutscene = setInterval(() => {
     if (gameData.loadedCutscene) {
       clearInterval(checkCutscene);
@@ -65,8 +65,6 @@ function loadLevel() {
 }
 
 function initLevel() {
-  console.log("Initialisation du niveau");
-
   // Réinitialiser les scores
   gameData.badScore = 0;
   gameData.goodScore = 0;
@@ -90,19 +88,16 @@ function initLevel() {
   // Démarrer le timer
   setInterval(displayTimer, 10);
   startTimer();
+  resumePowerUpTimer();
 
   // Démarrer la boucle du carousel (mode standard)
   startCarousel();
-
-  console.log("✅ Niveau chargé et démarré");
 }
 
 function finishLevel() {
   if (gameData.gameMode === "Endless") {
     return;
   }
-
-  console.log("Fin du niveau");
 
   // Désactiver tous les systèmes
   disablePowerUps();
@@ -127,7 +122,6 @@ function finishLevel() {
   gameData.loadedCutscene = false;
   gameData.countPoint = false;
 
-  console.log(gameData);
   HUD.classList.add("is-hidden");
 
   // Afficher l'écran de fin de niveau
@@ -142,8 +136,6 @@ function finishLevel() {
 }
 
 function endGame() {
-  console.log("Fin du jeu");
-     
   endLvl.classList.remove("is-hidden");
 
   if (gameData.lives === 0) {
@@ -165,39 +157,37 @@ function endGame() {
 let scoreScreenLock = false;
 
 async function scoreScreen() {
-  console.log("Ecran des scores");
   if (scoreScreenLock) return;
   scoreScreenLock = true;
 
-  gameState.freezeInit = true;    
+  gameState.freezeInit = true;
   gameState.screen = "scoreboard";
 
   await addScoreToScoreboard();
 
-  console.log("Score enregistré, percentile :", gameState.lastAddedScore.percentile);
+  console.log(
+    "Score enregistré, percentile :",
+    gameState.lastAddedScore.percentile,
+  );
 
   endLvl.classList.add("is-hidden");
   displayScores(1, true);
 
   toCutscene.removeEventListener("click", scoreScreen);
   toCutscene.addEventListener("click", finalScreen);
-  toCutscene.textContent = "Retour au menu principal";  
+  toCutscene.textContent = "Retour au menu principal";
   toCutscene.focus();
 
   scoreScreenLock = false;
 
-  
   // paramètres ouverts par défaut ?
-  //conflits api création fichiers json et gitignore 
-  
+  //conflits api création fichiers json et gitignore
+
   //vrai serveur personalisé api
   //changer date rajouter une heure, heure d'hiver
-
 }
 
 function finalScreen() {
-  console.log("Retour au menu principal");
-  
   toCutscene.removeEventListener("click", finalScreen);
   toCutscene.addEventListener("click", selectCutscene);
   toCutscene.textContent = "Continuer";
@@ -208,4 +198,4 @@ function finalScreen() {
   resetGame();
 }
 
-export { loadLevel, finishLevel, endGame, scoreScreen};
+export { loadLevel, finishLevel, endGame, scoreScreen };

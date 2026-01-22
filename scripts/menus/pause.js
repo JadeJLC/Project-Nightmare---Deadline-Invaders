@@ -16,7 +16,7 @@ import {
 import { pauseTimer, startTimer } from "../engine/timer.js";
 import { pauseCarousel, resumeCarousel } from "../enemies/enemies.js";
 
-// ===== OUVERTURE DU MENU =====
+// ***** Ouverture du menu
 function openSettingsMenu() {
   pauseMenu("settings");
 }
@@ -57,7 +57,7 @@ function pauseMenu(type) {
   pauseGame();
 }
 
-// ===== PAUSE DU JEU =====
+// ***** Mise en pause
 function pauseGame() {
   disableMovement();
   disableShooting();
@@ -69,19 +69,17 @@ function pauseGame() {
   closeBtn.focus();
 }
 
-// ===== REPRISE DU JEU =====
+// ***** Reprise du jue
 function resumeGame() {
   menu.classList.add("is-hidden");
-  console.log(gameData);
 
   if (gameData.currentMusic === "main-menu") return;
+  console.log(gameData);
   enableMovement();
   enableEnemyShooting();
   enableShooting();
   resumeEnemyShots();
   startTimer();
-
-  // ✅ Un seul appel pour reprendre le carousel, quel que soit le mode
   resumeCarousel();
 }
 

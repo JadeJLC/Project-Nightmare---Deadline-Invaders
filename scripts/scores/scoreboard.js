@@ -13,8 +13,6 @@ let currentPage = 1;
 let totalPages = 1;
 
 async function addScoreToScoreboard() {
-  console.log("Sauvegarde du score en cours");
-
   let gameMode = "";
   if (gameData.gameMode === "Story") gameMode = "Histoire";
   if (gameData.gameMode === "Endless") gameMode = "Sans fin";
@@ -62,7 +60,6 @@ async function retrieveScores(pageToDisplay = 1) {
     }
 
     const data = await res.json();
-    console.log("Scores réceptionnés");
 
     return {
       scores: data.scores,
@@ -76,10 +73,6 @@ async function retrieveScores(pageToDisplay = 1) {
 }
 
 async function displayScores(pageNumber = 1, gameEnd = false) {
-  console.log(
-    `Affichage du scoreboard - page demandée: ${pageNumber}, gameEnd: ${gameEnd}`,
-  );
-
   mainMenuContainer.innerHTML = "";
   scoreBoardTitle();
 
@@ -90,7 +83,6 @@ async function displayScores(pageNumber = 1, gameEnd = false) {
     totalPages = data.totalPages || 1;
 
     if (!data.scores || data.scores.length === 0) {
-      console.log("Aucun score à afficher");
       emptyScoreBoard();
     } else {
       console.log(`${data.scores.length} score(s) récupéré(s)`);
@@ -111,7 +103,7 @@ function displayPercentile(score) {
   `;
   scoreBoardContainer.insertBefore(info, scoreBoardContainer.firstChild);
   console.log(
-    "Percentile affiché :",
+    "Pourcentage affiché :",
     score.percentile,
     "% - Rang :",
     score.rank,
@@ -156,15 +148,8 @@ function createScoreBoard(scores, gameEnd) {
 
   //Percentile si fin de partie
   if (gameEnd && gameState.lastAddedScore) {
-    console.log("Affichage du percentile pour:", gameState.lastAddedScore);
     displayPercentile(gameState.lastAddedScore);
   } else {
-    console.log(
-      "Pas d'affichage du percentile - gameEnd:",
-      gameEnd,
-      "lastAddedScore:",
-      gameState.lastAddedScore,
-    );
   }
 
   //Création du tableau
