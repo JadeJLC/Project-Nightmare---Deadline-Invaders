@@ -14,6 +14,7 @@ function startPowerUpTimeout() {
 
   console.log(delay);
   powerUpTimeout = setTimeout(() => {
+    if (!floatingPowerUp.isThere) floatingPowerUp.currentPowerUp = null;
     resumePowerUpMove();
     startPowerUpTimeout();
   }, delay);
@@ -30,6 +31,8 @@ function resumePowerUpTimeout() {
   startPowerUpTimeout();
 }
 // #endregion
+
+function powerUpTimer() {}
 
 // A implémenter : timer indiquant le temps restant sur le powerup
 

@@ -172,6 +172,7 @@ function perfectionism() {
 // Powerup Backup : retire du pourcentage rouge
 // ----- Activé en appuyant sur la touche "W"
 function backup() {
+  if (gameData.badScore === 0) return;
   gameData.activePU = "Bonus utilisé : Backup";
 
   gameData.badScore -= levelData.relouMalus;

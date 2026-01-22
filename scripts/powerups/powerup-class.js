@@ -4,6 +4,7 @@ import { displayPowerUps } from "./display-powerups.js";
 import { pausePowerUpMove } from "./powerup-move.js";
 import { powerUpData, powerUpList } from "./powerup-spawn.js";
 import { floatingPowerUp } from "./powerup-spawn.js";
+import { resumePowerUpTimeout } from "./powerup-timer.js";
 
 export class PowerUp {
   constructor(x, y, direction) {
@@ -60,7 +61,6 @@ export class PowerUp {
     this.el.remove();
 
     floatingPowerUp.isThere = false;
-    floatingPowerUp.currentPowerUp = null;
     this.isAlive = false;
   }
 }

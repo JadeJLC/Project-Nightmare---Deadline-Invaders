@@ -136,7 +136,7 @@ function displayBackup() {
   const backup = document.createElement("div");
   backup.class = "power-up";
   backup.alt = backup.title = "Backup<br/> - Retire du pourcentage négatif";
-  backup.innerHTML = `<div class="mini-tile backup"></div> <span>${powerups.Backup} [W]</span>`;
+  backup.innerHTML = `<div class="mini-tile backup"></div> <span>${powerups.Backup} [,]</span>`;
 
   if (displayDetails) {
     backup.innerHTML += `<span class="pup-detail">${backup.alt}</span>`;
