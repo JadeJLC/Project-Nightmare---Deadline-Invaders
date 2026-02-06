@@ -154,6 +154,7 @@ Ce projet permet de développer des compétences dans :
 
 - [ ] Niveaux de difficulté ajustables (facile, normal, difficile)
 - [ ] Nouveaux environnements de travail (designer, marketing, etc.)
+- [ ] Niveaux supplémentaires
 - [ ] Nouvelles équipe (skins des personnages)
 - [ ] Plus de power-ups
 - [ ] Tableau des scores hébergé en ligne
