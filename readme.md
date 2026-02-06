@@ -1,102 +1,166 @@
-# Make your game - présentation du projet
+# Project Nightmare - Deadline Invaders
 
-Création d'un jeu entièrement en HTML/CSS/JS sur le modèle d'un jeu rétro.
-Base choisie : Space Invader.
+<div align="center">
 
-## Concept - Project Nightmare : Deadline Invaders
+**Jeu vidéo de type Space Invaders revisité dans l'univers humoristique du monde de l'entreprise.**
 
-- Project Nightmare se situe dans le contexte d'une entreprise ou un collègue particulier vole et sabote le travail des autres, puis s'attribue le mérite de la réussite du projet commun sur les choses se passent bien.
-- Le joueur peut choisir le nom du collègue.
-- Le mode "de base" se situe dans une équipe de développeurs. Il sera à terme possible de choisir l'environnement selon plusieurs métiers prédéfinis.
-- Le jeu fonctionne comme un Space Invader : les collègues "normaux" se déplacent sur l'écran et le joueur "tire" en leur envoyant des éléments de projets (lignes de code dans le mode par défaut). Chaque élément envoyé permet d'avancer le pourcentage du projet (en vert/blanc). Entre les collègues normaux, le collègue "relou" apparaît. Si le joueur tire dessus, le pourcentage de projet saboté (en rouge) augmente.
-- Pour gagner un niveau, il faut terminer le projet en ayant plus de 50% d'apports productifs. Si le joueur perd un niveau, il perd une vie et recommence le niveau. Une fois toutes les vies épuisées, le jeu s'arrête et il faut reprendre de zéro.
-- Le jeu est de base composé de trois niveaux : collègue, chef de projet, manager. Le collègue relou apparaît plus souvent dans une ligne à mesure qu'on monte dans les niveaux (et potentiellement obtient des nouvelles capacités)
-- Le joueur peut débloquer des bonus (collègue diplomate, se plaindre au patron, etc) pour impacter le collègue relou et augmenter ses propres chances de gagner.
-- Le score total du joueur correspond au pourcentage validé dans chaque niveau. S'il obtient 100% à chaque niveau, il débloque une cinématique de fin spéciale où il rejoint la direction.
-- Le jeu se termine par le collègue relou qui se fait renvoyer et tous les autres collègues qui font la fête pendant son pot de départ.
+</div>
 
-## Idées de design
+## Aperçu
 
-- Musique 8-bit (pour rester dans le thème jeu rétro). Exemple de musiques possibles :
+Project Nightmare - Deadline Invaders est un jeu vidéo rétro entièrement développé en HTML, CSS et JavaScript. Inspiré du classique Space Invaders, le jeu transpose l'action dans un bureau où le joueur doit contribuer à un projet tout en évitant un "collègue relou" qui sabote le travail de l'équipe.
+C'est un projet d'études en groupe développé dans le cadre de la formation à Zone01, visant à créer un jeu complet avec game design, animations, et mécaniques de gameplay.
 
+## Concept
+
+Dans Project Nightmare, vous incarnez un développeur qui doit faire avancer un projet d'entreprise. Vos collègues défilent à l'écran et vous leur envoyez des éléments de projet (lignes de code) pour progresser. Mais attention : parmi eux se cache un collègue relou qui s'approprie le mérite du travail des autres et sabote le projet !
+
+- **Objectif** : Terminer chaque niveau avec plus de 50% de contributions positives au projet
+- **Progression** : Trois niveaux avec promotions successives + cinématique de fin
+- **Victoire parfaite** : Atteignez 100% de réussite sur tous les niveaux pour débloquer la cinématique spéciale
+
+## Fonctionnalités
+
+- **Personnalisation** : Choisissez le nom du collègue relou et du joueur
+- **Trois niveaux de difficulté croissante** : Le collègue relou apparaît de plus en plus fréquemment
+- **Mode sans fin** : Jouez en continu pour battre votre meilleur score
+- **Système de vies** : 3 vies pour réussir le jeu, avec possibilité de recommencer les niveaux
+- **Power-ups variés** : 
+  - Collègue diplomate (pause temporaire)
+  - Team building (le collègue relou devient temporairement positif)
+  - Dénonciation (retire un collègue relou)
+  - Boost de productivité (double les points)
+  - Cafféine (accélère les déplacements)
+  - Backup (retire du pourcentage négatif)
+- **Cinématiques narratives** : Histoire évolutive selon votre progression et vos performances
+- **Menu pause complet** : Reprendre, recommencer le niveau ou le jeu, ajuster les options
+- **Système de high scores** : Enregistrement et consultation des meilleurs scores
+- **Musiques et effets sonores 8-bit** : Ambiance rétro gaming authentique
+- **Graphismes pixel art** : Personnages et environnements en style rétro
+
+## Technologies utilisées
+
+**Language & Design:**
+
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
+[![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/fr/docs/Web/HTML)
+[![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/fr/docs/Web/CSS)
+[![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org/)
+[![Pixel Art](https://img.shields.io/badge/Pixel_Art-Design-ff69b4?style=for-the-badge)](https://en.wikipedia.org/wiki/Pixel_art)
+
+## Utilisation
+
+### Prérequis
+
+- Un navigateur web moderne (Chrome, Firefox, Safari, Edge)
+- Go (pour l'API de gestion des scores)
+
+### Installation
+
+1.  **Cloner le repo**
+```bash
+    git clone https://github.com/JadeJLC/Project-Nightmare---Deadline-Invaders.git
+    cd Project-Nightmare---Deadline-Invaders
 ```
-Niveaux :
-https://pixabay.com/fr/music/jeux-vid%C3%A9o-arcade-beat-323176/
-https://pixabay.com/fr/music/jeux-vid%C3%A9o-8-bit-gaming-background-music-358443/
 
-Cinématiques :
-Base : https://pixabay.com/fr/music/jeux-vid%C3%A9o-man-is-he-mega-glbml-22045/
-Victoire : https://pixabay.com/fr/music/jeux-vid%C3%A9o-fun-with-my-8-bit-game-301278/
-Défaite : https://pixabay.com/fr/music/ambiant-a-night-full-of-stars-peaceful-electronic-8-bitpiano-track-321551/
+2.  **Lancer l'API de gestion des scores**
+```bash
+    go run main.go
 ```
 
-- Visuels en pixel art. Idées de référence :
-
+3.  **Ouvrir le jeu**
+    
+    Ouvrez le fichier `index.html` dans votre navigateur, ou utilisez un serveur local :
+```bash
+    # Avec Python 3
+    python -m http.server 8000
+    
+    # Ou avec Node.js (si http-server est installé)
+    npx http-server
 ```
-https://i.pinimg.com/originals/8d/25/ec/8d25ec2293c7801097af5af4c7a17e71.gif
-https://img.freepik.com/premium-vector/chibi-cute-human-figure-pixel-art-adorable-kawaii-character-male-female-different-skin-hair_418367-497.jpg
-https://i.pinimg.com/736x/a3/e6/49/a3e64979cc76ec65a4893b5228d94d93.jpg
+    
+    Puis accédez à `http://localhost:8000`
+
+### **Contrôles**
+
+- **Flèches directionnelles** : Déplacer le personnage
+- **Barre d'espace** : Tirer / Envoyer du travail
+- **I** : Détails des power-ups possédés
+- **W, X, C, V, B, N, ?** : utilisation des power-ups
+- **P ou Échap** : Mettre en pause
+
+### **Comment jouer**
+
+1. **Configuration** : Entrez votre nom et celui du collègue relou
+2. **Gameplay** : 
+   - Déplacez-vous horizontalement en bas de l'écran
+   - Tirez sur les collègues normaux pour faire avancer le projet (barre verte)
+   - Évitez de tirer sur le collègue relou (barre rouge)
+3. **Objectif** : Terminez chaque niveau avec plus de 50% de contributions positives
+4. **Power-ups** : Collectez et utilisez stratégiquement les bonus
+5. **Progression** : Réussissez les 3 niveaux pour voir la fin de l'histoire, ou jouez en mode sans fin pour améliorer votre score
+
+## Structure du projet
+```
+project-root/
+├── images/         # Sprites et graphismes pixel art
+├── musiques/       # Musiques 8-bit et effets sonores
+├── page/           # Pages HTML du jeu
+├── ressources/     # Assets et ressources diverses
+├── scripts/        # Logique du jeu en JavaScript
+├── main.go         # API Go pour la gestion de la base de données des scores
+├── scripts.zip     # Archive des scripts
+└── readme.md       # Ce fichier
 ```
 
-- Niveaux : personnage du joueur représenté par un personnage de dos à son bureau ? Autres collègues normaux dans le décor, collègue relou portant une casquette avec l'initiale de son prénom.
+## Development
 
-## Cinématiques
+### Architecture du jeu
 
-- Entre les niveaux, le collègue relou s'attribue le mérite de la réussite du projet et obtient une promotion.
-- En cas de défaite à un niveau, le projet n'est pas fonctionnel et le patron s'énerve.
-- En cas de game over, le collègue relou devient directeur (et renvoie le personnage joueur ?).
-- En cas de victoire à tous les niveaux, le collègue relou se fait renvoyer (pot de départ, fête).
-- En cas de parfait (100% sur tous les niveaux), le joueur devient directeur de la boîte.
+- **Frontend** : HTML, CSS et JavaScript vanilla pour le gameplay
+- **API** : API Go pour la gestion et la persistance des scores
+- **Boucle de jeu** : 60 FPS avec requestAnimationFrame
+- **Gestion des collisions** : Détection précise pour les tirs et power-ups
+- **Système de score** : Calcul du pourcentage de contribution positive/négative avec sauvegarde persistante
 
-## Niveaux
+### Optimisation des performances
 
-- Niveau 1 : 1 ou 2 collègues relous par ligne, les lignes avancent lentement.
-- Niveau 2 : augmente le nombre d'apparition du collègue relou par ligne, accélère le déplacement des lignes
-- Niveau 3 : encore plus d'apparition du collègue relou par ligne + ajout d'un malus (par exemple, accélération de la deadline au hasard)
+- Limitation du nombre d'entités à l'écran
+- Réutilisation des objets plutôt que création/destruction
+- Optimisation des calculs de collision
+- Sprites pré-chargés pour éviter les lags
 
-## Power-ups
+## Apprentissages clés
 
-- Collègue diplomate : envoie le collègue diplomate négocier avec le collègue relou. Le mouvement des lignes s'interrompt temporairement et il devient plus facile d'avancer dans le projet. ✓
-- Team building : pendant une courte période, le collègue relou se montre un peu plus coopératif. Tirer dessus augmente le pourcentage positif du projet. ✓
-- Dénonciation : se plaint au patron pour faire avancer les choses. Un collègue relou est retiré de la ligne la plus proche du joueur. ✓
-- Boost de productivité : l'équipe est plus motivée. Double le pourcentage de projet attribué par chaque tir positif. ✓
-- Cafféine : un petit remontant pour tenir le coup. Accélère les déplacements du personnage joueur. ✓
+Ce projet permet de développer des compétences dans :
 
-# Make your game - découpage des tâches
+- Développement de jeux vidéo en JavaScript vanilla
+- Gestion de la boucle de jeu et du framerate
+- Programmation orientée objet (classes pour entités)
+- Gestion des événements et des entrées utilisateur
+- Game design et équilibrage de difficulté
+- Animation et graphismes pixel art
+- Intégration audio (musiques et effets sonores)
+- Narration interactive avec cinématiques
+- API Go pour la persistance des données
 
-## Visuel
+## Autres informations
 
-- **Créer les visuels** : collègues en pixel art, collègue relou, personnage principal, décors simples pour les cinématiques ✓
-- **Créer les cinématiques** : animations des personnages, ajout de la musique, écriture de petites lignes de dialogue ✓
-- **Musiques** : intégrer les musiques et les effets sonores ✓
-- **Interface** : affichage du pourcentage, du score total et du nombre de vies + menu pause (recommencer le niveau, recommencer le jeu, continuer, options) ✓
-- **Structure HTML et CSS** : placer tous les éléments dans une structure HTML/CSS responsive et fonctionnelle ✓
+- Ce projet est un projet de groupe développé dans le cadre de ma formation à Zone01.
+- L'objectif était de créer un jeu vidéo complet de A à Z avec game design, développement et assets.
+- Inspiré du classique Space Invaders mais avec une twist humoristique sur le monde du travail.
 
-## Fonctionnel
+## Améliorations futures
 
-- **Configuration de départ** : demander au joueur le nom du collègue et charger la bonne image + le nom dans les cinématiques ✓
-- **Mécaniques de base** : vitesse de déplacement des collègues et du joueur, vitesse de tir ✓
-- **Avancement du projet** : calcul et optimisation du pourcentage attribué par tir allié/ennemi, enregistrement du score entre chaque niveau ✓
-- **Intégration des animations** : mouvement des collègues sur l'écran, animation de tir, déplacement du personnage du joueur ✓
-- **Pause** : mécanique de mise en pause, sauvegarde des données pour relancer le jeu selon les demandes du joueur sur le menu ✓
+- [ ] Niveaux de difficulté ajustables (facile, normal, difficile)
+- [ ] Nouveaux environnements de travail (designer, marketing, etc.)
+- [ ] Nouvelles équipe (skins des personnages)
+- [ ] Plus de power-ups
+- [ ] Tableau des scores hébergé en ligne
+- [ ] Déploiement du jeu
 
-## Optimisation
+<div align="center">
 
-- **Performance** : vérifier que le jeu reste à 60fps, assurer la performance
-- **Difficulté** : optimisation de l'équilibre collègues normaux/collègue relou selon les niveaux ✓
-- **Vies** : nombre de vies raisonnable pour réussir le jeu sans qu'il soit trop facile (3) ✓
+Par [JadeJLC](https://github.com/JadeJLC), [Nathan Paccoud](https://github.com/NathPacc), [Clara Hiesse](https://github.com/clarahiesse), [Valentine Ladjyn](https://github.com/vladjyn)
 
-## Bonus
-
-- **Nom du joueur** : pour les cinématiques ✓
-- **Base de données "high score"** : pour comparer à ses scores précédents (multiplié par le nombre de vies restantes pour la rejouabilité ?)
-- **Options** : couper/activer la musique (via le menu pause) ✓
-- **Difficulté** : niveau de difficulté ajustable (plus de vies, plus de pourcentage gagné par tir, etc)
-- **Mode sans fin** : possibilité de jouer non-stop en dehors de l'histoire, le score augmente mais le niveau ne s'arrête qu'une fois toutes les vies épuisées
-
-## Debug
-
-- Intégrer des console.log pour suivre le fonctionnement du programme en temps réel. ✓
-- Essayer de créer un fichier test pour les fonctions plus mathématiques.
-- Tester régulièrement les FPS en jouant au jeu.
-- Finir le jeu au moins une fois chacun sans bugs ni ragequit. ✓
+</div>
